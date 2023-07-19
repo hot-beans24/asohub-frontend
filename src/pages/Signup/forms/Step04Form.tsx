@@ -29,30 +29,15 @@ const Step04Form: FC<Step04FormProps> = ({ nextStep, backStep }) => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormFieldGroup>
-        <TextField
-          label="メールアドレス"
-          type="email"
-          value={signupFormValues.email}
-          readOnly
-        />
-        <TextField
-          label="ユーザー名"
-          type="text"
-          value={signupFormValues.username}
-          readOnly
-        />
+        <TextField label="メールアドレス" type="email" value={signupFormValues.email} readOnly />
+        <TextField label="ユーザー名" type="text" value={signupFormValues.username} readOnly />
         <TextField
           label="学科"
           type="text"
           value={departmentSelectOpts[signupFormValues.department - 1].label}
           readOnly
         />
-        <TextField
-          label="学年"
-          type="text"
-          value={gradeSelectOpts[signupFormValues.grade - 1].label}
-          readOnly
-        />
+        <TextField label="学年" type="text" value={gradeSelectOpts[signupFormValues.grade - 1].label} readOnly />
       </FormFieldGroup>
       <ButtonGroup>
         <Button type="button" icon={faCaretLeft} onClick={() => backStep()} isNotPrimary isHalfSize>

@@ -14,7 +14,7 @@ export const stepStyle = (isCurrentStep: boolean, isAlready: boolean) => css`
   border-radius: 100%;
   outline: ${isCurrentStep ? '3px solid white' : 'none'};
   outline-offset: -6px;
-  background-color: ${isAlready? 'black' : 'var(--medium-gray)'};
+  background-color: ${isAlready ? 'black' : 'var(--medium-gray)'};
   color: white;
   font-size: 1.6rem;
   font-weight: 500;

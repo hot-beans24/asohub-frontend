@@ -11,7 +11,14 @@ import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 import SelectField from '@@/components/form/SelectField'
 
-import { Step03ValuesType, usernameOptions, departmentOptions, gradeOptions, departmentSelectOpts, gradeSelectOpts } from '../options'
+import {
+  Step03ValuesType,
+  usernameOptions,
+  departmentOptions,
+  gradeOptions,
+  departmentSelectOpts,
+  gradeSelectOpts
+} from '../options'
 
 type Step03FormProps = {
   nextStep: () => void
@@ -19,11 +26,21 @@ type Step03FormProps = {
 }
 
 const Step03Form: FC<Step03FormProps> = ({ nextStep, backStep }) => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<Step03ValuesType>()
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Step03ValuesType>()
   const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
 
   const handleOnSubmit: SubmitHandler<Step03ValuesType> = (data) => {
-    setSignupFormValues({ ...signupFormValues, username: data.username, department: Number(data.department), grade: Number(data.grade) })
+    setSignupFormValues({
+      ...signupFormValues,
+      username: data.username,
+      department: Number(data.department),
+      grade: Number(data.grade)
+    })
     nextStep()
   }
 

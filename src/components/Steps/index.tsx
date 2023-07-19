@@ -15,27 +15,27 @@ const Steps: FC<StepsProps> = ({ step }) => {
   const steps: StepInfo[] = [
     {
       step: 1,
-      message: '学校のメールアドレスを入力してください',
+      message: '学校のメールアドレスを入力してください'
     },
     {
       step: 2,
-      message: 'パスワードを入力してください ',
+      message: 'パスワードを入力してください '
     },
     {
       step: 3,
-      message: 'ユーザー情報を入力してください',
+      message: 'ユーザー情報を入力してください'
     },
     {
       step: 4,
-      message: '以下の情報でアカウントを作成します',
+      message: '以下の情報でアカウントを作成します'
     },
     {
       step: 5,
-      message: 'プロフィールを入力してください',
+      message: 'プロフィールを入力してください'
     },
     {
       step: 6,
-      message: '学校のメールアドレスを入力してください',
+      message: '学校のメールアドレスを入力してください'
     }
   ]
 

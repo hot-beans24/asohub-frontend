@@ -32,7 +32,7 @@ export const emailOptions: RegisterOptions = {
     message: 'メールアドレスを入力してください'
   },
   pattern: {
-    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@s.asojuku.ac.jp$/,
     message: 'メールアドレスの形式が正しくありません'
   }
 }
@@ -75,7 +75,7 @@ export const gradeOptions: RegisterOptions = {
 export const departmentSelectOpts: SelectOption[] = [
   { label: '情報工学科', value: 1 },
   { label: '情報システム専攻科', value: 2 },
-  { label: '情報システム科', value: 3 },
+  { label: '情報システム科', value: 3 }
 ]
 
 export const gradeSelectOpts: SelectOption[] = [

@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import Layout from '@@/components/Layout'
 import Heading from '@@/components/Heading'
 import Steps from '@@/components/Steps'
 
@@ -16,16 +15,14 @@ const SignupPage: FC = () => {
   const { step, nextStep, backStep } = useWizard()
 
   return (
-    <Layout>
-      <div css={box}>
-        <Heading>Signup</Heading>
-        <Steps step={step} />
-        {step === 1 && <Step01Form nextStep={nextStep} />}
-        {step === 2 && <Step02Form nextStep={nextStep} backStep={backStep} />}
-        {step === 3 && <Step03Form nextStep={nextStep} backStep={backStep} />}
-        {step === 4 && <Step04Form nextStep={nextStep} backStep={backStep} />}
-      </div>
-    </Layout>
+    <div css={box}>
+      <Heading>Signup</Heading>
+      <Steps step={step} />
+      {step === 1 && <Step01Form nextStep={nextStep} />}
+      {step === 2 && <Step02Form nextStep={nextStep} backStep={backStep} />}
+      {step === 3 && <Step03Form nextStep={nextStep} backStep={backStep} />}
+      {step === 4 && <Step04Form nextStep={nextStep} backStep={backStep} />}
+    </div>
   )
 }
 

@@ -17,7 +17,12 @@ type Step01FormProps = {
 }
 
 const Step01Form: FC<Step01FormProps> = ({ nextStep }) => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<Step01ValuesType>()
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Step01ValuesType>()
   const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
 
   const handleOnSubmit: SubmitHandler<Step01ValuesType> = (data) => {

@@ -7,7 +7,7 @@ export const selectField = (isError: boolean, isReadOnly?: boolean) => css`
 
   cursor: pointer;
   span {
-    font-size: 5.0rem;
+    font-size: 5rem;
   }
 `
 

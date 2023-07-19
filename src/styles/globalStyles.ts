@@ -10,7 +10,7 @@ const grobalStyles = css`
     --error-color: #ff4949;
     --light-pink: #fceeed;
     --light-gray: #f5f5f5;
-    --medium-gray: #D9D9D9;
+    --medium-gray: #d9d9d9;
     --dark-gray: #ababab;
     --light-blue: #6db8e2;
   }
@@ -19,7 +19,8 @@ const grobalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', '游ゴシック', YuGothic, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+    font-family: 'Montserrat', '游ゴシック', YuGothic, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ',
+      Meiryo, sans-serif;
     font-size: 1.4rem;
     -webkit-appearance: none;
     -moz-appearance: none;
