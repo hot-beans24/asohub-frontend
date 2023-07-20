@@ -2,10 +2,8 @@ import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-import Form from '@@/components/form/Form'
-import FormFieldGroup from '@@/components/form/FormFieldGroup'
+import { Form, FormFieldGroup, TextField } from '@@/components/Form'
 import Button from '@@/components/Button'
-import TextField from '@@/components/form/TextFiled'
 
 import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
 

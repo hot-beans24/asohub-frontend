@@ -4,10 +4,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import Heading from '@@/components/Heading'
 import Link from '@@/components/Link'
-import Form from '@@/components/form/Form'
-import FormFieldGroup from '@@/components/form/FormFieldGroup'
+import Form from '@@/components/Form/Form'
+import FormFieldGroup from '@@/components/Form/FormFieldGroup'
 import Button from '@@/components/Button'
-import TextField from '@@/components/form/TextFiled'
+import TextField from '@@/components/Form/TextField'
 
 import { box, text } from './styles'
 

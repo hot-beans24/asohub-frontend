@@ -2,14 +2,15 @@ import { FC } from 'react'
 
 import Heading from '@@/components/Heading'
 import Link from '@@/components/Link'
+
 import Steps from '@@/pages/Signup/components/Steps'
 
-import { useWizard } from './hooks/useWizard'
-import { useSignupFormState } from './hooks/useSignupFormState'
-import Step01Form from './parts/Step01Form'
-import Step02Form from './parts/Step02Form'
-import Step03Form from './parts/Step03Form'
-import Step04Form from './parts/Step04Form'
+import { useWizard } from '@@/pages/Signup/hooks/useWizard'
+import { useSignupFormState } from '@@/pages/Signup/hooks/useSignupFormState'
+import Step01Form from '@@/pages/Signup/parts/Step01Form'
+import Step02Form from '@@/pages/Signup/parts/Step02Form'
+import Step03Form from '@@/pages/Signup/parts/Step03Form'
+import Step04Form from '@@/pages/Signup/parts/Step04Form'
 
 import { box, text } from './styles'
 
