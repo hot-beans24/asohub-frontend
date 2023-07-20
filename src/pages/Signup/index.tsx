@@ -29,7 +29,7 @@ const SignupPage: FC = () => {
     <div css={box}>
       <Heading>Signup</Heading>
       <Steps step={step} />
-      {step === 1 && <Step01Form signupFormState={signupFormState}  nextStep={nextStep} />}
+      {step === 1 && <Step01Form signupFormState={signupFormState} nextStep={nextStep} />}
       {step === 2 && <Step02Form signupFormState={signupFormState} nextStep={nextStep} backStep={backStep} />}
       {step === 3 && <Step03Form signupFormState={signupFormState} nextStep={nextStep} backStep={backStep} />}
       {step === 4 && <Step04Form signupFormState={signupFormState} nextStep={nextStep} backStep={backStep} />}

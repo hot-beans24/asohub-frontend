@@ -8,7 +8,7 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { SignupFormState } from '../types/signupForm'
+import { SignupFormState, Step02FormValues } from '@@/pages/Signup/types/signupForm'
 
 type Step02FormProps = {
   signupFormState: SignupFormState
@@ -17,15 +17,10 @@ type Step02FormProps = {
 }
 
 const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValues }, nextStep, backStep }) => {
-  const { register, getValues, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+  const { register, getValues, handleSubmit, formState: { errors } } = useForm<Step02FormValues>()
 
-  type ValuesType = {
-    password: string
-    confirmPassword: string
-  }
-
-  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    setSignupFormValues((prev) => ({ ...prev, password: data.password }))
+  const handleOnSubmit: SubmitHandler<Step02FormValues> = (data) => {
+    setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
 
@@ -33,11 +28,11 @@ const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValue
     backStep()
   }
 
-  const passwordOptions: RegisterOptions<ValuesType, 'password'> = {
+  const passwordOptions: RegisterOptions<Step02FormValues, 'password'> = {
     required: 'パスワードを入力してください'
   }
 
-  const confirmPasswordOptions: RegisterOptions<ValuesType, 'confirmPassword'> = {
+  const confirmPasswordOptions: RegisterOptions<Step02FormValues, 'confirmPassword'> = {
     required: 'パスワード(確認用)を入力してください',
     validate: (confirmPassword) => {
       const password = getValues('password')

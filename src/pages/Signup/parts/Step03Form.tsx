@@ -9,8 +9,8 @@ import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 import SelectField from '@@/components/form/SelectField'
 
-import { SignupFormState } from '../types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from '../data/selectOptions'
+import { SignupFormState, Step03FormValues } from '@@/pages/Signup/types/signupForm'
+import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
 
 type Step03FormProps = {
   signupFormState: SignupFormState
@@ -19,21 +19,10 @@ type Step03FormProps = {
 }
 
 const Step03Form: FC<Step03FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep, backStep }) => {
-  type ValuesType = {
-    username: string
-    department: number
-    grade: number
-  }
+  const { control, register, watch, handleSubmit, formState: { errors } } = useForm<Step03FormValues>()
 
-  const { control, register, watch, handleSubmit, formState: { errors } } = useForm<ValuesType>()
-
-  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    setSignupFormValues((prev) => ({
-      ...prev,
-      username: data.username,
-      department: data.department,
-      grade: data.grade
-    }))
+  const handleOnSubmit: SubmitHandler<Step03FormValues> = (data) => {
+    setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
 
@@ -41,15 +30,15 @@ const Step03Form: FC<Step03FormProps> = ({ signupFormState: { signupFormValues, 
     backStep()
   }
 
-  const usernameOptions: RegisterOptions<ValuesType, 'username'> = {
+  const usernameOptions: RegisterOptions<Step03FormValues, 'username'> = {
     required: 'ユーザー名を入力してください'
   }
 
-  const departmentOptions: RegisterOptions<ValuesType, 'department'> = {
+  const departmentOptions: RegisterOptions<Step03FormValues, 'department'> = {
     required: '学科を選択してください'
   }
 
-  const gradeOptions: RegisterOptions<ValuesType, 'grade'> = {
+  const gradeOptions: RegisterOptions<Step03FormValues, 'grade'> = {
     required: '学年を選択してください'
   }
 
@@ -79,7 +68,7 @@ const Step03Form: FC<Step03FormProps> = ({ signupFormState: { signupFormValues, 
         />
         <SelectField
           label="学年"
-          options={gradeSelectOpts.slice(0, departmentSelectOpts[watch('department', 1) - 1].maxGrade)}
+          options={gradeSelectOpts.slice(0, departmentSelectOpts[watch('department', signupFormValues.department) - 1].maxGrade)}
           defaultValue={signupFormValues.grade}
           {...register('grade', gradeOptions)}
           errorMessage={errors.grade?.message}

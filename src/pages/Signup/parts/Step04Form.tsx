@@ -8,8 +8,8 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { SignupFormState } from '../types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from '../data/selectOptions'
+import { SignupFormState, Step04FormValues } from '@@/pages/Signup/types/signupForm'
+import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
 
 type Step04FormProps = {
   signupFormState: SignupFormState
@@ -18,16 +18,9 @@ type Step04FormProps = {
 }
 
 const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }, nextStep, backStep }) => {
-  type ValuesType = {
-    email: string
-    username: string
-    department: number
-    grade: number
-  }
+  const { handleSubmit } = useForm<Step04FormValues>()
 
-  const { handleSubmit } = useForm<ValuesType>()
-
-  const handleOnSubmit: SubmitHandler<ValuesType> = () => {
+  const handleOnSubmit: SubmitHandler<Step04FormValues> = () => {
     console.dir(signupFormValues)
     nextStep()
   }

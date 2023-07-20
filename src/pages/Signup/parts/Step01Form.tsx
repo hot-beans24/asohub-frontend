@@ -7,7 +7,7 @@ import FormFieldGroup from '@@/components/form/FormFieldGroup'
 import Button from '@@/components/Button'
 import TextField from '@@/components/form/TextFiled'
 
-import { SignupFormState } from '../types/signupForm'
+import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
 
 type Step01FormProps = {
   signupFormState: SignupFormState
@@ -15,18 +15,14 @@ type Step01FormProps = {
 }
 
 const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep }) => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+  const { control, register, handleSubmit, formState: { errors } } = useForm<Step01FormValues>()
 
-  type ValuesType = {
-    email: string
-  }
-
-  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    setSignupFormValues((prev) => ({ ...prev, email: data.email }))
+  const handleOnSubmit: SubmitHandler<Step01FormValues> = (data) => {
+    setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
 
-  const emailOptions: RegisterOptions<ValuesType, 'email'> = {
+  const emailOptions: RegisterOptions<Step01FormValues, 'email'> = {
     required: 'メールアドレスを入力してください',
     pattern: {
       value: /^[0-9]{7}@s.asojuku.ac.jp$/,
