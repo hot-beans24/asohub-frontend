@@ -23,7 +23,7 @@ const LoginPage: FC = () => {
     console.log(data)
   }
 
-  const emailOptions: RegisterOptions<ValuesType> = {
+  const emailOptions: RegisterOptions<ValuesType, 'email'> = {
     required: 'メールアドレスを入力してください',
     pattern: {
       value: /^[0-9]{7}@s.asojuku.ac.jp$/,
@@ -31,7 +31,7 @@ const LoginPage: FC = () => {
     }
   }
 
-  const passwordOptions: RegisterOptions<ValuesType> = {
+  const passwordOptions: RegisterOptions<ValuesType, 'password'> = {
     required: 'パスワードを入力してください'
   }
 

@@ -28,7 +28,7 @@ const Step03Form: FC<Step03FormProps> = ({ nextStep, backStep }) => {
     grade: number
   }
 
-  const { control, register, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+  const { control, register, watch, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     setSignupFormValues({
@@ -82,7 +82,7 @@ const Step03Form: FC<Step03FormProps> = ({ nextStep, backStep }) => {
         />
         <SelectField
           label="学年"
-          options={gradeSelectOpts}
+          options={gradeSelectOpts.slice(0, departmentSelectOpts[watch('department', 1) - 1].maxGrade)}
           defaultValue={signupFormValues.grade}
           {...register('grade', gradeOptions)}
           errorMessage={errors.grade?.message}
