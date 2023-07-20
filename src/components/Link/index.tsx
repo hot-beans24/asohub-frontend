@@ -1,7 +1,7 @@
 import { FC, LinkHTMLAttributes } from 'react'
 import { Link as RLDLink, LinkProps as RLDLinkProps } from 'react-router-dom'
 
-import { link } from './style'
+import { link } from './styles'
 
 type LinkProps = LinkHTMLAttributes<HTMLLinkElement> &
   RLDLinkProps & {

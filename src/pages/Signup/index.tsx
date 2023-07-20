@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import Heading from '@@/components/Heading'
-import Steps from '@@/components/Steps'
+import Steps from '@@/pages/Signup/components/Steps'
 
 import { useWizard } from './useWizard'
 import Step01Form from './forms/Step01Form'

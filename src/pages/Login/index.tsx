@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import Heading from '@@/components/Heading'
@@ -9,18 +9,30 @@ import FormFieldGroup from '@@/components/form/FormFieldGroup'
 import Button from '@@/components/Button'
 import TextField from '@@/components/form/TextFiled'
 
-import { ValuesType, emailOptions, passwordOptions } from './options'
-import { box, text } from './style'
+import { box, text } from './styles'
 
 const LoginPage: FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<ValuesType>()
+  type ValuesType = {
+    email: string
+    password: string
+  }
+
+  const { register, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     console.log(data)
+  }
+
+  const emailOptions: RegisterOptions<ValuesType> = {
+    required: 'メールアドレスを入力してください',
+    pattern: {
+      value: /^[0-9]{7}@s.asojuku.ac.jp$/,
+      message: 'メールアドレスの形式が正しくありません'
+    }
+  }
+
+  const passwordOptions: RegisterOptions<ValuesType> = {
+    required: 'パスワードを入力してください'
   }
 
   return (

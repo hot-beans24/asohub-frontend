@@ -1,7 +1,8 @@
 import { FC } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, RegisterOptions,  } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil'
+
 import { signupFormState } from '@@/recoil/atom/signupFormState'
 
 import Form from '@@/components/form/Form'
@@ -10,24 +11,40 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { Step02ValuesType, passwordOptions, confirmPasswordOptions } from '../options'
-
 type Step02FormProps = {
   nextStep: () => void
   backStep: () => void
 }
 
 const Step02Form: FC<Step02FormProps> = ({ nextStep, backStep }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<Step02ValuesType>()
   const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
 
-  const handleOnSubmit: SubmitHandler<Step02ValuesType> = (data) => {
+  type ValuesType = {
+    password: string
+    confirmPassword: string
+  }
+
+  const { register, getValues, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+
+  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     setSignupFormValues({ ...signupFormValues, password: data.password })
     nextStep()
+  }
+
+  const handleOnBack = () => {
+    backStep()
+  }
+
+  const passwordOptions: RegisterOptions<ValuesType, 'password'> = {
+    required: 'パスワードを入力してください'
+  }
+
+  const confirmPasswordOptions: RegisterOptions<ValuesType, 'confirmPassword'> = {
+    required: 'パスワード(確認用)を入力してください',
+    validate: (confirmPassword) => {
+      const password = getValues('password')
+      return confirmPassword === password || 'パスワードが一致しません'
+    }
   }
 
   return (
@@ -49,7 +66,7 @@ const Step02Form: FC<Step02FormProps> = ({ nextStep, backStep }) => {
         />
       </FormFieldGroup>
       <ButtonGroup>
-        <Button type="button" icon={faCaretLeft} onClick={() => backStep()} isNotPrimary isHalfSize>
+        <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
           Back
         </Button>
         <Button type="submit" icon={faCaretRight} isIconRight isHalfSize>

@@ -1,8 +1,9 @@
 import { FC } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 
-import { message, icon } from './style'
+import { message, icon } from './styles'
 
 type FormFieldErrorMessageProps = {
   errorMessage: string

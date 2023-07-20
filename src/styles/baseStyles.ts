@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { css } from '@emotion/react'
 
 export const formFieldBase = (isError: boolean, isReadOnly?: boolean) => css`
@@ -27,4 +26,10 @@ export const formFieldBase = (isError: boolean, isReadOnly?: boolean) => css`
     font-weight: 600;
     inset: -26px auto auto 4px;
   }
+`
+
+export const formTextBase = css`
+  color: var(--dark-gray);
+  font-size: 1.4rem;
+  text-align: center;
 `

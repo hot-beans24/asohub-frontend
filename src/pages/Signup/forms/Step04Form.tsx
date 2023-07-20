@@ -10,7 +10,7 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { Step04ValuesType, departmentSelectOpts, gradeSelectOpts } from '../options'
+import { departmentSelectOpts, gradeSelectOpts } from './selectOptions'
 
 type Step04FormProps = {
   nextStep: () => void
@@ -18,12 +18,24 @@ type Step04FormProps = {
 }
 
 const Step04Form: FC<Step04FormProps> = ({ nextStep, backStep }) => {
-  const { handleSubmit } = useForm<Step04ValuesType>()
   const signupFormValues = useRecoilValue(signupFormState)
 
-  const handleOnSubmit: SubmitHandler<Step04ValuesType> = () => {
+  type ValuesType = {
+    email: string
+    username: string
+    department: number
+    grade: number
+  }
+
+  const { handleSubmit } = useForm<ValuesType>()
+
+  const handleOnSubmit: SubmitHandler<ValuesType> = () => {
     console.dir(signupFormValues)
     nextStep()
+  }
+
+  const handleOnBack = () => {
+    backStep()
   }
 
   return (
@@ -40,7 +52,7 @@ const Step04Form: FC<Step04FormProps> = ({ nextStep, backStep }) => {
         <TextField label="学年" type="text" value={gradeSelectOpts[signupFormValues.grade - 1].label} readOnly />
       </FormFieldGroup>
       <ButtonGroup>
-        <Button type="button" icon={faCaretLeft} onClick={() => backStep()} isNotPrimary isHalfSize>
+        <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
           Back
         </Button>
         <Button type="submit" icon={faGhost} isIconRight isHalfSize>

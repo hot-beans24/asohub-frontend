@@ -1,6 +1,6 @@
 import { FC, FormHTMLAttributes, PropsWithChildren } from 'react'
 
-import { form } from './style'
+import { form } from './styles'
 
 type FormProps = FormHTMLAttributes<HTMLFormElement>
 

@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react'
 
-import { box, stepStyle, line, message } from './style'
+import { box, stepStyle, line, message } from './styles'
 
 type StepsProps = {
   step: number
@@ -42,8 +42,8 @@ const Steps: FC<StepsProps> = ({ step }) => {
   return (
     <>
       <div css={box}>
-        {steps.map((info, index) => (
-          <Fragment key={index}>
+        {steps.map((info) => (
+          <Fragment key={info.step}>
             <span css={stepStyle(info.step === step, info.step <= step)}>{info.step}</span>
             {info.step < 6 && <span css={line(info.step < step)} />}
           </Fragment>

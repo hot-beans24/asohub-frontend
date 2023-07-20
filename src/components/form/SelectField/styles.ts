@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { formFieldBase } from '@@/styles/formFieldBaseStyle'
+import { formFieldBase } from '@@/styles/baseStyles'
 
 export const selectField = (isError: boolean, isReadOnly?: boolean) => css`
   ${formFieldBase(isError, isReadOnly)}

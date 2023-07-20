@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 import { signupFormState } from '@@/recoil/atom/signupFormState'
 
@@ -10,24 +10,30 @@ import FormFieldGroup from '@@/components/form/FormFieldGroup'
 import Button from '@@/components/Button'
 import TextField from '@@/components/form/TextFiled'
 
-import { Step01ValuesType, emailOptions } from '../options'
-
 type Step01FormProps = {
   nextStep: () => void
 }
 
 const Step01Form: FC<Step01FormProps> = ({ nextStep }) => {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<Step01ValuesType>()
   const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
 
-  const handleOnSubmit: SubmitHandler<Step01ValuesType> = (data) => {
+  type ValuesType = {
+    email: string
+  }
+
+  const { control, register, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+
+  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     setSignupFormValues({ ...signupFormValues, email: data.email })
     nextStep()
+  }
+
+  const emailOptions: RegisterOptions<ValuesType, 'email'> = {
+    required: 'メールアドレスを入力してください',
+    pattern: {
+      value: /^[0-9]{7}@s.asojuku.ac.jp$/,
+      message: 'メールアドレスの形式が正しくありません'
+    }
   }
 
   return (

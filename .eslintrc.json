@@ -29,7 +29,8 @@
     "react/require-default-props": "off",
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-nested-ternary": "off"
   },
   "ignorePatterns": ["vite.config.ts"]
 }
