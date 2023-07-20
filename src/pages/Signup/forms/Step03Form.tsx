@@ -1,9 +1,6 @@
-import { FC } from 'react'
+import { FC, Dispatch, SetStateAction } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
-import { useRecoilState } from 'recoil'
-
-import { signupFormState } from '@@/recoil/atom/signupFormState'
 
 import Form from '@@/components/form/Form'
 import FormFieldGroup from '@@/components/form/FormFieldGroup'
@@ -12,16 +9,17 @@ import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 import SelectField from '@@/components/form/SelectField'
 
+import { SignupFormValues } from '../types/signupForm'
 import { departmentSelectOpts, gradeSelectOpts } from './selectOptions'
 
 type Step03FormProps = {
+  signupFormValues: SignupFormValues
+  setSignupFormValues: Dispatch<SetStateAction<SignupFormValues>>
   nextStep: () => void
   backStep: () => void
 }
 
-const Step03Form: FC<Step03FormProps> = ({ nextStep, backStep }) => {
-  const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
-
+const Step03Form: FC<Step03FormProps> = ({ signupFormValues, setSignupFormValues, nextStep, backStep }) => {
   type ValuesType = {
     username: string
     department: number
@@ -31,12 +29,12 @@ const Step03Form: FC<Step03FormProps> = ({ nextStep, backStep }) => {
   const { control, register, watch, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    setSignupFormValues({
-      ...signupFormValues,
+    setSignupFormValues((prev) => ({
+      ...prev,
       username: data.username,
       department: data.department,
       grade: data.grade
-    })
+    }))
     nextStep()
   }
 

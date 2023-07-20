@@ -1,8 +1,6 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { faGhost, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
-import { useRecoilValue } from 'recoil'
-import { signupFormState } from '@@/recoil/atom/signupFormState'
 
 import Form from '@@/components/form/Form'
 import FormFieldGroup from '@@/components/form/FormFieldGroup'
@@ -10,16 +8,16 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
+import { SignupFormValues } from '../types/signupForm'
 import { departmentSelectOpts, gradeSelectOpts } from './selectOptions'
 
 type Step04FormProps = {
+  signupFormValues: SignupFormValues
   nextStep: () => void
   backStep: () => void
 }
 
-const Step04Form: FC<Step04FormProps> = ({ nextStep, backStep }) => {
-  const signupFormValues = useRecoilValue(signupFormState)
-
+const Step04Form: FC<Step04FormProps> = ({ signupFormValues, nextStep, backStep }) => {
   type ValuesType = {
     email: string
     username: string

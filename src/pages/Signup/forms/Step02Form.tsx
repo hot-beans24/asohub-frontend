@@ -1,9 +1,6 @@
-import { FC } from 'react'
+import { FC, Dispatch, SetStateAction } from 'react'
 import { useForm, SubmitHandler, RegisterOptions,  } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
-import { useRecoilState } from 'recoil'
-
-import { signupFormState } from '@@/recoil/atom/signupFormState'
 
 import Form from '@@/components/form/Form'
 import FormFieldGroup from '@@/components/form/FormFieldGroup'
@@ -11,13 +8,15 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
+import { SignupFormValues } from '../types/signupForm'
+
 type Step02FormProps = {
+  setSignupFormValues: Dispatch<SetStateAction<SignupFormValues>>
   nextStep: () => void
   backStep: () => void
 }
 
-const Step02Form: FC<Step02FormProps> = ({ nextStep, backStep }) => {
-  const [signupFormValues, setSignupFormValues] = useRecoilState(signupFormState)
+const Step02Form: FC<Step02FormProps> = ({ setSignupFormValues, nextStep, backStep }) => {
 
   type ValuesType = {
     password: string
@@ -27,7 +26,7 @@ const Step02Form: FC<Step02FormProps> = ({ nextStep, backStep }) => {
   const { register, getValues, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    setSignupFormValues({ ...signupFormValues, password: data.password })
+    setSignupFormValues((prev) => ({ ...prev, password: data.password }))
     nextStep()
   }
 
