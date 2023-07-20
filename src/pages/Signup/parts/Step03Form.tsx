@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction } from 'react'
+import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,17 +9,16 @@ import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 import SelectField from '@@/components/form/SelectField'
 
-import { SignupFormValues } from '../types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from './selectOptions'
+import { SignupFormState } from '../types/signupForm'
+import { departmentSelectOpts, gradeSelectOpts } from '../data/selectOptions'
 
 type Step03FormProps = {
-  signupFormValues: SignupFormValues
-  setSignupFormValues: Dispatch<SetStateAction<SignupFormValues>>
+  signupFormState: SignupFormState
   nextStep: () => void
   backStep: () => void
 }
 
-const Step03Form: FC<Step03FormProps> = ({ signupFormValues, setSignupFormValues, nextStep, backStep }) => {
+const Step03Form: FC<Step03FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep, backStep }) => {
   type ValuesType = {
     username: string
     department: number

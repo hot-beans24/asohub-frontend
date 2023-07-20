@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction } from 'react'
+import { FC } from 'react'
 import { useForm, SubmitHandler, RegisterOptions,  } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
@@ -8,22 +8,21 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { SignupFormValues } from '../types/signupForm'
+import { SignupFormState } from '../types/signupForm'
 
 type Step02FormProps = {
-  setSignupFormValues: Dispatch<SetStateAction<SignupFormValues>>
+  signupFormState: SignupFormState
   nextStep: () => void
   backStep: () => void
 }
 
-const Step02Form: FC<Step02FormProps> = ({ setSignupFormValues, nextStep, backStep }) => {
+const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValues }, nextStep, backStep }) => {
+  const { register, getValues, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   type ValuesType = {
     password: string
     confirmPassword: string
   }
-
-  const { register, getValues, handleSubmit, formState: { errors } } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     setSignupFormValues((prev) => ({ ...prev, password: data.password }))

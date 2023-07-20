@@ -8,16 +8,16 @@ import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 import TextField from '@@/components/form/TextFiled'
 
-import { SignupFormValues } from '../types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from './selectOptions'
+import { SignupFormState } from '../types/signupForm'
+import { departmentSelectOpts, gradeSelectOpts } from '../data/selectOptions'
 
 type Step04FormProps = {
-  signupFormValues: SignupFormValues
+  signupFormState: SignupFormState
   nextStep: () => void
   backStep: () => void
 }
 
-const Step04Form: FC<Step04FormProps> = ({ signupFormValues, nextStep, backStep }) => {
+const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }, nextStep, backStep }) => {
   type ValuesType = {
     email: string
     username: string
