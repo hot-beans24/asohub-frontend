@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import { SelectOption } from '@@/types/selectOption'
-import FormFiledWrapper from '@@/components/Form/FormFieldWrapper'
+import { FormFieldWrapper } from '@@/components/Form'
 
 import { selectField, opt, icon } from './styles'
 
@@ -16,7 +16,7 @@ type SelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
 const SelectField: FC<SelectFieldProps> = forwardRef<HTMLSelectElement, SelectFieldProps>(
   ({ label, errorMessage, options, isReadOnly, ...selectProps }, ref) => {
     return (
-      <FormFiledWrapper label={label} errorMessage={errorMessage}>
+      <FormFieldWrapper label={label} errorMessage={errorMessage}>
         <FontAwesomeIcon css={icon(isReadOnly)} icon={faCaretDown} size="lg" />
         <select css={selectField(!!errorMessage, isReadOnly)} defaultValue="" ref={ref} {...selectProps}>
           {options.map((option) => (
@@ -25,7 +25,7 @@ const SelectField: FC<SelectFieldProps> = forwardRef<HTMLSelectElement, SelectFi
             </option>
           ))}
         </select>
-      </FormFiledWrapper>
+      </FormFieldWrapper>
     )
   }
 )

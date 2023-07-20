@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { faGhost, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
+import { useModal } from 'react-hooks-use-modal'
 
 import { Form, FormFieldGroup, TextField } from '@@/components/Form'
 import Button from '@@/components/Button'
@@ -27,6 +28,8 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
     backStep()
   }
 
+  const [Modal, open, close] = useModal('root')
+
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormFieldGroup>
@@ -44,10 +47,14 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
         <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
           Back
         </Button>
-        <Button type="submit" icon={faGhost} isIconRight isHalfSize>
+        <Button type="button" icon={faGhost} onClick={open} isIconRight isHalfSize>
           Create
         </Button>
       </ButtonGroup>
+      <Modal>
+        hello
+        <button type="button" onClick={close}>close</button>
+      </Modal>
     </Form>
   )
 }

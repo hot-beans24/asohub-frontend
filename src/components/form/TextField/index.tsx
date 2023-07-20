@@ -2,7 +2,7 @@ import { useRef, useState, InputHTMLAttributes, forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import FormFiledWrapper from '@@/components/Form/FormFieldWrapper'
+import { FormFieldWrapper } from '@@/components/Form'
 
 import { textField, pwMask } from './styles'
 
@@ -27,14 +27,14 @@ const TextField = forwardRef<HTMLInputElement, TextFiledProps>(
     }
 
     return (
-      <FormFiledWrapper label={label} errorMessage={errorMessage}>
+      <FormFieldWrapper label={label} errorMessage={errorMessage}>
         {isPassword && (
           <button type="button" aria-label="mask password" css={pwMask} onClick={handleEyeClick}>
             <FontAwesomeIcon icon={isShowPassword ? faEye : faEyeSlash} />
           </button>
         )}
         <input css={textField(!!errorMessage, inputProps.readOnly)} placeholder=" " ref={ref} {...inputProps} />
-      </FormFiledWrapper>
+      </FormFieldWrapper>
     )
   }
 )

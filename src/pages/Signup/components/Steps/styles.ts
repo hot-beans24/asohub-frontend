@@ -24,16 +24,29 @@ export const stepStyle = (isCurrentStep: boolean, isAlready: boolean) => css`
   align-items: center;
 
   ${isCurrentStep && 'animation-name: stepAnimate;'}
-  animation-duration: 0.4s;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
   @keyframes stepAnimate {
     0% {
-      transform: scale(0.6);
+      scale: 1 1 1;
     }
-    60% {
-      transform: scale(1.2);
+    30% {
+      scale: 1.25 0.75 1;
+    }
+    40% {
+      scale: 0.75 1.25 1;
+    }
+    50% {
+      scale: 1.15 0.85 1;
+    }
+    65% {
+      scale: 0.95 1.05 1;
+    }
+    75% {
+      scale: 1.05 0.95 1;
     }
     100% {
-      transform: scale(1);
+      scale: 1 1 1;
     }
   }
 `
