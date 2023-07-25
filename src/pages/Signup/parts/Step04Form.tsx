@@ -11,7 +11,7 @@ import ButtonGroup from '@@/components/ButtonGroup'
 
 import { SignupFormState, Step04FormValues } from '@@/pages/Signup/types/signupForm'
 import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
-import lottieJson from './Aniki-Hamster.json'
+import lottieJson from './good.json'
 
 import { modalBox, message } from './styles'
 
@@ -72,7 +72,7 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
           }}
         >
           <p css={message}>\\ アカウントが作成されました //</p>
-          <Lottie animationData={lottieJson} style={{ width: 300 }} />
+          <Lottie animationData={lottieJson} width={200} />
           <Button type="submit" onClick={() => nextStep()} icon={faThumbsUp} isIconRight isHalfSize autoFocus={false}>OK</Button>
         </motion.div>
       </Modal>
