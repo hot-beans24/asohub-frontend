@@ -1,7 +1,9 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { faGhost, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
+import { faGhost, faCaretLeft, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { useModal } from 'react-hooks-use-modal'
+import { motion } from 'framer-motion'
+import Lottie from 'lottie-react'
 
 import { Form, FormFieldGroup, TextField } from '@@/components/Form'
 import Button from '@@/components/Button'
@@ -9,6 +11,9 @@ import ButtonGroup from '@@/components/ButtonGroup'
 
 import { SignupFormState, Step04FormValues } from '@@/pages/Signup/types/signupForm'
 import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
+import lottieJson from './Aniki-Hamster.json'
+
+import { modalBox, message } from './styles'
 
 type Step04FormProps = {
   signupFormState: SignupFormState
@@ -21,14 +26,18 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
 
   const handleOnSubmit: SubmitHandler<Step04FormValues> = () => {
     console.dir(signupFormValues)
-    nextStep()
   }
 
   const handleOnBack = () => {
     backStep()
   }
 
-  const [Modal, open, close] = useModal('root')
+  const [Modal, open] = useModal('root', {
+    preventScroll: false,
+    focusTrapOptions: {
+      clickOutsideDeactivates: false,
+    }
+  })
 
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -52,8 +61,20 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
         </Button>
       </ButtonGroup>
       <Modal>
-        hello
-        <button type="button" onClick={close}>close</button>
+        <motion.div
+          css={modalBox}
+          initial={{ rotate: 180, scale: 0 }}
+          animate={{ rotate: 0, scale: 1 }}
+          transition={{
+            type: 'spring',
+            stiffness: 260,
+            damping: 20
+          }}
+        >
+          <p css={message}>\\ アカウントが作成されました //</p>
+          <Lottie animationData={lottieJson} style={{ width: 300 }} />
+          <Button type="submit" onClick={() => nextStep()} icon={faThumbsUp} isIconRight isHalfSize autoFocus={false}>OK</Button>
+        </motion.div>
       </Modal>
     </Form>
   )

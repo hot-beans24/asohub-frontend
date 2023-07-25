@@ -7,7 +7,7 @@ const grobalStyles = css`
 
   :root {
     --main-color: #144777;
-    --error-color: #ff4949;
+    --error-color: #ed6f78;
     --light-pink: #fceeed;
     --light-gray: #f5f5f5;
     --medium-gray: #d9d9d9;
@@ -19,7 +19,7 @@ const grobalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', '游ゴシック', YuGothic, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ',
+    font-family: 'Montserrat', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ',
       Meiryo, sans-serif;
     font-size: 1.4rem;
     -webkit-appearance: none;
