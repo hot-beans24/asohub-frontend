@@ -19,8 +19,7 @@ const grobalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ',
-      Meiryo, sans-serif;
+    font-family: 'Montserrat', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
     font-size: 1.4rem;
     -webkit-appearance: none;
     -moz-appearance: none;

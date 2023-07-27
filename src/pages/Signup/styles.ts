@@ -9,10 +9,3 @@ export const box = css`
   justify-content: center;
   align-items: center;
 `
-
-export const text = css`
-  margin-top: 70px;
-  color: var(--dark-gray);
-  font-size: 1.4rem;
-  text-align: center;
-`

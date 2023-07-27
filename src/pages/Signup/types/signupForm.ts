@@ -34,3 +34,8 @@ export type Step04FormValues = {
   department: number
   grade: number
 }
+
+export type Step05FormValues = {
+  iconImage: File
+  profileBio: string
+}

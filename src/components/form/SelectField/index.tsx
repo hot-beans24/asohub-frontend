@@ -2,7 +2,7 @@ import { FC, forwardRef, SelectHTMLAttributes } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import { SelectOption } from '@@/types/selectOption'
+import { SelectOption } from '@@/pages/Signup/data/selectOptions'
 import { FormFieldWrapper } from '@@/components/Form'
 
 import { selectField, opt, icon } from './styles'

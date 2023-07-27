@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 
-export const button = (isIconRight?: boolean, isNotPrimary?: boolean, isHalfSize?: boolean) => css`
+export const button = (isIconRight?: boolean, isNotPrimary?: boolean, isHalfSize?: boolean, isBlack?: boolean) => css`
   width: ${isHalfSize ? '120px' : '300px'};
   height: 52px;
   padding: 0 2rem;
   border-radius: 8px;
-  background-color: ${isNotPrimary ? 'var(--medium-gray)' : 'var(--main-color)'};
+  background-color: ${isNotPrimary ? 'var(--medium-gray)' : isBlack ? 'black' : 'var(--main-color)'};
   color: white;
   font-size: 1.4rem;
   font-weight: 500;

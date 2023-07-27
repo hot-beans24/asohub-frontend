@@ -7,4 +7,5 @@ export const form = css`
   justify-content: center;
   align-items: center;
   gap: 40px;
+  position: relative;
 `

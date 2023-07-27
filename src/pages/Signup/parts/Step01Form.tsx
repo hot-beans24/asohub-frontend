@@ -2,10 +2,12 @@ import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
+import Link from '@@/components/Link'
 import { Form, FormFieldGroup, TextField } from '@@/components/Form'
 import Button from '@@/components/Button'
 
 import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
+import { text } from './styles'
 
 type Step01FormProps = {
   signupFormState: SignupFormState
@@ -29,6 +31,7 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
   }
 
   return (
+    <>
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormFieldGroup>
         <Controller
@@ -50,6 +53,8 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
         Next
       </Button>
     </Form>
+    <p css={text}>既にアカウントをお持ちの方は<Link to="/login">こちら</Link></p>
+    </>
   )
 }
 

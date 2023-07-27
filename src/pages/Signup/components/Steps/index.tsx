@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react'
 
-import { steps } from '@@/pages/Signup/data/steps'
+import { steps } from './steps'
 
 import { box, stepStyle, line, message } from './styles'
 
@@ -14,11 +14,7 @@ const Steps: FC<StepsProps> = ({ step }) => {
       <div css={box}>
         {steps.map((info) => (
           <Fragment key={info.step}>
-            <span
-              css={stepStyle(info.step === step, info.step <= step)}
-            >
-              {info.step}
-            </span>
+            <span css={stepStyle(info.step === step, info.step <= step)}>{info.step}</span>
             {info.step < 6 && <span css={line(info.step < step)} />}
           </Fragment>
         ))}

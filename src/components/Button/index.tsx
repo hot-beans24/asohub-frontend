@@ -11,12 +11,13 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isIconRight?: boolean
   isNotPrimary?: boolean
   isHalfSize?: boolean
+  isBlack?: boolean
 }
 
-const Button: FC<ButtonProps> = ({ children, type, icon, isIconRight, isNotPrimary, isHalfSize, ...props }) => {
+const Button: FC<ButtonProps> = ({ children, type, icon, isIconRight, isNotPrimary, isHalfSize, isBlack, ...props }) => {
   return (
     // eslint-disable-next-line react/button-has-type
-    <button css={button(isIconRight, isNotPrimary, isHalfSize)} type={type} {...props}>
+    <button css={button(isIconRight, isNotPrimary, isHalfSize, isBlack)} type={type} {...props}>
       {icon && <FontAwesomeIcon icon={icon} size="lg" />}
       {children}
     </button>

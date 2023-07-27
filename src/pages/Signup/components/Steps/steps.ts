@@ -26,6 +26,6 @@ export const steps: StepInfo[] = [
   },
   {
     step: 6,
-    message: '学校のメールアドレスを入力してください'
+    message: 'GitHubアカウントと連携してください'
   }
 ]

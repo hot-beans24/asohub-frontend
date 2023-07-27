@@ -32,12 +32,17 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
     backStep()
   }
 
-  const [Modal, open] = useModal('root', {
+  const [Modal, open, close] = useModal('root', {
     preventScroll: false,
     focusTrapOptions: {
-      clickOutsideDeactivates: false,
+      clickOutsideDeactivates: false
     }
   })
+
+  const onModalButtonClick = () => {
+    close()
+    nextStep()
+  }
 
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -63,17 +68,18 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
       <Modal>
         <motion.div
           css={modalBox}
-          initial={{ rotate: 180, scale: 0 }}
-          animate={{ rotate: 0, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
-            type: 'spring',
-            stiffness: 260,
-            damping: 20
+            duration: 0.8,
+            ease: [0, 0.71, 0.2, 1.01]
           }}
         >
-          <p css={message}>\\ アカウントが作成されました //</p>
+          <p css={message}>アカウントが作成されました</p>
           <Lottie animationData={lottieJson} width={200} />
-          <Button type="submit" onClick={() => nextStep()} icon={faThumbsUp} isIconRight isHalfSize autoFocus={false}>OK</Button>
+          <Button type="submit" onClick={onModalButtonClick} icon={faThumbsUp} isIconRight isHalfSize autoFocus={false}>
+            OK
+          </Button>
         </motion.div>
       </Modal>
     </Form>

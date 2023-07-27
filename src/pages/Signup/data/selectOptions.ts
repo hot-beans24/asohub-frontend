@@ -12,7 +12,7 @@ export const departmentSelectOpts: DepartmentSelectOption[] = [
   { label: '情報システム専攻科', value: 2, maxGrade: 3 },
   { label: '情報システム専攻科 : アドバンス', value: 3, maxGrade: 3 },
   { label: '情報システム科', value: 4, maxGrade: 2 },
-  { label: '情報システム科 : アドバンス', value: 5, maxGrade: 2 },
+  { label: '情報システム科 : アドバンス', value: 5, maxGrade: 2 }
 ]
 
 export const gradeSelectOpts: SelectOption[] = [

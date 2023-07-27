@@ -17,7 +17,11 @@ const LoginPage: FC = () => {
     password: string
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ValuesType>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<ValuesType>()
 
   const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
     console.log(data)

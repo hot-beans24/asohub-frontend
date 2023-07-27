@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useForm, SubmitHandler, RegisterOptions,  } from 'react-hook-form'
+import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
 import { Form, FormFieldGroup, TextField } from '@@/components/Form'
@@ -15,7 +15,12 @@ type Step02FormProps = {
 }
 
 const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValues }, nextStep, backStep }) => {
-  const { register, getValues, handleSubmit, formState: { errors } } = useForm<Step02FormValues>()
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Step02FormValues>()
 
   const handleOnSubmit: SubmitHandler<Step02FormValues> = (data) => {
     setSignupFormValues((prev) => ({ ...prev, ...data }))
