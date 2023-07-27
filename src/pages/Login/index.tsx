@@ -23,8 +23,8 @@ const LoginPage: FC = () => {
     formState: { errors }
   } = useForm<ValuesType>()
 
-  const handleOnSubmit: SubmitHandler<ValuesType> = (data) => {
-    console.log(data)
+  const handleOnSubmit: SubmitHandler<ValuesType> = () => {
+
   }
 
   const emailOptions: RegisterOptions<ValuesType, 'email'> = {
