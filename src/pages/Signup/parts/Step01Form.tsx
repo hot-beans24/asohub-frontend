@@ -1,11 +1,12 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 import Link from '@@/components/Link'
-import { Form, FormFieldGroup, TextField } from '@@/components/Form'
+import { Form, FormFieldGroup, TextField, FormServerErrorMessage } from '@@/components/Form'
 import Button from '@@/components/Button'
 
+// import { useCheckDuplicateEmail } from '@@/pages/Signup/hooks/useCheckDuplicateEmail'
 import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
 import { text } from './styles'
 
@@ -16,8 +17,14 @@ type Step01FormProps = {
 
 const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep }) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm<Step01FormValues>()
+  const [isAvailableEmail, setIsAvailableEmail] = useState<boolean>(true)
+  // const { checkDuplicateEmail } = useCheckDuplicateEmail()
 
-  const handleOnSubmit: SubmitHandler<Step01FormValues> = (data) => {
+  const handleOnSubmit: SubmitHandler<Step01FormValues> = async (data) => {
+    // const isAvailable = await checkDuplicateEmail(data.email)
+    const isAvailable = true
+    setIsAvailableEmail(isAvailable)
+    if (!isAvailable) return
     setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
@@ -33,6 +40,7 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
   return (
     <>
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
+      {!isAvailableEmail && <FormServerErrorMessage message="既に使用されているメールアドレスです。別のメールアドレスを入力してください。" />}
       <FormFieldGroup>
         <Controller
           name="email"

@@ -16,7 +16,7 @@ const Step05Form: FC<Step05FormProps> = () => {
 
   return (
     <Form>
-      <Skip nextStep={() => navigate('/') } />
+      <Skip nextStep={() => navigate('/')} />
       <Button type="button" icon={faGithub} isBlack>
         Login with Github
       </Button>

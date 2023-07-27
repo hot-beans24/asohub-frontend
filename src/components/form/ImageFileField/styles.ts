@@ -43,16 +43,13 @@ export const imagePreview = css`
   object-position: center;
   position: relative;
   z-index: 2;
-  animation: fadeIn 0.6s ease-in-out both;
+  animation: fadeIn 0.2s ease-in both;
   @keyframes fadeIn {
     0% {
-      scale: 0.9;
-    }
-    40% {
-      scale: 1.2;
+      opacity: 0;
     }
     100% {
-      scale: 1.0;
+      opacity: 1;
     }
   }
 `
