@@ -2,7 +2,7 @@ import { useRef, useState, InputHTMLAttributes, forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import { FormFieldWrapper } from '@@/components/Form'
+import FormFieldWrapper  from '@@/components/Form/FormFieldWrapper'
 
 import { textField, pwMask } from './styles'
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import { SelectOption } from '@@/pages/Signup/data/selectOptions'
-import { FormFieldWrapper } from '@@/components/Form'
+import FormFieldWrapper from '@@/components/Form/FormFieldWrapper'
 
 import { selectField, opt, icon } from './styles'
 

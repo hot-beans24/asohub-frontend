@@ -1,6 +1,6 @@
 import { TextareaHTMLAttributes, forwardRef } from 'react'
 
-import { FormFieldWrapper } from '@@/components/Form'
+import FormFieldWrapper from '@@/components/Form/FormFieldWrapper'
 
 import { textarea } from './styles'
 

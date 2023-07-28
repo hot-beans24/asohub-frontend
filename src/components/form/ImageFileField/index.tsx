@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 
-import { FormFieldWrapper } from '@@/components/Form'
+import FormFieldWrapper from '@@/components/Form/FormFieldWrapper'
 
 import { imageFileField, inputLabel, isNotImage, imagePreview, icon } from './styles'
 
