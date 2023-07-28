@@ -2,7 +2,10 @@ import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
-import { Form, FormFieldGroup, TextField, SelectField } from '@@/components/Form'
+import Form from '@@/components/Form/Form'
+import FormFieldGroup from '@@/components/Form/FormFieldGroup'
+import TextField from '@@/components/Form/TextField'
+import SelectField from '@@/components/Form/SelectField'
 import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 

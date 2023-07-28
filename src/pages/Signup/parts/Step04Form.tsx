@@ -5,7 +5,9 @@ import { useModal } from 'react-hooks-use-modal'
 import { motion } from 'framer-motion'
 import Lottie from 'lottie-react'
 
-import { Form, FormFieldGroup, TextField } from '@@/components/Form'
+import Form from '@@/components/Form/Form'
+import FormFieldGroup from '@@/components/Form/FormFieldGroup'
+import TextField from '@@/components/Form/TextField'
 import Button from '@@/components/Button'
 import ButtonGroup from '@@/components/ButtonGroup'
 

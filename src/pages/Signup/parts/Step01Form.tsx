@@ -3,7 +3,10 @@ import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 import Link from '@@/components/Link'
-import { Form, FormFieldGroup, TextField, FormServerErrorMessage } from '@@/components/Form'
+import Form from '@@/components/Form/Form'
+import FormFieldGroup from '@@/components/Form/FormFieldGroup'
+import TextField from '@@/components/Form/TextField'
+import FormServerErrorMessage from '@@/components/Form/FormServerErrorMessage'
 import Button from '@@/components/Button'
 
 // import { useCheckDuplicateEmail } from '@@/pages/Signup/hooks/useCheckDuplicateEmail'
