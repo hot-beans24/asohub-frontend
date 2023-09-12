@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
 
-import FormFieldLabel from '../FormFieldLabel'
-import FormFieldErrorMessage from '../FormFieldErrorMessage'
+import FormFieldLabel from '@@/components/Form/FormFieldLabel'
+import FormFieldErrorMessage from '@@/components/Form/FormFieldErrorMessage'
 
 import { wrapper } from './styles'
 
