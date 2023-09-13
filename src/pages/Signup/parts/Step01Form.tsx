@@ -9,7 +9,7 @@ import TextField from '@@/components/Form/TextField'
 import FormServerErrorMessage from '@@/components/Form/FormServerErrorMessage'
 import Button from '@@/components/Button'
 
-// import { useCheckDuplicateEmail } from '@@/pages/Signup/hooks/useCheckDuplicateEmail'
+import { useCheckEmailAvailability } from '@@/pages/Signup/hooks/useCheckEmailAvailability'
 import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
 import { text } from './styles'
 
@@ -21,11 +21,11 @@ type Step01FormProps = {
 const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep }) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm<Step01FormValues>()
   const [isAvailableEmail, setIsAvailableEmail] = useState<boolean>(true)
-  // const { checkDuplicateEmail } = useCheckDuplicateEmail()
+  const { checkEmailAvailability } = useCheckEmailAvailability()
 
   const handleOnSubmit: SubmitHandler<Step01FormValues> = async (data) => {
-    // const isAvailable = await checkDuplicateEmail(data.email)
-    const isAvailable = true
+    const isAvailable = await checkEmailAvailability(data.email)
+    // const isAvailable = true
     setIsAvailableEmail(isAvailable)
     if (!isAvailable) return
     setSignupFormValues((prev) => ({ ...prev, ...data }))
