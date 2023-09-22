@@ -5,7 +5,7 @@ export const useCheckEmailAvailability = () => {
   }
 
   const checkEmailAvailability = async (email: string) => {
-    const res = await fetch(`${import.meta.env.VITE_MOCKSERVER_PATH}/api/auth/email-check`, {
+    const res = await fetch(`${import.meta.env.VITE_API_PATH}/api/email-check`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })

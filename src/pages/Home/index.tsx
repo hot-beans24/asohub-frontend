@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 
 const HomePage: FC = () => {
   return (
-    <>
-      <div>ホーム</div>
-      <Link to="login">ログイン画面へ</Link>
-    </>
+    <h2>ホーム画面</h2>
   )
 }
 

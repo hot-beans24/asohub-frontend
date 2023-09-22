@@ -11,7 +11,7 @@ export const formFieldBase = (isError: boolean, isReadOnly?: boolean) => css`
   font-size: 1.4rem;
   font-weight: 500;
   letter-spacing: 0.1em;
-  &:focus {
+  &:focus-visible {
     outline: ${isError ? `2px solid var(--error-color)` : '2px solid var(--main-color)'};
     ${isReadOnly && 'outline: none;'}
   }
@@ -19,7 +19,7 @@ export const formFieldBase = (isError: boolean, isReadOnly?: boolean) => css`
   ${isReadOnly && 'cursor: default;'}
   ${isReadOnly && 'pointer-events: none;'}
 
-  &:focus + span,
+  &:focus-visible + span,
   &:not(:placeholder-shown) + span {
     color: var(--main-color);
     font-size: 1.2rem;

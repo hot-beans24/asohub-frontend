@@ -5,6 +5,7 @@ import { useModal } from 'react-hooks-use-modal'
 import { motion } from 'framer-motion'
 import Lottie from 'lottie-react'
 
+
 import Form from '@@/components/Form/Form'
 import FormFieldGroup from '@@/components/Form/FormFieldGroup'
 import TextField from '@@/components/Form/TextField'
@@ -13,6 +14,7 @@ import ButtonGroup from '@@/components/ButtonGroup'
 
 import { SignupFormState, Step04FormValues } from '@@/pages/Signup/types/signupForm'
 import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
+import { useSignup } from '../hooks/useSignup'
 import lottieJson from './good.json'
 
 import { modalBox, message } from './styles'
@@ -25,9 +27,10 @@ type Step04FormProps = {
 
 const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }, nextStep, backStep }) => {
   const { handleSubmit } = useForm<Step04FormValues>()
+  const { signup } = useSignup()
 
   const handleOnSubmit: SubmitHandler<Step04FormValues> = () => {
-    console.dir(signupFormValues)
+
   }
 
   const handleOnBack = () => {
@@ -41,8 +44,11 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
     }
   })
 
-  const onModalButtonClick = () => {
+  const onModalButtonClick = async () => {
     close()
+    const userId = await signup(signupFormValues)
+    console.log(signupFormValues)
+    console.log(userId)
     nextStep()
   }
 

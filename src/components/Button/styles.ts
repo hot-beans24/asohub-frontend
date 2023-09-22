@@ -19,7 +19,7 @@ export const button = (isIconRight?: boolean, isNotPrimary?: boolean, isHalfSize
   &:hover {
     opacity: 0.6;
   }
-  &:focus {
+  &:focus-visible {
     outline-offset: -6px;
     outline: 2px solid white;
   }
