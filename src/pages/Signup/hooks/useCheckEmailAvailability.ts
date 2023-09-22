@@ -1,10 +1,11 @@
-export const useCheckDuplicateEmail = () => {
+export const useCheckEmailAvailability = () => {
   type Body = {
     email: string
     is_available: boolean
   }
-  const checkDuplicateEmail = async (email: string) => {
-    const res = await fetch('http://localhost/api/auth/email-check', {
+
+  const checkEmailAvailability = async (email: string) => {
+    const res = await fetch(`${import.meta.env.VITE_API_PATH}/api/email-check`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
@@ -14,5 +15,5 @@ export const useCheckDuplicateEmail = () => {
     return is_available
   }
 
-  return { checkDuplicateEmail }
+  return { checkEmailAvailability }
 }

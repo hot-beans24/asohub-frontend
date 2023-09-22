@@ -5,9 +5,13 @@ import icon from '/icon.svg'
 
 import { logo } from './styles'
 
-const Logo: FC = () => {
+type LogoProps = {
+  isAuthPage?: boolean
+}
+
+const Logo: FC<LogoProps> = ({ isAuthPage }) => {
   return (
-    <Link css={logo} to="/">
+    <Link css={logo(isAuthPage)} to="/">
       <img src={icon} alt="icon" width={30} height={30} />
       AsoHub
     </Link>

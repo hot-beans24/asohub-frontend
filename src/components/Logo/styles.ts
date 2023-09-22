@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 
-export const logo = css`
+export const logo = (isAuthPage?: boolean) => css`
   color: var(--main-color);
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   letter-spacing: 0.06em;
-  position: fixed;
-  inset: 20px auto auto 20px;
+  position: ${isAuthPage && 'fixed'};
+  inset: ${isAuthPage && '20px auto auto 20px'};
   display: flex;
   justify-content: center;
   align-items: center;

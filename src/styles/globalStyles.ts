@@ -24,19 +24,21 @@ const grobalStyles = css`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    &:focus {
+    &:focus-visible {
       outline: 2px solid var(--main-color);
     }
   }
 
   html {
+    height: 100%;
     font-size: 10px;
   }
 
   body {
+    height: 100%;
     min-width: 300px;
     min-height: 100vh;
-    padding: 20px;
+    padding: 30px;
   }
 
   button {
@@ -45,14 +47,13 @@ const grobalStyles = css`
     cursor: pointer;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   #root {
     width: 100%;
     height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
   }
 `
 export default grobalStyles

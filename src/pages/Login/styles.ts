@@ -2,11 +2,9 @@ import { css } from '@emotion/react'
 
 export const box = css`
   height: 100%;
-  margin-top: 100px;
-  margin-bottom: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 `
 
