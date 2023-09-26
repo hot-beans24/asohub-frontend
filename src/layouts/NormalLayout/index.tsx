@@ -29,7 +29,7 @@ const NormalLayout: FC = () => {
           </li>
           <li css={marginBottom}>
             <Link to="/" css={user(isWide)} >
-              <img css={userIcon} src="user.jpeg" alt="" />
+              <img css={userIcon} src="user.png" alt="" />
               <span css={userName(isWide)}>username</span>
             </Link>
           </li>
@@ -148,6 +148,8 @@ const userIcon = css`
   width: 46px;
   height: 46px;
   border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
 `
 
 const userName = (isWide: boolean) => css`

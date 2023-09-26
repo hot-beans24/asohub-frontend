@@ -7,6 +7,8 @@ import NormalLayout from '@@/layouts/NormalLayout'
 import Home from '@@/pages/Home'
 import Login from '@@/pages/Login'
 import Singup from '@@/pages/Signup'
+import Mypage from '@@/pages/Mypage'
+import Setting from '@@/pages/Setting'
 import NotFound from '@@/pages/NotFound'
 
 const Router: FC = () => {
@@ -15,6 +17,8 @@ const Router: FC = () => {
       <Routes>
         <Route path="/" element={<NormalLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/setting" element={<Setting />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
