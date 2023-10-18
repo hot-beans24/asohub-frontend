@@ -66,6 +66,7 @@ const useUserAuth = () => {
           githubUserIcon: userData.github_user_icon,
           role: userData.role
         })
+        console.log(user)
       } else {
         setUser(null)
         setError('ログインしていません')
