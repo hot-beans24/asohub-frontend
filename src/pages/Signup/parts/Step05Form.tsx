@@ -2,47 +2,38 @@ import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import ImageFileField from '@@/components/Form/ImageFileField'
-import Textarea from '@@/components/Form/Textarea'
-import Button from '@@/components/Button'
-
-import Skip from '@@/pages/Signup/components/Skip'
-import { Step05FormValues } from '@@/pages/Signup/types/signupForm'
+import Form from '@@/features/form/components/Form'
+import FormButton from '@@/features/form/components/FormButton'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import ImageFileField from '@@/features/form/components/ImageFileField'
+import Textarea from '@@/features/form/components/Textarea'
 
 type Step05FormProps = {
   nextStep: () => void
 }
 
 const Step05Form: FC<Step05FormProps> = ({ nextStep }) => {
-  const {
-    register,
-    handleSubmit
-  } = useForm<Step05FormValues>()
+  type FormValues = {
+    iconImage: FileList
+    profileBio: string
+  }
 
-  const handleOnSubmit: SubmitHandler<Step05FormValues> = (data) => {
+  const { register, handleSubmit } = useForm<FormValues>()
+
+  const handleOnSubmit: SubmitHandler<FormValues> = (data) => {
     console.dir(data)
     nextStep()
   }
 
-
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
-      <Skip nextStep={nextStep} />
       <FormFieldGroup>
-        <ImageFileField
-          label="アイコン"
-          {...register('iconImage')}
-        />
-        <Textarea
-          label="プロフィール"
-          {...register('profileBio')}
-        />
+        <ImageFileField label="アイコン" {...register('iconImage')} />
+        <Textarea label="プロフィール" {...register('profileBio')} />
       </FormFieldGroup>
-      <Button type="submit" icon={faCircleCheck}>
+      <FormButton type="submit" icon={faCircleCheck}>
         Save
-      </Button>
+      </FormButton>
     </Form>
   )
 }

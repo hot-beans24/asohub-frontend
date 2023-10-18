@@ -15,7 +15,7 @@ const Steps: FC<StepsProps> = ({ step }) => {
         {steps.map((info) => (
           <Fragment key={info.step}>
             <span css={stepStyle(info.step === step, info.step <= step)}>{info.step}</span>
-            {info.step < 6 && <span css={line(info.step < step)} />}
+            {info.step < 5 && <span css={line(info.step < step)} />}
           </Fragment>
         ))}
       </div>

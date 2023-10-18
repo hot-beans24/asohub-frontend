@@ -30,7 +30,9 @@
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "ignorePatterns": ["vite.config.ts"]
 }

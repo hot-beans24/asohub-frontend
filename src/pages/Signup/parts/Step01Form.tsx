@@ -1,17 +1,18 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-import Link from '@@/components/Link'
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import TextField from '@@/components/Form/TextField'
-import FormServerErrorMessage from '@@/components/Form/FormServerErrorMessage'
-import Button from '@@/components/Button'
+import Link from '@@/features/common/components/Link'
 
-import { useCheckEmailAvailability } from '@@/pages/Signup/hooks/useCheckEmailAvailability'
-import { SignupFormState, Step01FormValues } from '@@/pages/Signup/types/signupForm'
-import { text } from './styles'
+import Form from '@@/features/form/components/Form'
+import FormServerError from '@@/features/form/components/FormServerError'
+import FormText from '@@/features/form/components/FormText'
+import FormButton from '@@/features/form/components/FormButton'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import TextField from '@@/features/form/components/TextField'
+
+import useEmailAvailability from '@@/features/signup/hooks/useEmailAvailability'
+import { SignupFormState } from '@@/features/signup/types/formValues'
 
 type Step01FormProps = {
   signupFormState: SignupFormState
@@ -19,52 +20,62 @@ type Step01FormProps = {
 }
 
 const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, setSignupFormValues }, nextStep }) => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<Step01FormValues>()
-  const [isAvailableEmail, setIsAvailableEmail] = useState<boolean>(true)
-  const { checkEmailAvailability } = useCheckEmailAvailability()
+  const { fetchEmailAvailability, isLoading, error } = useEmailAvailability()
 
-  const handleOnSubmit: SubmitHandler<Step01FormValues> = async (data) => {
-    const isAvailable = await checkEmailAvailability(data.email)
-    // const isAvailable = true
-    setIsAvailableEmail(isAvailable)
-    if (!isAvailable) return
-    setSignupFormValues((prev) => ({ ...prev, ...data }))
-    nextStep()
+  type FormValues = {
+    email: string
   }
 
-  const emailOptions: RegisterOptions<Step01FormValues, 'email'> = {
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormValues>()
+
+  const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
+    const isAvailable = await fetchEmailAvailability(data.email)
+    if (isAvailable && !error) {
+      setSignupFormValues((prev) => ({ ...prev, ...data }))
+      nextStep()
+    }
+  }
+
+  const emailOptions: RegisterOptions<FormValues, 'email'> = {
     required: 'メールアドレスを入力してください',
     pattern: {
       value: /^[0-9]{7}@s.asojuku.ac.jp$/,
-      message: 'メールアドレスの形式が正しくありません'
+      message: '@s.asojuku.ac.jpの形で入力してください'
     }
   }
 
   return (
     <>
-    <Form onSubmit={handleSubmit(handleOnSubmit)}>
-      {!isAvailableEmail && <FormServerErrorMessage message="既に使用されているメールアドレスです。別のメールアドレスを入力してください。" />}
-      <FormFieldGroup>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue={signupFormValues.email}
-          render={({ field }) => (
-            <TextField
-              label="メールアドレス"
-              type="email"
-              {...field}
-              {...register('email', emailOptions)}
-              errorMessage={errors.email?.message}
-            />
-          )}
-        />
-      </FormFieldGroup>
-      <Button type="submit" icon={faCaretRight} isIconRight>
-        Next
-      </Button>
-    </Form>
-    <p css={text}>既にアカウントをお持ちの方は<Link to="/login">こちら</Link></p>
+      <Form onSubmit={handleSubmit(handleOnSubmit)}>
+        {error && <FormServerError error={error} />}
+        <FormFieldGroup>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue={signupFormValues.email}
+            render={({ field }) => (
+              <TextField
+                label="メールアドレス"
+                type="email"
+                {...field}
+                {...register('email', emailOptions)}
+                error={errors.email?.message}
+              />
+            )}
+          />
+        </FormFieldGroup>
+        <FormButton type="submit" icon={faCaretRight} isLoading={isLoading} isIconRight>
+          Next
+        </FormButton>
+      </Form>
+      <FormText>
+        既にアカウントをお持ちの方は<Link to="/login">こちら</Link>
+      </FormText>
     </>
   )
 }

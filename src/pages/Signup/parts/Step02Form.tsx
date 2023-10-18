@@ -2,13 +2,13 @@ import { FC } from 'react'
 import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import TextField from '@@/components/Form/TextField'
-import Button from '@@/components/Button'
-import ButtonGroup from '@@/components/ButtonGroup'
+import Form from '@@/features/form/components/Form'
+import FormButton from '@@/features/form/components/FormButton'
+import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import TextField from '@@/features/form/components/TextField'
 
-import { SignupFormState, Step02FormValues } from '@@/pages/Signup/types/signupForm'
+import { SignupFormState } from '@@/features/signup/types/formValues'
 
 type Step02FormProps = {
   signupFormState: SignupFormState
@@ -17,27 +17,28 @@ type Step02FormProps = {
 }
 
 const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValues }, nextStep, backStep }) => {
+  type FormValues = {
+    password: string
+    confirmPassword: string
+  }
+
   const {
     register,
     getValues,
     handleSubmit,
     formState: { errors }
-  } = useForm<Step02FormValues>()
+  } = useForm<FormValues>()
 
-  const handleOnSubmit: SubmitHandler<Step02FormValues> = (data) => {
+  const handleOnSubmit: SubmitHandler<FormValues> = (data) => {
     setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
 
-  const handleOnBack = () => {
-    backStep()
-  }
-
-  const passwordOptions: RegisterOptions<Step02FormValues, 'password'> = {
+  const passwordOptions: RegisterOptions<FormValues, 'password'> = {
     required: 'パスワードを入力してください'
   }
 
-  const confirmPasswordOptions: RegisterOptions<Step02FormValues, 'confirmPassword'> = {
+  const confirmPasswordOptions: RegisterOptions<FormValues, 'confirmPassword'> = {
     required: 'パスワード(確認用)を入力してください',
     validate: (confirmPassword) => {
       const password = getValues('password')
@@ -53,24 +54,24 @@ const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValue
           type="password"
           isPassword
           {...register('password', passwordOptions)}
-          errorMessage={errors.password?.message}
+          error={errors.password?.message}
         />
         <TextField
           label="パスワード(確認用)"
           type="password"
           isPassword
           {...register('confirmPassword', confirmPasswordOptions)}
-          errorMessage={errors.confirmPassword?.message}
+          error={errors.confirmPassword?.message}
         />
       </FormFieldGroup>
-      <ButtonGroup>
-        <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
+      <FormButtonFlex>
+        <FormButton type="button" icon={faCaretLeft} onClick={backStep} color="gray" isHalfSize>
           Back
-        </Button>
-        <Button type="submit" icon={faCaretRight} isIconRight isHalfSize>
+        </FormButton>
+        <FormButton type="submit" icon={faCaretRight} isIconRight isHalfSize>
           Next
-        </Button>
-      </ButtonGroup>
+        </FormButton>
+      </FormButtonFlex>
     </Form>
   )
 }

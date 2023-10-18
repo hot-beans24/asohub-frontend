@@ -1,11 +1,15 @@
 import { FC } from 'react'
+import Lottie from 'lottie-react'
+
 import { css } from '@emotion/react'
+
+import notfound from './notfound.json'
 
 const NotFoundPage: FC = () => {
   return (
     <div css={container}>
-      <h1>404</h1>
-      <h3>Not Found</h3>
+      <Lottie animationData={notfound} />
+      <span css={message}>このページは存在しません</span>
     </div>
   )
 }
@@ -13,6 +17,8 @@ const NotFoundPage: FC = () => {
 export default NotFoundPage
 
 const container = css`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,3 +26,6 @@ const container = css`
   gap: 30px;
 `
 
+const message = css`
+  font-size: 1.6rem;
+`

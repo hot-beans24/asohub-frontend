@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import { SignupFormValues } from '../types/signupForm'
+import { SignupFormValues } from '@@/features/signup/types/formValues'
 
 export const useSignupFormState = () => {
   const [signupFormValues, setSignupFormValues] = useState<SignupFormValues>({
     email: '',
     username: '',
     password: '',
-    department: 1,
+    departmentID: 1,
     grade: 1
   })
 
