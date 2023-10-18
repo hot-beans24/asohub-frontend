@@ -1,18 +1,26 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import Heading from '@@/components/Heading'
-import Link from '@@/components/Link'
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import Button from '@@/components/Button'
-import TextField from '@@/components/Form/TextField'
+import Heading from '@@/features/common/components/Heading'
+import Link from '@@/features/common/components/Link'
 
-import { box, text } from './styles'
+import Form from '@@/features/form/components/Form'
+import FormText from '@@/features/form/components/FormText'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import FormButton from '@@/features/form/components/FormButton'
+import FormServerError from '@@/features/form/components/FormServerError'
+import TextField from '@@/features/form/components/TextField'
+
+import useLogin from '@@/features/login/hooks/useLogin'
+import { box } from './styles'
 
 const LoginPage: FC = () => {
-  type ValuesType = {
+  const nagiagte = useNavigate()
+  const { login, isLoading, error } = useLogin()
+
+  type FormValues = {
     email: string
     password: string
   }
@@ -21,21 +29,24 @@ const LoginPage: FC = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ValuesType>()
+  } = useForm<FormValues>()
 
-  const handleOnSubmit: SubmitHandler<ValuesType> = () => {
-
-  }
-
-  const emailOptions: RegisterOptions<ValuesType, 'email'> = {
-    required: 'メールアドレスを入力してください',
-    pattern: {
-      value: /^[0-9]{7}@s.asojuku.ac.jp$/,
-      message: 'メールアドレスの形式が正しくありません'
+  const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
+    const isSuccess = await login(data.email, data.password)
+    if (isSuccess && !error) {
+      nagiagte('/home')
     }
   }
 
-  const passwordOptions: RegisterOptions<ValuesType, 'password'> = {
+  const emailOptions: RegisterOptions<FormValues, 'email'> = {
+    required: 'メールアドレスを入力してください',
+    pattern: {
+      value: /^[0-9]{7}@s.asojuku.ac.jp$/,
+      message: '@s.asojuku.ac.jpの形で入力してください'
+    }
+  }
+
+  const passwordOptions: RegisterOptions<FormValues, 'password'> = {
     required: 'パスワードを入力してください'
   }
 
@@ -43,12 +54,13 @@ const LoginPage: FC = () => {
     <div css={box}>
       <Heading>Login</Heading>
       <Form onSubmit={handleSubmit(handleOnSubmit)}>
+        {error && <FormServerError error={error} />}
         <FormFieldGroup>
           <TextField
             label="メールアドレス"
             type="email"
             {...register('email', emailOptions)}
-            errorMessage={errors.email?.message}
+            error={errors.email?.message}
           />
           <TextField
             label="パスワード"
@@ -56,16 +68,16 @@ const LoginPage: FC = () => {
             maxLength={20}
             isPassword
             {...register('password', passwordOptions)}
-            errorMessage={errors.password?.message}
+            error={errors.password?.message}
           />
         </FormFieldGroup>
-        <Button type="submit" icon={faEnvelope}>
+        <FormButton type="submit" icon={faEnvelope} isLoading={isLoading}>
           Login with Email
-        </Button>
+        </FormButton>
       </Form>
-      <p css={text}>
+      <FormText>
         アカウントをお持ちでない方は<Link to="/signup">こちら</Link>
-      </p>
+      </FormText>
     </div>
   )
 }

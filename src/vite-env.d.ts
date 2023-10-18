@@ -1,8 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_MOCKSERVER_PATH: string
-  readonly VITE_API_PATH: string
+  readonly VITE_APP_URL: string
 }
 
 interface ImportMeta {

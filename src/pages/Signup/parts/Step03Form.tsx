@@ -2,15 +2,15 @@ import { FC } from 'react'
 import { useForm, Controller, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons'
 
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import TextField from '@@/components/Form/TextField'
-import SelectField from '@@/components/Form/SelectField'
-import Button from '@@/components/Button'
-import ButtonGroup from '@@/components/ButtonGroup'
+import Form from '@@/features/form/components/Form'
+import FormButton from '@@/features/form/components/FormButton'
+import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import TextField from '@@/features/form/components/TextField'
+import SelectField from '@@/features/form/components/SelectField'
 
-import { SignupFormState, Step03FormValues } from '@@/pages/Signup/types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
+import { SignupFormState } from '@@/features/signup/types/formValues'
+import { departmentSelectOpts, gradeSelectOpts } from '@@/features/signup/data/selectOptions'
 
 type Step03FormProps = {
   signupFormState: SignupFormState
@@ -23,32 +23,34 @@ const Step03Form: FC<Step03FormProps> = ({
   nextStep,
   backStep
 }) => {
+  type FormValues = {
+    username: string
+    departmentID: number
+    grade: number
+  }
+
   const {
     control,
     register,
     watch,
     handleSubmit,
     formState: { errors }
-  } = useForm<Step03FormValues>()
+  } = useForm<FormValues>()
 
-  const handleOnSubmit: SubmitHandler<Step03FormValues> = (data) => {
+  const handleOnSubmit: SubmitHandler<FormValues> = (data) => {
     setSignupFormValues((prev) => ({ ...prev, ...data }))
     nextStep()
   }
 
-  const handleOnBack = () => {
-    backStep()
-  }
-
-  const usernameOptions: RegisterOptions<Step03FormValues, 'username'> = {
+  const usernameOptions: RegisterOptions<FormValues, 'username'> = {
     required: 'ユーザー名を入力してください'
   }
 
-  const departmentOptions: RegisterOptions<Step03FormValues, 'department'> = {
+  const departmentIDOptions: RegisterOptions<FormValues, 'departmentID'> = {
     required: '学科を選択してください'
   }
 
-  const gradeOptions: RegisterOptions<Step03FormValues, 'grade'> = {
+  const gradeOptions: RegisterOptions<FormValues, 'grade'> = {
     required: '学年を選択してください'
   }
 
@@ -65,36 +67,36 @@ const Step03Form: FC<Step03FormProps> = ({
               type="text"
               {...field}
               {...register('username', usernameOptions)}
-              errorMessage={errors.username?.message}
+              error={errors.username?.message}
             />
           )}
         />
         <SelectField
           label="学科"
           options={departmentSelectOpts}
-          defaultValue={signupFormValues.department}
-          {...register('department', departmentOptions)}
-          errorMessage={errors.department?.message}
+          defaultValue={signupFormValues.departmentID}
+          {...register('departmentID', departmentIDOptions)}
+          error={errors.departmentID?.message}
         />
         <SelectField
           label="学年"
           options={gradeSelectOpts.slice(
             0,
-            departmentSelectOpts[watch('department', signupFormValues.department) - 1].maxGrade
+            departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade
           )}
           defaultValue={signupFormValues.grade}
           {...register('grade', gradeOptions)}
-          errorMessage={errors.grade?.message}
+          error={errors.grade?.message}
         />
       </FormFieldGroup>
-      <ButtonGroup>
-        <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
+      <FormButtonFlex>
+        <FormButton type="button" icon={faCaretLeft} onClick={backStep} color="gray" isHalfSize>
           Back
-        </Button>
-        <Button type="submit" icon={faCaretRight} isIconRight isHalfSize>
+        </FormButton>
+        <FormButton type="submit" icon={faCaretRight} isIconRight isHalfSize>
           Next
-        </Button>
-      </ButtonGroup>
+        </FormButton>
+      </FormButtonFlex>
     </Form>
   )
 }

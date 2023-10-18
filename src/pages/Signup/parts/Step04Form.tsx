@@ -2,22 +2,23 @@ import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { faGhost, faCaretLeft, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { useModal } from 'react-hooks-use-modal'
-import { motion } from 'framer-motion'
 import Lottie from 'lottie-react'
 
+import ModalBox from '@@/features/common/components/ModalBox'
 
-import Form from '@@/components/Form/Form'
-import FormFieldGroup from '@@/components/Form/FormFieldGroup'
-import TextField from '@@/components/Form/TextField'
-import Button from '@@/components/Button'
-import ButtonGroup from '@@/components/ButtonGroup'
+import Form from '@@/features/form/components/Form'
+import FormServerError from '@@/features/form/components/FormServerError'
+import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
+import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
+import FormButton from '@@/features/form/components/FormButton'
+import TextField from '@@/features/form/components/TextField'
 
-import { SignupFormState, Step04FormValues } from '@@/pages/Signup/types/signupForm'
-import { departmentSelectOpts, gradeSelectOpts } from '@@/pages/Signup/data/selectOptions'
-import { useSignup } from '../hooks/useSignup'
+import useSignup from '@@/features/signup/hooks/useSingup'
+
+import { SignupFormState } from '@@/features/signup/types/formValues'
+import { departmentSelectOpts, gradeSelectOpts } from '@@/features/signup/data/selectOptions'
+
 import lottieJson from './good.json'
-
-import { modalBox, message } from './styles'
 
 type Step04FormProps = {
   signupFormState: SignupFormState
@@ -26,69 +27,59 @@ type Step04FormProps = {
 }
 
 const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }, nextStep, backStep }) => {
-  const { handleSubmit } = useForm<Step04FormValues>()
-  const { signup } = useSignup()
-
-  const handleOnSubmit: SubmitHandler<Step04FormValues> = () => {
-
+  type FormValues = {
+    email: string
+    username: string
+    departmentID: number
+    grade: number
   }
 
-  const handleOnBack = () => {
-    backStep()
-  }
+  const { handleSubmit } = useForm<FormValues>()
+  const { signup, isLoading, error } = useSignup()
 
-  const [Modal, open, close] = useModal('root', {
+  const [Modal, open] = useModal('root', {
     preventScroll: false,
     focusTrapOptions: {
       clickOutsideDeactivates: false
     }
   })
 
-  const onModalButtonClick = async () => {
-    close()
-    const userId = await signup(signupFormValues)
-    console.log(signupFormValues)
-    console.log(userId)
-    nextStep()
+  const handleOnSubmit: SubmitHandler<FormValues> = async () => {
+    const isSuccess = await signup(signupFormValues)
+    if (isSuccess && !error) {
+      open()
+    }
   }
 
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
+      {error && <FormServerError error={error} />}
       <FormFieldGroup>
         <TextField label="メールアドレス" type="email" value={signupFormValues.email} readOnly />
         <TextField label="ユーザー名" type="text" value={signupFormValues.username} readOnly />
         <TextField
           label="学科"
           type="text"
-          value={departmentSelectOpts[signupFormValues.department - 1].label}
+          value={departmentSelectOpts[signupFormValues.departmentID - 1].label}
           readOnly
         />
         <TextField label="学年" type="text" value={gradeSelectOpts[signupFormValues.grade - 1].label} readOnly />
       </FormFieldGroup>
-      <ButtonGroup>
-        <Button type="button" icon={faCaretLeft} onClick={handleOnBack} isNotPrimary isHalfSize>
+      <FormButtonFlex>
+        <FormButton type="button" icon={faCaretLeft} onClick={backStep} color="gray" isHalfSize>
           Back
-        </Button>
-        <Button type="button" icon={faGhost} onClick={open} isIconRight isHalfSize>
+        </FormButton>
+        <FormButton type="submit" icon={faGhost} isLoading={isLoading} isIconRight isHalfSize>
           Create
-        </Button>
-      </ButtonGroup>
+        </FormButton>
+      </FormButtonFlex>
       <Modal>
-        <motion.div
-          css={modalBox}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            ease: [0, 0.71, 0.2, 1.01]
-          }}
-        >
-          <p css={message}>アカウントが作成されました</p>
+        <ModalBox message="アカウントが作成されました" isNoGap>
           <Lottie animationData={lottieJson} width={200} />
-          <Button type="submit" onClick={onModalButtonClick} icon={faThumbsUp} isIconRight isHalfSize autoFocus={false}>
+          <FormButton type="submit" onClick={nextStep} icon={faThumbsUp} isIconRight isHalfSize>
             OK
-          </Button>
-        </motion.div>
+          </FormButton>
+        </ModalBox>
       </Modal>
     </Form>
   )
