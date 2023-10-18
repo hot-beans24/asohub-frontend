@@ -34,7 +34,7 @@ const useLogin = () => {
             break
           }
           case HttpStatusCode.Unauthorized: {
-            setError('メールアドレスまたはパスワードが正しくありません')
+            setError('メールアドレスまたは\nパスワードが正しくありません')
             break
           }
           default: {

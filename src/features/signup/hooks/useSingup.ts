@@ -1,14 +1,14 @@
 import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
-import useUserAuth from '@@/features/auth/hooks/useUserAuth'
+import useLogin from '@@/features/login/hooks/useLogin'
 
 import { SignupFormValues } from '@@/features/signup/types/formValues'
 
 /* ⭐️ サインアップフック ⭐️ */
 const useSignup = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
-  const { fetchUserAuth } = useUserAuth()
+  const { login } = useLogin()
 
   const signup = async (formValues: SignupFormValues): Promise<boolean> => {
     apiInit()
@@ -24,7 +24,7 @@ const useSignup = () => {
         department_id: formValues.departmentID,
         grade: formValues.grade
       })
-      fetchUserAuth()
+      login(formValues.email, formValues.password)
       return true
     } catch (error) {
       if (isAxiosError(error)) {
