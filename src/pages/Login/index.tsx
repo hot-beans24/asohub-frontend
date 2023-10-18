@@ -6,6 +6,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import Heading from '@@/features/common/components/Heading'
 import Link from '@@/features/common/components/Link'
 
+import AuthContainer from '@@/features/layout/components/AuthContainer'
+
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
 import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
@@ -14,7 +16,6 @@ import FormServerError from '@@/features/form/components/FormServerError'
 import TextField from '@@/features/form/components/TextField'
 
 import useLogin from '@@/features/login/hooks/useLogin'
-import { box } from './styles'
 
 const LoginPage: FC = () => {
   const nagiagte = useNavigate()
@@ -28,12 +29,12 @@ const LoginPage: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>()
 
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isSuccess = await login(data.email, data.password)
-    if (isSuccess && !error) {
+    if (isSuccess) {
       nagiagte('/home')
     }
   }
@@ -42,16 +43,16 @@ const LoginPage: FC = () => {
     required: 'メールアドレスを入力してください',
     pattern: {
       value: /^[0-9]{7}@s.asojuku.ac.jp$/,
-      message: '@s.asojuku.ac.jpの形で入力してください'
-    }
+      message: '@s.asojuku.ac.jpの形で入力してください',
+    },
   }
 
   const passwordOptions: RegisterOptions<FormValues, 'password'> = {
-    required: 'パスワードを入力してください'
+    required: 'パスワードを入力してください',
   }
 
   return (
-    <div css={box}>
+    <AuthContainer>
       <Heading>Login</Heading>
       <Form onSubmit={handleSubmit(handleOnSubmit)}>
         {error && <FormServerError error={error} />}
@@ -78,7 +79,7 @@ const LoginPage: FC = () => {
       <FormText>
         アカウントをお持ちでない方は<Link to="/signup">こちら</Link>
       </FormText>
-    </div>
+    </AuthContainer>
   )
 }
 

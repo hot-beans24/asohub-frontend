@@ -1,39 +1,33 @@
 import { FC } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import AuthLayout from '@@/layouts/AuthLayout'
-import NormalLayout from '@@/layouts/NormalLayout'
-
-import Auth from '@@/Auth'
+import Root from '@@/features/layout/components/Root'
+import AuthGuard from '@@/features/auth/components/AuthGurad'
 
 import Home from '@@/pages/Home'
 import Login from '@@/pages/Login'
 import Logout from '@@/pages/Logout'
 import Singup from '@@/pages/Signup'
-import Mypage from '@@/pages/Mypage'
-import Setting from '@@/pages/Setting'
-import NotFound from '@@/pages/NotFound'
+// import Mypage from '@@/pages/Mypage'
+// import Setting from '@@/pages/Setting'
+
+import PageStatus from '@@/features/common/components/PageStatus'
 
 const Router: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<NormalLayout />}>
+        <Route element={<Root />}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route element={<Auth />}>
-            <Route path="/mypage" element={<Mypage />} />
-            <Route path="/setting" element={<Setting />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Route>
-
-        <Route path="/" element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
-          <Route element={<Auth />}>
+          <Route path="/signup" element={<Singup />} />
+          <Route element={<AuthGuard />}>
+            <Route path="/mypage" element={<PageStatus status="creating" />} />
+            <Route path="/setting" element={<PageStatus status="creating" />} />
+            <Route path="/new-repository" element={<PageStatus status="creating" />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
-          <Route path="/signup" element={<Singup />} />
+          <Route path="*" element={<PageStatus status="notfound" />} />
         </Route>
       </Routes>
     </BrowserRouter>

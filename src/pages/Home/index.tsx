@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import PostCardGrid from '@@/features/post/components/PostCardGrid'
+import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
 import PostCard from '@@/features/post/components/PostCard'
 
 const HomePage: FC = () => {
@@ -11,7 +11,7 @@ const HomePage: FC = () => {
     message: 'アイウエオかきくけこ',
     time: '2023/09/26 10:05',
     githubUserId: 'hot-beans24',
-    githubUserIcon: 'https://avatars.githubusercontent.com/u/106505475?v=4'
+    githubUserIcon: 'https://avatars.githubusercontent.com/u/106505475?v=4',
   }
   const posts = []
   for (let i = 0; i < 40; i += 1) {
@@ -20,7 +20,7 @@ const HomePage: FC = () => {
   return (
     <>
       <h2>ホーム画面</h2>
-      <PostCardGrid>
+      <PostCardsContainer>
         {posts.map((info, i) => (
           <PostCard
             // eslint-disable-next-line react/no-array-index-key
@@ -32,7 +32,7 @@ const HomePage: FC = () => {
             githubUserIcon={info.githubUserIcon}
           />
         ))}
-      </PostCardGrid>
+      </PostCardsContainer>
     </>
   )
 }

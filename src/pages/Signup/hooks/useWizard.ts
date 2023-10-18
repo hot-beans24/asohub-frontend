@@ -14,6 +14,6 @@ export const useWizard = () => {
   return {
     step,
     nextStep,
-    backStep
+    backStep,
   }
 }

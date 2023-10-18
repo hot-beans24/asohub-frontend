@@ -7,7 +7,7 @@ const styles = {
     justify-content: center;
     align-items: center;
     gap: 40px;
-  `
+  `,
 }
 
 export default styles

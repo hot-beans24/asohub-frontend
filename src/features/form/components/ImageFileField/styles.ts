@@ -62,7 +62,7 @@ const styles = {
     z-index: 10;
     cursor: pointer;
     pointer-events: none;
-  `
+  `,
 }
 
 export default styles

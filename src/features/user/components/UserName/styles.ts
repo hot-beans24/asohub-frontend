@@ -5,7 +5,7 @@ const styles = {
     height: 20px;
     color: var(--dark-gray);
     letter-spacing: 1px;
-  `
+  `,
 }
 
 export default styles

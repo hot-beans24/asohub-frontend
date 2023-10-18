@@ -16,7 +16,7 @@ const styles = {
   message: css`
     font-size: 1.6rem;
     font-weight: 600;
-  `
+  `,
 }
 
 export default styles

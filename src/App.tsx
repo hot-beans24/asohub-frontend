@@ -1,20 +1,20 @@
 import { FC } from 'react'
+import { RecoilRoot } from 'recoil'
 import { Global } from '@emotion/react'
 
 import grobalStyles from '@@/styles/globalStyles'
 
 import Router from './Router'
-import Providers from './Providers'
 
 import Init from './Init'
 
 const App: FC = () => {
   return (
-    <Providers>
+    <RecoilRoot>
       <Init />
       <Global styles={grobalStyles} />
       <Router />
-    </Providers>
+    </RecoilRoot>
   )
 }
 

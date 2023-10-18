@@ -6,7 +6,7 @@ const fontSizes = {
   h3: '1.8rem',
   h4: '1.6rem',
   h5: '1.4rem',
-  h6: '1.2rem'
+  h6: '1.2rem',
 }
 
 const marginBottoms = {
@@ -15,7 +15,7 @@ const marginBottoms = {
   h3: '24px',
   h4: '20px',
   h5: '16px',
-  h6: '12px'
+  h6: '12px',
 }
 
 export type Tag = keyof typeof fontSizes
@@ -27,7 +27,7 @@ const styles = {
     font-weight: bold;
     text-align: center;
     letter-spacing: 0.2em;
-  `
+  `,
 }
 
 export default styles

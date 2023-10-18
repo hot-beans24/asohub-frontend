@@ -8,7 +8,7 @@ const styles = {
   `,
   errorIcon: css`
     margin-right: 8px;
-  `
+  `,
 }
 
 export default styles

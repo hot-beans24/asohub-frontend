@@ -6,7 +6,7 @@ const styles = {
     flex-direction: column;
     gap: 8px;
     position: relative;
-  `
+  `,
 }
 
 export default styles

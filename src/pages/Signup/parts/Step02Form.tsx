@@ -8,7 +8,7 @@ import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
 import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
 import TextField from '@@/features/form/components/TextField'
 
-import { SignupFormState } from '@@/features/signup/types/formValues'
+import SignupFormState from '@@/features/signup/types/SignupFormState'
 
 type Step02FormProps = {
   signupFormState: SignupFormState
@@ -26,7 +26,7 @@ const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValue
     register,
     getValues,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>()
 
   const handleOnSubmit: SubmitHandler<FormValues> = (data) => {
@@ -35,7 +35,7 @@ const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValue
   }
 
   const passwordOptions: RegisterOptions<FormValues, 'password'> = {
-    required: 'パスワードを入力してください'
+    required: 'パスワードを入力してください',
   }
 
   const confirmPasswordOptions: RegisterOptions<FormValues, 'confirmPassword'> = {
@@ -43,7 +43,7 @@ const Step02Form: FC<Step02FormProps> = ({ signupFormState: { setSignupFormValue
     validate: (confirmPassword) => {
       const password = getValues('password')
       return confirmPassword === password || 'パスワードが一致しません'
-    }
+    },
   }
 
   return (

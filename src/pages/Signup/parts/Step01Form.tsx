@@ -12,7 +12,7 @@ import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
 import TextField from '@@/features/form/components/TextField'
 
 import useEmailAvailability from '@@/features/signup/hooks/useEmailAvailability'
-import { SignupFormState } from '@@/features/signup/types/formValues'
+import SignupFormState from '@@/features/signup/types/SignupFormState'
 
 type Step01FormProps = {
   signupFormState: SignupFormState
@@ -30,12 +30,12 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
     control,
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>()
 
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isAvailable = await fetchEmailAvailability(data.email)
-    if (isAvailable && !error) {
+    if (isAvailable) {
       setSignupFormValues((prev) => ({ ...prev, ...data }))
       nextStep()
     }
@@ -45,8 +45,8 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
     required: 'メールアドレスを入力してください',
     pattern: {
       value: /^[0-9]{7}@s.asojuku.ac.jp$/,
-      message: '@s.asojuku.ac.jpの形で入力してください'
-    }
+      message: '@s.asojuku.ac.jpの形で入力してください',
+    },
   }
 
   return (

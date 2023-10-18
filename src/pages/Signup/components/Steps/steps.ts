@@ -6,19 +6,19 @@ type StepInfo = {
 export const steps: StepInfo[] = [
   {
     step: 1,
-    message: '学校のメールアドレスを入力してください'
+    message: '学校のメールアドレスを入力してください',
   },
   {
     step: 2,
-    message: 'パスワードを入力してください '
+    message: 'パスワードを入力してください ',
   },
   {
     step: 3,
-    message: 'ユーザー情報を入力してください'
+    message: 'ユーザー情報を入力してください',
   },
   {
     step: 4,
-    message: '以下の情報でアカウントを作成します'
+    message: '以下の情報でアカウントを作成します',
   },
   // {
   //   step: 5,
@@ -27,6 +27,6 @@ export const steps: StepInfo[] = [
   // 一旦非表示
   {
     step: 5,
-    message: 'GitHubアカウントと連携してください'
-  }
+    message: 'GitHubアカウントと連携してください',
+  },
 ]

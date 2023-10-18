@@ -15,8 +15,9 @@ import TextField from '@@/features/form/components/TextField'
 
 import useSignup from '@@/features/signup/hooks/useSingup'
 
-import { SignupFormState } from '@@/features/signup/types/formValues'
-import { departmentSelectOpts, gradeSelectOpts } from '@@/features/signup/data/selectOptions'
+import SignupFormState from '@@/features/signup/types/SignupFormState'
+import departmentSelectOpts from '@@/features/signup/data/departmentSelectOpts'
+import gradeSelectOpts from '@@/features/signup/data/gradeSelectOpts'
 
 import lottieJson from './good.json'
 
@@ -40,13 +41,13 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
   const [Modal, open] = useModal('root', {
     preventScroll: false,
     focusTrapOptions: {
-      clickOutsideDeactivates: false
-    }
+      clickOutsideDeactivates: false,
+    },
   })
 
   const handleOnSubmit: SubmitHandler<FormValues> = async () => {
     const isSuccess = await signup(signupFormValues)
-    if (isSuccess && !error) {
+    if (isSuccess) {
       open()
     }
   }

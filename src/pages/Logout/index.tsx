@@ -19,8 +19,8 @@ const LogoutPage: FC = () => {
     initialValue: true,
     preventScroll: false,
     focusTrapOptions: {
-      clickOutsideDeactivates: false
-    }
+      clickOutsideDeactivates: false,
+    },
   })
 
   const handleCancelClick = () => {
@@ -30,7 +30,7 @@ const LogoutPage: FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await logout()
-    if (isSuccess && !error) {
+    if (isSuccess) {
       navigate('/login')
     }
   }
