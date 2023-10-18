@@ -51,7 +51,7 @@ const Step05Form: FC<Step06FormProps> = () => {
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await linkGithub(githubUser.id)
-    if (isSuccess && !errorB) {
+    if (isSuccess) {
       navigate('/home')
     }
   }

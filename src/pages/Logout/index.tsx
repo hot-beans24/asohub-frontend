@@ -30,7 +30,7 @@ const LogoutPage: FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await logout()
-    if (isSuccess && !error) {
+    if (isSuccess) {
       navigate('/login')
     }
   }

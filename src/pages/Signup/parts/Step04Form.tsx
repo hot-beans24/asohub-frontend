@@ -46,7 +46,7 @@ const Step04Form: FC<Step04FormProps> = ({ signupFormState: { signupFormValues }
 
   const handleOnSubmit: SubmitHandler<FormValues> = async () => {
     const isSuccess = await signup(signupFormValues)
-    if (isSuccess && !error) {
+    if (isSuccess) {
       open()
     }
   }

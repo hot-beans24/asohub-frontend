@@ -33,7 +33,7 @@ const LoginPage: FC = () => {
 
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isSuccess = await login(data.email, data.password)
-    if (isSuccess && !error) {
+    if (isSuccess) {
       nagiagte('/home')
     }
   }

@@ -35,7 +35,7 @@ const Step01Form: FC<Step01FormProps> = ({ signupFormState: { signupFormValues, 
 
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isAvailable = await fetchEmailAvailability(data.email)
-    if (isAvailable && !error) {
+    if (isAvailable) {
       setSignupFormValues((prev) => ({ ...prev, ...data }))
       nextStep()
     }
