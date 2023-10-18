@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { SignupFormValues } from '@@/features/signup/types/formValues'
+import SignupFormValues from '@@/features/signup/types/SignupFormValues'
 
 export const useSignupFormState = () => {
   const [signupFormValues, setSignupFormValues] = useState<SignupFormValues>({
@@ -8,7 +8,7 @@ export const useSignupFormState = () => {
     username: '',
     password: '',
     departmentID: 1,
-    grade: 1
+    grade: 1,
   })
 
   return { signupFormValues, setSignupFormValues }

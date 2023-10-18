@@ -9,7 +9,7 @@ const styles = {
     height: 200px;
     padding: 20px;
     resize: none;
-  `
+  `,
 }
 
 export default styles

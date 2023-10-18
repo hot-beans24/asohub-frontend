@@ -19,8 +19,8 @@ const LogoutPage: FC = () => {
     initialValue: true,
     preventScroll: false,
     focusTrapOptions: {
-      clickOutsideDeactivates: false
-    }
+      clickOutsideDeactivates: false,
+    },
   })
 
   const handleCancelClick = () => {

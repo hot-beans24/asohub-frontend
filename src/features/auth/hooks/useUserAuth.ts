@@ -2,82 +2,73 @@ import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
+import FetchUserAuthResBody from '@@/features/auth/types/FetchUserAuthResBody'
 
 /* ⭐️ ユーザー認証情報フック ⭐️ */
 const useUserAuth = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
   const { user, setUser } = useUserState()
 
+  // 🌐 ログイン済みかを判定
   const isLoggedIn = (): boolean => {
     return !!user
   }
 
+  // 🌐 ユーザー認証情報を取得
   const fetchUserAuth = async (): Promise<void> => {
-    if (user) return
-
     apiInit()
 
-    type ResponseBody = {
-      authenticated: boolean
-      user: {
-        user_id: string
-        email: string
-        user_name: string
-        department_id: number
-        grade: number
-        github_username: string
-        github_user_icon: string
-        authenticated: boolean
-        role: string
-      } | null
-    }
+    /**
+     * -----------------------------------
+     * 💡 ユーザー認証情報を取得済みかどうかを判定
+     * -----------------------------------
+     * ✅ 取得済みの場合は処理を終了
+     * ❌ 未取得の場合は続けて処理を実行
+     * -----------------------------------
+     */
+    if (user) return
 
     try {
-      /* 🍄 実際の処理 🍄 */
-      const res = await asohubApiClient.get<ResponseBody>('/auth-status')
+      const res = await asohubApiClient.get<FetchUserAuthResBody>('/auth-status')
 
-      /* 🔥 確認用 🔥 */
-      // const res = {
-      //   data: {
-      //     authenticated: true,
-      //     user: {
-      //       user_id: '0001',
-      //       email: '0000000@s.asojuku.ac.jp',
-      //       user_name: 'sample user',
-      //       department_id: 1,
-      //       grade: 3,
-      //       github_username: 'hot-beans24',
-      //       github_user_icon: 'https://avatars.githubusercontent.com/u/106505475?v=4',
-      //       authenticated: true,
-      //       role: 'ROLE'
-      //     }
-      //   }
-      // }
+      const userAuthData = res.data.user
 
-      const userData = res.data.user
-      if (res.data.authenticated && userData) {
+      /**
+       * ------------------------------------
+       * 💡 ログイン済みかどうかを判定
+       * ------------------------------------
+       * ✅ ログイン済みの場合はユーザー認証情報を保存
+       * ❌ 未ログインの場合はユーザー認証情報を削除
+       * ------------------------------------
+       */
+      if (res.data.authenticated && userAuthData) {
         setUser({
-          id: userData.user_id,
-          email: userData.email,
-          name: userData.user_name,
-          departmentID: userData.department_id,
-          grade: userData.grade,
-          githubUserID: userData.github_username,
-          githubUserIcon: userData.github_user_icon,
-          role: userData.role
+          id: userAuthData.user_id,
+          email: userAuthData.email,
+          name: userAuthData.user_name,
+          departmentID: userAuthData.department_id,
+          grade: userAuthData.grade,
+          githubUserID: userAuthData.github_username,
+          githubUserIcon: userAuthData.github_user_icon,
+          role: userAuthData.role,
         })
-        console.log(user)
       } else {
         setUser(null)
         setError('ログインしていません')
       }
     } catch (error) {
       if (isAxiosError(error)) {
+        /**
+         * ---------------------------------
+         * 💡 HTTPステータスコードでエラー処理を分岐
+         * ---------------------------------
+         * 1. その他
+         * ---------------------------------
+         */
         switch (error.response?.status) {
           default: {
             setUser(null)
             setError('ユーザー認証情報取得エラー')
-            console.log(error)
             break
           }
         }
@@ -91,7 +82,7 @@ const useUserAuth = () => {
     isLoggedIn,
     fetchUserAuth,
     isLoading,
-    error
+    error,
   }
 }
 

@@ -3,37 +3,48 @@ import { useState } from 'react'
 import { githubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
-import { GithubUser } from '@@/features/github/types/formValues'
+import FetchUserAuthResBody from '@@/features/github/types/FetchGithubUserResBody'
+import GithubUser from '@@/features/github/types/GithubUser'
 
 /* ⭐️ GitHubユーザーフック ⭐️ */
 const useGithubUserState = () => {
-  const dummy: GithubUser = { id: '', name: '', icon: '' }
-  const [githubUser, setGithubUser] = useState<GithubUser>(dummy)
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
 
+  // 🌐 GitHubユーザーダミーデータ
+  const dummy: GithubUser = { id: '', name: '', icon: '' }
+  // 🌐 GitHubユーザー情報ステート
+  const [githubUser, setGithubUser] = useState<GithubUser>(dummy)
+
+  // 🌐 GitHubユーザー情報ステートをクリア
   const clearGithubUserState = (): void => {
     setGithubUser(dummy)
   }
 
+  // 🌐 GitHubユーザー情報を取得
   const fetchGithubUser = async (userID: string): Promise<void> => {
     apiInit()
 
-    type ResponseBody = {
-      login: string
-      name: string
-      avatar_url: string
-    }
-
     try {
-      const res = await githubApiClient.get<ResponseBody>(`/users/${userID}`)
+      const res = await githubApiClient.get<FetchUserAuthResBody>(`/users/${userID}`)
+
       const githubUserData = res.data
+
+      // ✅ 正常にAPIアクセスできた場合GitHubユーザー情報をステートに保存
       setGithubUser({
         id: githubUserData.login,
         name: githubUserData.name,
-        icon: githubUserData.avatar_url
+        icon: githubUserData.avatar_url,
       })
     } catch (error) {
       if (isAxiosError(error)) {
+        /**
+         * ---------------------------------
+         * 💡 HTTPステータスコードでエラー処理を分岐
+         * ---------------------------------
+         * 1. 404
+         * 2. その他
+         * ---------------------------------
+         */
         switch (error.response?.status) {
           case HttpStatusCode.NotFound: {
             setError('ユーザーが見つかりませんでした')
@@ -55,7 +66,7 @@ const useGithubUserState = () => {
     clearGithubUserState,
     githubUser,
     isLoading,
-    error
+    error,
   }
 }
 

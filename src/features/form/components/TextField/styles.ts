@@ -17,7 +17,7 @@ const styles = {
     &:hover {
       opacity: 0.6;
     }
-  `
+  `,
 }
 
 export default styles

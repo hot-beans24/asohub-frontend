@@ -1,5 +1,6 @@
 import { atom } from 'recoil'
 
+// 🌐 ユーザー認証情報の型
 export type User = {
   id: string
   email: string
@@ -11,7 +12,8 @@ export type User = {
   githubUserIcon: string
 } | null
 
+// 🌐 Recoilで管理するユーザー認証情報
 export const userState = atom<User>({
   key: 'userState',
-  default: null
+  default: null,
 })

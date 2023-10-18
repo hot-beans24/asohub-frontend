@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 const colors = {
   main: 'var(--main-color)',
   black: 'black',
-  gray: 'var(--medium-gray)'
+  gray: 'var(--medium-gray)',
 }
 
 const styles = {
@@ -30,7 +30,7 @@ const styles = {
       outline-offset: -6px;
       outline: 2px solid white;
     }
-  `
+  `,
 }
 
 export default styles

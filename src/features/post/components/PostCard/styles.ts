@@ -41,7 +41,7 @@ const styles = {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  `
+  `,
 }
 
 export default styles

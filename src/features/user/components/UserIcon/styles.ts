@@ -19,7 +19,7 @@ const styles = {
     object-position: center;
     animation-name: ${animations.fadeIn};
     animation-duration: 1s;
-  `
+  `,
 }
 
 export default styles

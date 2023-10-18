@@ -9,7 +9,7 @@ const styles = {
     align-items: center;
     gap: 40px;
     position: relative;
-  `
+  `,
 }
 
 export default styles

@@ -3,28 +3,36 @@ import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
 
+import LogoutResBody from '@@/features/logout/types/LogoutResBody'
+
 /* ⭐️ ログアウトフック ⭐️ */
 const useLogout = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
   const { setUser } = useUserState()
 
+  // 🌐 ログアウト
   const logout = async (): Promise<boolean> => {
     apiInit()
 
-    type ResponseBody = {}
-
     try {
-      /* 🍄 実際の処理 🍄 */
-      await asohubApiClient.post<ResponseBody>('/logout')
+      await asohubApiClient.post<LogoutResBody>('/logout')
 
+      // ✅ 正常にAPIアクセスできた場合ユーザー認証情報ステートをクリア
       setUser(null)
+
       return true
     } catch (error) {
       if (isAxiosError(error)) {
+        /**
+         * ---------------------------------
+         * 💡 HTTPステータスコードでエラー処理を分岐
+         * ---------------------------------
+         * 1. その他
+         * ---------------------------------
+         */
         switch (error.response?.status) {
           default: {
             setError('ログアウトエラー')
-            console.log(error)
             break
           }
         }
@@ -38,7 +46,7 @@ const useLogout = () => {
   return {
     logout,
     isLoading,
-    error
+    error,
   }
 }
 

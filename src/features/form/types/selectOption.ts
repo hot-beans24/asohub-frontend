@@ -1,4 +1,7 @@
-export type SelectOption = {
+// 🌐 セレクトオプション
+type SelectOption = {
   label: string
-  value: string | number
+  value: number
 }
+
+export default SelectOption

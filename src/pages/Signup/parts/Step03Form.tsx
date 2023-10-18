@@ -9,8 +9,9 @@ import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
 import TextField from '@@/features/form/components/TextField'
 import SelectField from '@@/features/form/components/SelectField'
 
-import { SignupFormState } from '@@/features/signup/types/formValues'
-import { departmentSelectOpts, gradeSelectOpts } from '@@/features/signup/data/selectOptions'
+import SignupFormState from '@@/features/signup/types/SignupFormState'
+import departmentSelectOpts from '@@/features/signup/data/departmentSelectOpts'
+import gradeSelectOpts from '@@/features/signup/data/gradeSelectOpts'
 
 type Step03FormProps = {
   signupFormState: SignupFormState
@@ -21,7 +22,7 @@ type Step03FormProps = {
 const Step03Form: FC<Step03FormProps> = ({
   signupFormState: { signupFormValues, setSignupFormValues },
   nextStep,
-  backStep
+  backStep,
 }) => {
   type FormValues = {
     username: string
@@ -34,7 +35,7 @@ const Step03Form: FC<Step03FormProps> = ({
     register,
     watch,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>()
 
   const handleOnSubmit: SubmitHandler<FormValues> = (data) => {
@@ -43,15 +44,15 @@ const Step03Form: FC<Step03FormProps> = ({
   }
 
   const usernameOptions: RegisterOptions<FormValues, 'username'> = {
-    required: 'ユーザー名を入力してください'
+    required: 'ユーザー名を入力してください',
   }
 
   const departmentIDOptions: RegisterOptions<FormValues, 'departmentID'> = {
-    required: '学科を選択してください'
+    required: '学科を選択してください',
   }
 
   const gradeOptions: RegisterOptions<FormValues, 'grade'> = {
-    required: '学年を選択してください'
+    required: '学年を選択してください',
   }
 
   return (
@@ -82,7 +83,7 @@ const Step03Form: FC<Step03FormProps> = ({
           label="学年"
           options={gradeSelectOpts.slice(
             0,
-            departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade
+            departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade,
           )}
           defaultValue={signupFormValues.grade}
           {...register('grade', gradeOptions)}

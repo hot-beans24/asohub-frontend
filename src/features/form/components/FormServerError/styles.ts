@@ -12,7 +12,7 @@ const styles = {
     justify-content: center;
     align-items: center;
     gap: 6px;
-  `
+  `,
 }
 
 export default styles

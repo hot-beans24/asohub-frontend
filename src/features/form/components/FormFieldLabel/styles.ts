@@ -11,7 +11,7 @@ const styles = {
     position: absolute;
     inset: 12px auto auto 2rem;
     pointer-events: none;
-  `
+  `,
 }
 
 export default styles

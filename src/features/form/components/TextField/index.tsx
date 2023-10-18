@@ -25,12 +25,11 @@ const TextField = forwardRef<HTMLInputElement, TextFiledProps>(({ label, error, 
 
   return (
     <FormFieldWrapper label={label} error={error}>
-      {isPassword && (
+      {isPassword &&
         // <button type="button" aria-label="mask password" css={styles.pwMask} onClick={handleEyeClick}>
         //   <FontAwesomeIcon icon={isShowPassword ? faEye : faEyeSlash} />
         // </button>
-        null
-      )}
+        null}
       <input css={styles.textField(!!error, inputProps.readOnly)} placeholder=" " ref={ref} {...inputProps} />
     </FormFieldWrapper>
   )

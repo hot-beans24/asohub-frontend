@@ -29,7 +29,7 @@ const Step05Form: FC<Step06FormProps> = () => {
     clearGithubUserState,
     githubUser,
     isLoading: isLoadingA,
-    error: errorA
+    error: errorA,
   } = useGithubUserState()
   const { linkGithub, isLoading: isLoadingB, error: errorB, setError: setErrorB } = useLinkGithub()
 
@@ -41,7 +41,7 @@ const Step05Form: FC<Step06FormProps> = () => {
     control,
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>()
 
   const handleOnUserCheck: SubmitHandler<FormValues> = async (data) => {
@@ -64,7 +64,7 @@ const Step05Form: FC<Step06FormProps> = () => {
     required: 'GithubユーザーIDを入力してください',
     validate: (id) => {
       return githubUsernameRegex.test(id) || 'IDの形式が正しくありません'
-    }
+    },
   }
 
   if (githubUser.id) {

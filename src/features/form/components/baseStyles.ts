@@ -27,7 +27,7 @@ const baseStyles = {
       font-weight: 600;
       inset: -26px auto auto 4px;
     }
-  `
+  `,
 }
 
 export default baseStyles

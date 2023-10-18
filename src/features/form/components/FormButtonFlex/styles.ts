@@ -7,7 +7,7 @@ const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  `
+  `,
 }
 
 export default styles

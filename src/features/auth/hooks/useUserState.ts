@@ -1,20 +1,15 @@
-import { useEffect } from 'react'
-
 import { useRecoilState } from 'recoil'
 
 import { User, userState } from '@@/features/auth/recoil/user'
 
-/* ⭐️ ユーザー登録情報フック */
+/* ⭐️ ユーザー認証情報ステートフック ⭐️ */
 const useUserState = () => {
+  // 🌐 ユーザー認証情報ステート
   const [user, setUser] = useRecoilState<User>(userState)
-
-  useEffect(() => {
-    console.log(user)
-  }, [user])
 
   return {
     user,
-    setUser
+    setUser,
   }
 }
 

@@ -11,7 +11,7 @@ const styles = {
       font-size: 5rem;
     }
   `,
-  opt: css`
+  option: css`
     cursor: pointer;
   `,
   arrowIcon: (isReadOnly?: boolean) => css`
@@ -22,7 +22,7 @@ const styles = {
     cursor: pointer;
     pointer-events: none;
     ${isReadOnly && 'display: none;'}
-  `
+  `,
 }
 
 export default styles

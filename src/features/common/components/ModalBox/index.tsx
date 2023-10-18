@@ -16,7 +16,7 @@ const ModalBox: FC<ModalBoxProps> = ({ children, message, isNoGap }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{
         duration: 0.4,
-        ease: [0, 0.6, 0.2, 1.0]
+        ease: [0, 0.6, 0.2, 1.0],
       }}
     >
       <p css={styles.message}>{message}</p>
