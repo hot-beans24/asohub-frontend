@@ -1,4 +1,5 @@
 import SelectOption from '@@/features/form/types/SelectOption'
+
 // 🌐 学科選択セレクトオプション
 type DepartmentSelectOption = SelectOption & {
   maxGrade: number
