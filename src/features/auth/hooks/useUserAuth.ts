@@ -34,7 +34,7 @@ const useUserAuth = () => {
 
     try {
       /* 🍄 実際の処理 🍄 */
-      const res = await asohubApiClient.post<ResponseBody>('/auth-status')
+      const res = await asohubApiClient.get<ResponseBody>('/auth-status')
 
       /* 🔥 確認用 🔥 */
       // const res = {
