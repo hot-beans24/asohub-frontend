@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 import SignupFormValues from '@@/features/signup/types/SignupFormValues'
 
-export const useSignupFormState = () => {
+/* ⭐️ サインアップフォームステートフック ⭐️ */
+const useSignupFormValuesState = () => {
   const [signupFormValues, setSignupFormValues] = useState<SignupFormValues>({
     email: '',
     username: '',
@@ -13,3 +14,5 @@ export const useSignupFormState = () => {
 
   return { signupFormValues, setSignupFormValues }
 }
+
+export default useSignupFormValuesState
