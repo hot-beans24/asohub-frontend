@@ -17,6 +17,7 @@ import TextField from '@@/features/form/components/TextField'
 
 import useLogin from '@@/features/login/hooks/useLogin'
 
+/* ⭐️ ログインページ : 完 ⭐️ */
 const LoginPage: FC = () => {
   const nagiagte = useNavigate()
   const { login, isLoading, error } = useLogin()
