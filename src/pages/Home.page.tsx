@@ -3,6 +3,7 @@ import { FC } from 'react'
 import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
 import PostCard from '@@/features/post/components/PostCard'
 
+/* ⭐️ ホームページ : 製作中 ⭐️ */
 const HomePage: FC = () => {
   const postInfo = {
     id: 'ID',
