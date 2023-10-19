@@ -11,6 +11,7 @@ import FormButton from '@@/features/form/components/FormButton'
 
 import useLogout from '@@/features/logout/hooks/useLogout'
 
+/* ⭐️ ログアウトページ : 完 ⭐️ */
 const LogoutPage: FC = () => {
   const navigate = useNavigate()
   const { logout, isLoading, error } = useLogout()
