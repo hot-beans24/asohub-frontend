@@ -8,7 +8,7 @@ const AuthGuard: FC = () => {
   const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false)
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await fetchUserAuth()
       setIsAuthChecked(true)
     })()
