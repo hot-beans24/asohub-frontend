@@ -1,4 +1,4 @@
-import { css, keyframes  } from '@emotion/react'
+import { css, keyframes } from '@emotion/react'
 
 const stepAnimate = keyframes`
   0% {
@@ -56,7 +56,7 @@ const styles = {
     height: 1px;
     border-radius: 4px;
     background-color: ${isAlready ? 'black' : 'var(--medium-gray)'};
-  `
+  `,
 }
 
 export default styles

@@ -1,11 +1,11 @@
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
-import recoilFormStep from '@@/features/form/recoil/formStep';
+import recoilFormStep from '@@/features/form/recoil/formStep'
 
 /* ⭐️ フォームステップフック ⭐️ */
 const useFormStep = () => {
   // 🌐 ステップステート
-  const [formStep, setFormStep] = useRecoilState(recoilFormStep);
+  const [formStep, setFormStep] = useRecoilState(recoilFormStep)
   // 🌐 ステップをリセットする
   const resetFormStep = useResetRecoilState(recoilFormStep)
 
@@ -23,7 +23,7 @@ const useFormStep = () => {
     formStep,
     nextStep,
     backStep,
-    resetFormStep
+    resetFormStep,
   }
 }
 

@@ -14,8 +14,6 @@ import useLinkGithub from '@@/features/github/hooks/useLinkGithub'
 import GithunUserForm from '@@/features/github/components/GithubUserForm'
 import GithubUser from '@@/features/github/components/GithubUser'
 
-
-
 const LinkGithubForm: FC = () => {
   const navigate = useNavigate()
   const { githubUser, resetGithubUser } = useGithubUser()

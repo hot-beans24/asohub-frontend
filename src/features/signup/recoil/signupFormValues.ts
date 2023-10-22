@@ -1,6 +1,6 @@
-import { atom } from "recoil"
+import { atom } from 'recoil'
 
-import SignupFormValues from "@@/features/signup/types/SignupFormValues"
+import SignupFormValues from '@@/features/signup/types/SignupFormValues'
 
 // 🌐 Recoilで管理するサインアップフォーム値
 const signupFormValues = atom<SignupFormValues>({

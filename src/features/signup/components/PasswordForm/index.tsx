@@ -7,7 +7,6 @@ import useFormStep from '@@/features/form/hooks/useFormStep'
 import useSignupFormValues from '@@/features/signup/hooks/useSignupFormValues'
 import PasswordFormValues from '@@/features/signup/types/PasswordFormValues'
 
-
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
 import FormButtonFlex from '@@/features/form/components/FormButtonFlex'

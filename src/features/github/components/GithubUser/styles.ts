@@ -51,7 +51,7 @@ const styles = {
     align-items: center;
     animation-name: ${animations.fadeIn};
     animation-duration: 0.4s;
-  `
+  `,
 }
 
 export default styles

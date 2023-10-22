@@ -17,7 +17,7 @@ import SelectField from '@@/features/form/components/SelectField'
 import departmentSelectOpts from '@@/features/signup/data/departmentSelectOpts'
 import gradeSelectOpts from '@@/features/signup/data/gradeSelectOpts'
 
-const Step03Form: FC= () => {
+const Step03Form: FC = () => {
   const { nextStep, backStep } = useFormStep()
   const { signupFormValues, setSignupFormValues } = useSignupFormValues()
 
@@ -74,7 +74,7 @@ const Step03Form: FC= () => {
         label="学年"
         options={gradeSelectOpts.slice(
           0,
-          departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade,
+          departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade
         )}
         defaultValue={signupFormValues.grade}
         {...register('grade', gradeOptions)}

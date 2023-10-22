@@ -1,7 +1,14 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faGear, faHouse, faRightFromBracket, faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBars,
+  faGear,
+  faHouse,
+  faRightFromBracket,
+  faRightToBracket,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
 
@@ -47,7 +54,7 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
         {isLoggedIn && user && (
           <>
             <li>
-            <NavbarLink path={user.id} label="マイページ" icon={faUser} />
+              <NavbarLink path={user.id} label="マイページ" icon={faUser} />
             </li>
             <li>
               <NavbarLink path={ROUTES.SETTING} label="設定" icon={faGear} />

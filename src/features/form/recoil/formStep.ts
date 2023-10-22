@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom } from 'recoil'
 
 // 🌐 Recoilで管理するフォームステップ
 const formStep = atom<number>({

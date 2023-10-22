@@ -13,12 +13,7 @@ import useGithubUser from '@@/features/github/hooks/useGithubUser'
 import GithubUserFormValues from '@@/features/github/types/GithubUserFormValues'
 
 const GithunUserForm: FC = () => {
-  const {
-    fetchGithubUser,
-    githubUser,
-    isLoading,
-    error
-  } = useGithubUser()
+  const { fetchGithubUser, githubUser, isLoading, error } = useGithubUser()
 
   const {
     control,

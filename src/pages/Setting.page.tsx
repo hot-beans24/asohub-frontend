@@ -6,7 +6,8 @@ import PageStatus from '@@/features/common/components/PageStatus'
 const SettingPage: FC = () => {
   return (
     <>
-      <h2>設定ページ</h2>{/* 製作中であることを表示 */}
+      <h2>設定ページ</h2>
+      {/* 製作中であることを表示 */}
       <PageStatus status="creating" />
     </>
   )

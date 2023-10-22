@@ -11,20 +11,20 @@ type GithubUserProps = {
   githubUserName: string
 }
 
-const GithubUser: FC<GithubUserProps> = ({ githubUserIcon, githubUserID, githubUserName}) => {
+const GithubUser: FC<GithubUserProps> = ({ githubUserIcon, githubUserID, githubUserName }) => {
   return (
     <div css={styles.githubUser}>
-        <div css={styles.githubUserIconWrapper}>
-          <Img
-            css={styles.githubUserIcon}
-            src={githubUserIcon}
-            loader={<FontAwesomeIcon icon={faSpinner} style={{ fontSize: 24, color: '#d9d9d9' }} spin />}
-            alt="github user icon"
-          />
-        </div>
-        <span css={styles.githubUsername}>{githubUserName}</span>
-        <span css={styles.githubUserID}>{githubUserID}</span>
+      <div css={styles.githubUserIconWrapper}>
+        <Img
+          css={styles.githubUserIcon}
+          src={githubUserIcon}
+          loader={<FontAwesomeIcon icon={faSpinner} style={{ fontSize: 24, color: '#d9d9d9' }} spin />}
+          alt="github user icon"
+        />
       </div>
+      <span css={styles.githubUsername}>{githubUserName}</span>
+      <span css={styles.githubUserID}>{githubUserID}</span>
+    </div>
   )
 }
 

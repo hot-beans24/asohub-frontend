@@ -9,7 +9,7 @@ const navbarWidth = atom<NavbarWidth>({
   key: 'navbarWidth',
   default: {
     isWide: localStorage.getItem(KEY) === 'true',
-  }
+  },
 })
 
 const navbarWidthSelector = selector<boolean>({
@@ -25,7 +25,7 @@ const navbarWidthSelector = selector<boolean>({
       localStorage.setItem(KEY, newValue.toString())
       set(navbarWidth, { isWide: newValue })
     }
-  }
+  },
 })
 
 export default navbarWidthSelector

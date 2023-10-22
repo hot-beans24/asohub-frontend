@@ -28,7 +28,7 @@ const SelectField: FC<SelectFieldProps> = forwardRef<HTMLSelectElement, SelectFi
         </select>
       </FormFieldWrapper>
     )
-  },
+  }
 )
 
 export default SelectField

@@ -13,11 +13,7 @@ const Root: FC = () => {
   const location = useLocation()
   const { isLoggedIn } = useUserAuth()
 
-  const authPagePaths = [
-    '/login',
-    '/logout',
-    '/signup'
-  ]
+  const authPagePaths = ['/login', '/logout', '/signup']
 
   const isAuthPage = authPagePaths.includes(location.pathname)
 
