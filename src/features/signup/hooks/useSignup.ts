@@ -3,29 +3,33 @@ import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useLogin from '@@/features/login/hooks/useLogin'
 
-import SignupFormValues from '@@/features/signup/types/SignupFormValues'
-import SignupResBody from '@@/features/signup/types/SignupResBody'
+import useSignupFormValues from '@@/features/signup/hooks/useSignupFormValues'
+import SignupResBody from '@@/features/api/types/SignupResBody'
 
 /* ⭐️ サインアップフック ⭐️ */
 const useSignup = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const { signupFormValues, resetSignupFormValues } = useSignupFormValues()
   const { login } = useLogin()
 
   // 🌐 サインアップ
-  const signup = async (formValues: SignupFormValues): Promise<boolean> => {
+  const signup = async (): Promise<boolean> => {
     apiInit()
 
     try {
       await asohubApiClient.post<SignupResBody>('/signup', {
-        email: formValues.email,
-        password: formValues.password,
-        name: formValues.username,
-        department_id: formValues.departmentID,
-        grade: formValues.grade,
+        email: signupFormValues.email,
+        password: signupFormValues.password,
+        name: signupFormValues.username,
+        department_id: signupFormValues.departmentID,
+        grade: signupFormValues.grade,
       })
 
       // ✅ 正常にAPIアクセスできた場合ログイン
-      login(formValues.email, formValues.password)
+      login(signupFormValues.email, signupFormValues.password)
+
+      // ✅ サインアップフォームの値をリセット
+      resetSignupFormValues()
 
       return true
     } catch (error) {

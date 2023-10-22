@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import makeRepositoryPath from '@@/features/github/utils/makeRepositoryPath'
+
 import UserIcon from '@@/features/user/components/UserIcon'
 import UserName from '@@/features/user/components/UserName'
 

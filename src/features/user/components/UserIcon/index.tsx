@@ -15,7 +15,7 @@ const UserIcon: FC<UserIconProps> = ({ src }) => {
       <Img
         css={styles.iconImg}
         src={src}
-        loader={<FontAwesomeIcon icon={faSpinner} style={{ fontSize: 24, color: '#d9d9d9' }} spinPulse />}
+        loader={<FontAwesomeIcon icon={faSpinner} spin style={{ color: '#d9d9d9' }} />}
         alt="user icon"
       />
     </div>

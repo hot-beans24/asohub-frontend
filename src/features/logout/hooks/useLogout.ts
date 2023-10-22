@@ -3,7 +3,7 @@ import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
 
-import LogoutResBody from '@@/features/logout/types/LogoutResBody'
+import LogoutResBody from '@@/features/api/types/LogoutResBody'
 
 /* ⭐️ ログアウトフック ⭐️ */
 const useLogout = () => {

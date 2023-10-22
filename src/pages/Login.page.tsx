@@ -10,7 +10,6 @@ import AuthContainer from '@@/features/layout/components/AuthContainer'
 
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
-import FormFieldGroup from '@@/features/form/components/FormFieldGroup'
 import FormButton from '@@/features/form/components/FormButton'
 import FormServerError from '@@/features/form/components/FormServerError'
 import TextField from '@@/features/form/components/TextField'
@@ -57,29 +56,27 @@ const LoginPage: FC = () => {
       <Heading>Login</Heading>
       <Form onSubmit={handleSubmit(handleOnSubmit)}>
         {error && <FormServerError error={error} />}
-        <FormFieldGroup>
-          <TextField
-            label="メールアドレス"
-            type="email"
-            {...register('email', emailOptions)}
-            error={errors.email?.message}
-          />
-          <TextField
-            label="パスワード"
-            type="password"
-            maxLength={20}
-            isPassword
-            {...register('password', passwordOptions)}
-            error={errors.password?.message}
-          />
-        </FormFieldGroup>
+        <TextField
+          label="メールアドレス"
+          type="email"
+          {...register('email', emailOptions)}
+          error={errors.email?.message}
+        />
+        <TextField
+          label="パスワード"
+          type="password"
+          maxLength={20}
+          isPassword
+          {...register('password', passwordOptions)}
+          error={errors.password?.message}
+        />
         <FormButton type="submit" icon={faEnvelope} isLoading={isLoading}>
           Login with Email
         </FormButton>
+        <FormText>
+          アカウントをお持ちでない方は<Link to="/signup">こちら</Link>
+        </FormText>
       </Form>
-      <FormText>
-        アカウントをお持ちでない方は<Link to="/signup">こちら</Link>
-      </FormText>
     </AuthContainer>
   )
 }

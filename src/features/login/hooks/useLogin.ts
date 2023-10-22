@@ -3,7 +3,7 @@ import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 
-import LoginResBody from '@@/features/login/types/LoginResBody'
+import LoginResBody from '@@/features/api/types/LoginResBody'
 
 /* ⭐️ ログインフック ⭐️ */
 const useLogin = () => {
