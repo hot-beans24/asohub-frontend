@@ -6,12 +6,12 @@ import grobalStyles from '@@/styles/globalStyles'
 
 import Router from './routes/Router'
 
-import Init from './Init'
+// import Init from './Init'
 
 const App: FC = () => {
   return (
     <RecoilRoot>
-      <Init />
+      {/* <Init /> */}
       <Global styles={grobalStyles} />
       <Router />
     </RecoilRoot>

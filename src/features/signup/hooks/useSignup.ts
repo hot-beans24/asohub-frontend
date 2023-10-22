@@ -26,7 +26,7 @@ const useSignup = () => {
       })
 
       // ✅ 正常にAPIアクセスできた場合ログイン
-      login(signupFormValues.email, signupFormValues.password)
+      await login(signupFormValues.email, signupFormValues.password)
 
       // ✅ サインアップフォームの値をリセット
       resetSignupFormValues()

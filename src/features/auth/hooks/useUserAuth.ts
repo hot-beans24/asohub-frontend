@@ -27,7 +27,7 @@ const useUserAuth = () => {
      * ❌ 未取得の場合は続けて処理を実行
      * -----------------------------------
      */
-    if (user) return
+    if (isLoggedIn()) return
 
     try {
       const res = await asohubApiClient.get<FetchUserAuthResBody>('/auth-status')
