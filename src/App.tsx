@@ -4,7 +4,7 @@ import { Global } from '@emotion/react'
 
 import grobalStyles from '@@/styles/globalStyles'
 
-import Router from './Router'
+import Router from './routes/Router'
 
 import Init from './Init'
 
