@@ -2,6 +2,8 @@ import { FC, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from 'react-hooks-use-modal'
 
+import ROUTES from '@@/routes/routes'
+
 import ModalBox from '@@/features/common/components/ModalBox'
 
 import Form from '@@/features/form/components/Form'
@@ -32,7 +34,7 @@ const LogoutPage: FC = () => {
     e.preventDefault()
     const isSuccess = await logout()
     if (isSuccess) {
-      navigate('/login')
+      navigate(ROUTES.HOME)
     }
   }
 

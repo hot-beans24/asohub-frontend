@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
+import ROUTES from '@@/routes/routes'
+
 import Heading from '@@/features/common/components/Heading'
 import Link from '@@/features/common/components/Link'
 
@@ -35,7 +37,7 @@ const LoginPage: FC = () => {
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isSuccess = await login(data.email, data.password)
     if (isSuccess) {
-      nagiagte('/home')
+      nagiagte(ROUTES.HOME)
     }
   }
 
