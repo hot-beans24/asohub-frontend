@@ -1,14 +1,17 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGear, faHouse, faRightFromBracket, faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
 
+import NavbarLink from '@@/features/layout/components//NavbarLink'
+import useWide from '@@/features/layout/hooks/useWide'
+
 import UserIcon from '@@/features/user/components/UserIcon'
 
-import NavbarLink from '@@/features/layout/components//NavbarLink'
-import navbarData from '@@/features/layout/data/navbarData'
+import ROUTES from '@@/routes/routes'
+
 import styles from './styles'
 
 type NavbarProps = {
@@ -17,12 +20,8 @@ type NavbarProps = {
 }
 
 const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
-  const [isWide, setIsWide] = useState<boolean>(true)
+  const { isWide, toggleWide } = useWide()
   const { user } = useUserState()
-
-  const handleToggleWidthClick = () => {
-    setIsWide((prev) => !prev)
-  }
 
   if (isAuthPage) {
     return null
@@ -32,26 +31,37 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
     <nav css={styles.navbar(isWide)}>
       <ul css={styles.navbarUl}>
         <li>
-          <button type="button" aria-label="toggle width" css={styles.toggleWidthBtn} onClick={handleToggleWidthClick}>
+          <button type="button" aria-label="toggle width" css={styles.toggleWidthBtn} onClick={toggleWide}>
             <FontAwesomeIcon icon={faBars} style={{ fontSize: 22 }} />
           </button>
         </li>
         <li css={styles.marginBottom}>
-          <Link to="/user" css={styles.userWrapper(isWide, isLoggedIn)}>
-            <UserIcon src={isLoggedIn ? user!!.githubUserIcon : 'guest.png'} />
+          <Link to={`/${user?.id}` || ROUTES.HOME} css={styles.userWrapper(isWide, isLoggedIn)}>
+            <UserIcon src={isLoggedIn && user ? user.githubUserIcon : '/guest.png'} />
             <span css={styles.userName(isWide)}>{isLoggedIn ? user!!.name : 'Guest'}</span>
           </Link>
         </li>
-        {navbarData.map(({ path, label, icon, isLastPosition, isRequiredLogin }) => {
-          if ((isRequiredLogin && !isLoggedIn) || (isLoggedIn && path === '/login')) {
-            return null
-          }
-          return (
-            <li key={path} css={isLastPosition && styles.navbarLiLast}>
-              <NavbarLink path={path} label={label} icon={icon} isWide={isWide} />
+        <li>
+          <NavbarLink path={ROUTES.HOME} label="ホーム" icon={faHouse} />
+        </li>
+        {isLoggedIn && user && (
+          <>
+            <li>
+            <NavbarLink path={user.id} label="マイページ" icon={faUser} />
             </li>
-          )
-        })}
+            <li>
+              <NavbarLink path={ROUTES.SETTING} label="設定" icon={faGear} />
+            </li>
+            <li css={styles.navbarLiLast}>
+              <NavbarLink path={ROUTES.LOGOUT} label="ログアウト" icon={faRightFromBracket} />
+            </li>
+          </>
+        )}
+        {!isLoggedIn && !user && (
+          <li css={styles.navbarLiLast}>
+            <NavbarLink path={ROUTES.LOGIN} label="ログイン" icon={faRightToBracket} />
+          </li>
+        )}
       </ul>
     </nav>
   )

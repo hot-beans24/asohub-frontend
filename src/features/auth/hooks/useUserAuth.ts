@@ -1,8 +1,9 @@
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
+
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import FetchUserAuthResBody from '@@/features/api/types/FetchUserAuthResBody'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
-import FetchUserAuthResBody from '@@/features/auth/types/FetchUserAuthResBody'
 
 /* ⭐️ ユーザー認証情報フック ⭐️ */
 const useUserAuth = () => {
