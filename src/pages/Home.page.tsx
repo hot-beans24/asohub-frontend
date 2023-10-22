@@ -9,7 +9,7 @@ const HomePage: FC = () => {
     id: 'ID',
     username: 'username',
     repositoryName: 'asohub-frontend',
-    message: 'アイウエオかきくけこ',
+    description: 'AsoHubのフロントエンドリポジトリ',
     time: '2023/09/26 10:05',
     githubUserId: 'hot-beans24',
     githubUserIcon: 'https://avatars.githubusercontent.com/u/106505475?v=4',
@@ -28,6 +28,7 @@ const HomePage: FC = () => {
             key={info.id + i}
             username={info.username}
             repositoryName={info.repositoryName}
+            description={info.description}
             time={info.time}
             githubUserID={info.githubUserId}
             githubUserIcon={info.githubUserIcon}
