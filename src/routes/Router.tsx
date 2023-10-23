@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import RouteChanger from '@@/routes/RouteChanger'
+import RoutingInit from '@@/routes/RoutingInit'
 import AuthGuard from '@@/routes/AuthGuard'
 import ROUTES from '@@/routes/routes'
 
@@ -20,7 +20,7 @@ const Router: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<RouteChanger />}>
+        <Route element={<RoutingInit />}>
           <Route element={<Root />}>
             <Route index element={<Home />} />
             <Route path={ROUTES.HOME} element={<Home />} />

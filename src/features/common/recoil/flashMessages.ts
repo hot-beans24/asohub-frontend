@@ -12,16 +12,15 @@ const flashMessagesSelector = selector<FlashMessages>({
   get: ({ get }) => {
     return get(flashMessagesAtom)
   },
-  set: ({ get, set }, newFlashMessages) => {
-    const fMessages = get(flashMessagesAtom)
+  set: ({ set }, newFlashMessages) => {
     if (newFlashMessages instanceof DefaultValue || newFlashMessages === null) {
       return
     }
-    const keys = fMessages?.map((fmessage) => fmessage.key) || []
-    newFlashMessages.forEach((fMessage) => {
-      if (!keys.includes(fMessage.key)) {
-        set(flashMessagesAtom, (prev) => [...(prev || []), fMessage])
-      }
+    console.log({newFlashMessages})
+    set(flashMessagesAtom, (prev) => {
+      const keys = newFlashMessages.map((fMessage) => fMessage.key)
+      const filterdFlashMessages = prev?.filter((fMessage) => !keys.includes(fMessage.key))
+      return [...(filterdFlashMessages || []), ...newFlashMessages]
     })
   },
 })

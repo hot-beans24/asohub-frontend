@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 import { useLocation, useNavigate, Outlet } from 'react-router-dom'
 
-const RouteChanger: FC = () => {
+const RoutingInit: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -14,4 +14,4 @@ const RouteChanger: FC = () => {
   return <Outlet />
 }
 
-export default RouteChanger
+export default RoutingInit

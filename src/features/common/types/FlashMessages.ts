@@ -1,10 +1,6 @@
-// 🌐 フラッシュメッセージ
-type FlashMessages =
-  | {
-      key: string
-      type: 'success' | 'error'
-      message: string
-    }[]
-  | null
+import FlashMessage from "@@/features/common/types/FlashMessage"
+
+// 🌐 フラッシュメッセージ一覧s
+type FlashMessages = FlashMessage[] | null
 
 export default FlashMessages

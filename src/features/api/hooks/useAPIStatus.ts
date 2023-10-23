@@ -11,11 +11,11 @@ const useAPIStatus = () => {
   // 🌐 APIアクセスエラーステート
   const [error, setError] = useState<Error>(null)
 
-  const { setFlashMessages } = useFlashMessages()
+  const { setFlashMessages, resetFlashMessages } = useFlashMessages()
 
   useEffect(() => {
     if (error) {
-      setFlashMessages((prev) => [...(prev || []), { key: error.key, type: 'error', message: error.message }])
+      setFlashMessages([{ key: error.key, type: 'error', message: error.message }])
     }
   }, [error])
 
@@ -28,6 +28,7 @@ const useAPIStatus = () => {
   // 🌐 APIアクセス終了時の処理
   const apiEnd = (): void => {
     setIsLoading(false)
+    resetFlashMessages()
   }
 
   return {

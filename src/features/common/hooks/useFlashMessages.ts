@@ -10,20 +10,6 @@ const useFlashMessages = () => {
   const setDeletedOneFlashMessages = useSetRecoilState(flashMessagesAtom)
   const resetFlashMessages = useResetRecoilState(flashMessagesAtom)
 
-  useEffect(() => {
-    setTimeout(() => {
-      resetFlashMessages()
-    }, 15000)
-
-    return () => {
-      resetFlashMessages()
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(flashMessages)
-  }, [flashMessages])
-
   const deleteFlashMessage = (key: string) => {
     setDeletedOneFlashMessages((prev) => prev?.filter((fMessage) => fMessage.key !== key) ?? null)
   }
@@ -32,6 +18,7 @@ const useFlashMessages = () => {
     flashMessages,
     setFlashMessages,
     deleteFlashMessage,
+    resetFlashMessages
   }
 }
 
