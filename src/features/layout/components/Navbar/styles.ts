@@ -60,8 +60,6 @@ const styles = {
     letter-spacing: 1px;
     white-space: nowrap;
     display: ${isWide ? 'inline-block' : 'none'};
-    animation: navLinkLabel;
-    animation-duration: 0.4s;
   `,
 }
 

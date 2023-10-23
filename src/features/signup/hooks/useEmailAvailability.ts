@@ -1,7 +1,7 @@
 import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
-import FetchEmailAvailabilityResBody from '@@/features/signup/types/FetchEmailAvailabilityResBody'
+import FetchEmailAvailabilityResBody from '@@/features/api/types/FetchEmailAvailabilityResBody'
 
 /* ⭐️ メールアドレス有効性フック ⭐️ */
 const useEmailAvailability = () => {
@@ -27,7 +27,7 @@ const useEmailAvailability = () => {
        * ---------------------------------
        */
       if (!isAvailable) {
-        setError('このメールアドレスは使用できません')
+        setError({ key: 'emailIsNotAvailable', message: 'このメールアドレスは使用できません' })
       }
 
       return isAvailable
@@ -43,11 +43,11 @@ const useEmailAvailability = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.BadRequest: {
-            setError('メールアドレスが不正です')
+            setError({ key: 'emailAvailabilityBadRequest', message: 'メールアドレスが不正です' })
             break
           }
           default: {
-            setError('メールアドレス有効性チェックエラー')
+            setError({ key: 'emailAvailabilityError', message: 'メールアドレス有効性チェックエラー' })
             break
           }
         }

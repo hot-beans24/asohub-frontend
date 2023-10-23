@@ -1,7 +1,7 @@
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
-import LinkGithubResBody from '@@/features/github/types/LinkGithubResBody'
+import LinkGithubResBody from '@@/features/api/types/LinkGithubResBody'
 
 /* ⭐️ GitHubアカウント紐付けフック ⭐️ */
 const useLinkGithub = () => {
@@ -28,7 +28,7 @@ const useLinkGithub = () => {
          */
         switch (error.response?.status) {
           default: {
-            setError('GitHub紐付け処理エラー')
+            setError({ key: 'linkGithubError', message: 'GitHub紐付け処理エラー' })
             break
           }
         }

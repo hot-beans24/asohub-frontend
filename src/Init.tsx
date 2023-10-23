@@ -6,8 +6,10 @@ const Init: FC = () => {
   const { fetchUserAuth } = useUserAuth()
 
   useEffect(() => {
-    console.log('🔥 初期実行 🔥')
-    fetchUserAuth()
+    const init = async () => {
+      await fetchUserAuth()
+    }
+    init()
   }, [])
 
   return null

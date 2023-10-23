@@ -1,28 +1,33 @@
 import { FC } from 'react'
 import Lottie from 'lottie-react'
 
-import styles from './styles'
+import lottieNotfound from '@@/assets/lottie-notfound.json'
+import lottieCreating from '@@/assets/lottie-creating.json'
+import lottieMaintenance from '@@/assets/lottie-maintenance.json'
 
-import notfoundLottieJson from './notfound.json'
-import creatingLottieJson from './creating.json'
-import maintenanceLottieJson from './maintenance.json'
+import styles from './styles'
 
 type StatusPageProps = {
   status: 'notfound' | 'creating' | 'maintenance'
 }
 
 const PageStatus: FC<StatusPageProps> = ({ status }) => {
-  const data = {
+  type StatusData = {
+    json: any
+    message: string
+  }
+
+  const data: Record<StatusPageProps['status'], StatusData> = {
     notfound: {
-      json: notfoundLottieJson,
+      json: lottieNotfound,
       message: 'このページは存在しません',
     },
     creating: {
-      json: creatingLottieJson,
-      message: 'このページは作成中です',
+      json: lottieCreating,
+      message: 'このページは制作中です',
     },
     maintenance: {
-      json: maintenanceLottieJson,
+      json: lottieMaintenance,
       message: 'このページはメンテナンス中です',
     },
   }

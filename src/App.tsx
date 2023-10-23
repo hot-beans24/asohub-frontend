@@ -4,15 +4,15 @@ import { Global } from '@emotion/react'
 
 import grobalStyles from '@@/styles/globalStyles'
 
-import Router from './Router'
+import Init from '@@/Init'
 
-import Init from './Init'
+import Router from '@@/routes/Router'
 
 const App: FC = () => {
   return (
     <RecoilRoot>
-      <Init />
       <Global styles={grobalStyles} />
+      <Init />
       <Router />
     </RecoilRoot>
   )

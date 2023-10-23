@@ -1,8 +1,9 @@
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
+
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import FetchUserAuthResBody from '@@/features/api/types/FetchUserAuthResBody'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
-import FetchUserAuthResBody from '@@/features/auth/types/FetchUserAuthResBody'
 
 /* ⭐️ ユーザー認証情報フック ⭐️ */
 const useUserAuth = () => {
@@ -26,7 +27,7 @@ const useUserAuth = () => {
      * ❌ 未取得の場合は続けて処理を実行
      * -----------------------------------
      */
-    if (user) return
+    if (isLoggedIn()) return
 
     try {
       const res = await asohubApiClient.get<FetchUserAuthResBody>('/auth-status')
@@ -54,7 +55,6 @@ const useUserAuth = () => {
         })
       } else {
         setUser(null)
-        setError('ログインしていません')
       }
     } catch (error) {
       if (isAxiosError(error)) {
@@ -68,7 +68,7 @@ const useUserAuth = () => {
         switch (error.response?.status) {
           default: {
             setUser(null)
-            setError('ユーザー認証情報取得エラー')
+            setError({ key: 'userAuthError', message: 'ユーザー認証情報取得エラー' })
             break
           }
         }

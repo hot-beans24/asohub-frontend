@@ -1,6 +1,6 @@
 // 🌐 GitHubリポジトリパスを生成
 const makeRepositoryPath = (userID: string, repositoryName: string): string => {
-  return `${import.meta.env.VITE_GITHUB_PATH}/${userID}/${repositoryName}`
+  return `https://github.com/${userID}/${repositoryName}`
 }
 
 export default makeRepositoryPath

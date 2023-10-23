@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
+
+import Error from '@@/features/api/types/Error'
 
 /* ⭐️ APIステータスフック ⭐️ */
 const useAPIStatus = () => {
   // 🌐 APIローディング判定ステート
   const [isLoading, setIsLoading] = useState<boolean>(false)
   // 🌐 APIアクセスエラーステート
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<Error>(null)
+
+  const { setFlashMessages, resetFlashMessages } = useFlashMessages()
+
+  useEffect(() => {
+    if (error) {
+      setFlashMessages([{ key: error.key, type: 'error', message: error.message }])
+    }
+  }, [error])
 
   // 🌐 APIアクセス開始時の処理
   const apiInit = (): void => {
@@ -16,6 +28,7 @@ const useAPIStatus = () => {
   // 🌐 APIアクセス終了時の処理
   const apiEnd = (): void => {
     setIsLoading(false)
+    resetFlashMessages()
   }
 
   return {

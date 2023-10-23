@@ -1,27 +1,24 @@
-import { useState } from 'react'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { githubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
-import FetchUserAuthResBody from '@@/features/github/types/FetchGithubUserResBody'
+import recoilGithubUser from '@@/features/github/recoil/githubUser'
+
+import FetchUserAuthResBody from '@@/features/api/types/FetchGithubUserResBody'
 import GithubUser from '@@/features/github/types/GithubUser'
 
 /* ⭐️ GitHubユーザーフック ⭐️ */
-const useGithubUserState = () => {
+const useGithubUser = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
 
-  // 🌐 GitHubユーザーダミーデータ
-  const dummy: GithubUser = { id: '', name: '', icon: '' }
   // 🌐 GitHubユーザー情報ステート
-  const [githubUser, setGithubUser] = useState<GithubUser>(dummy)
-
-  // 🌐 GitHubユーザー情報ステートをクリア
-  const clearGithubUserState = (): void => {
-    setGithubUser(dummy)
-  }
+  const [githubUser, setGithubUser] = useRecoilState<GithubUser>(recoilGithubUser)
+  // 🌐 GitHubユーザー情報ステートをリセットする関数
+  const resetGithubUser = useResetRecoilState(recoilGithubUser)
 
   // 🌐 GitHubユーザー情報を取得
-  const fetchGithubUser = async (userID: string): Promise<void> => {
+  const fetchGithubUser = async (userID: string): Promise<boolean> => {
     apiInit()
 
     try {
@@ -35,6 +32,8 @@ const useGithubUserState = () => {
         name: githubUserData.name,
         icon: githubUserData.avatar_url,
       })
+
+      return true
     } catch (error) {
       if (isAxiosError(error)) {
         /**
@@ -47,15 +46,16 @@ const useGithubUserState = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.NotFound: {
-            setError('ユーザーが見つかりませんでした')
+            setError({ key: 'githubUserNotFound', message: 'ユーザーが見つかりませんでした' })
             break
           }
           default: {
-            setError('GitHubユーザー検索エラー')
+            setError({ key: 'githubUserError', message: 'GitHubユーザー検索エラー' })
             break
           }
         }
       }
+      return false
     } finally {
       apiEnd()
     }
@@ -63,11 +63,11 @@ const useGithubUserState = () => {
 
   return {
     fetchGithubUser,
-    clearGithubUserState,
+    resetGithubUser,
     githubUser,
     isLoading,
     error,
   }
 }
 
-export default useGithubUserState
+export default useGithubUser

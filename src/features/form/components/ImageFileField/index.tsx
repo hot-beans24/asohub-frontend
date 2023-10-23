@@ -50,7 +50,7 @@ const ImageFileField = forwardRef<HTMLInputElement, ImageFileFieldProps>(
         />
       </FormFieldWrapper>
     )
-  },
+  }
 )
 
 export default ImageFileField

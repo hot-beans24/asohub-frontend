@@ -7,6 +7,7 @@ const grobalStyles = css`
 
   :root {
     --main-color: #144777;
+    --success-color: #4caf50;
     --error-color: #ed6f78;
     --light-pink: #fceeed;
     --light-gray: #f5f5f5;
