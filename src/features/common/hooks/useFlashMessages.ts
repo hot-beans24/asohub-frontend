@@ -14,6 +14,10 @@ const useFlashMessages = () => {
     setTimeout(() => {
       setFlashMessages(null)
     }, 15000)
+
+    return () => {
+      setFlashMessages(null)
+    }
   }, [location.state])
 
   const deleteFlashMessage = (key: number) => {
