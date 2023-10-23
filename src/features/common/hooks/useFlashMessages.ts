@@ -19,6 +19,10 @@ const useFlashMessages = () => {
     }
   }, [])
 
+  useEffect(() => {
+    console.log(flashMessages)
+  }, [flashMessages])
+
   const deleteFlashMessage = (key: number) => {
     setFlashMessages((prev) => prev?.filter((_, index) => index !== key) ?? null)
   }

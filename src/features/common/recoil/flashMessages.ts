@@ -13,11 +13,11 @@ const flashMessagesSelector = selector<FlashMessages>({
     return get(flashMessages)
   },
   set: ({ get, set }, newFlashMessages) => {
-    const fMessages = get(flashMessages)
-    const keys = fMessages?.map((fmessage) => fmessage.key) || []
     if (newFlashMessages instanceof DefaultValue || newFlashMessages === null) {
       return
     }
+    const fMessages = get(flashMessages)
+    const keys = fMessages?.map((fmessage) => fmessage.key) || []
     newFlashMessages.forEach((fMessage) => {
       if (!keys.includes(fMessage.key)) {
         set(flashMessages, (prev) => [...(prev || []), fMessage])

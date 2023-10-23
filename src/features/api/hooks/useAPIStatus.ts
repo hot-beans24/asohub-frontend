@@ -15,7 +15,7 @@ const useAPIStatus = () => {
 
   useEffect(() => {
     if (error) {
-      setFlashMessages([{ key: error.key, type: 'error', message: error.message }])
+      setFlashMessages((prev) => [...(prev || []), { key: error.key, type: 'error', message: error.message }])
     }
   }, [error])
 
