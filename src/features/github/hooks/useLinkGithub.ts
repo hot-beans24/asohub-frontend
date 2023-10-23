@@ -28,7 +28,7 @@ const useLinkGithub = () => {
          */
         switch (error.response?.status) {
           default: {
-            setError('GitHub紐付け処理エラー')
+            setError({ key: 'linkGithubError', message: 'GitHub紐付け処理エラー' })
             break
           }
         }

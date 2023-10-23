@@ -32,7 +32,7 @@ const useLogout = () => {
          */
         switch (error.response?.status) {
           default: {
-            setError('ログアウトエラー')
+            setError({ key: 'logoutError', message: 'ログアウトエラー' })
             break
           }
         }

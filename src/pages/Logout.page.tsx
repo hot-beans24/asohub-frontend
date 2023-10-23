@@ -7,7 +7,6 @@ import ROUTES from '@@/routes/routes'
 import ModalBox from '@@/features/common/components/ModalBox'
 
 import Form from '@@/features/form/components/Form'
-import FormServerError from '@@/features/form/components/FormServerError'
 import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
 import FormButton from '@@/features/form/components/FormButton'
 
@@ -20,7 +19,7 @@ import logoutSuccessFlashMessage from '@@/features/logout/data/logoutSuccessFlas
 /* ⭐️ ログアウトページ : 完 ⭐️ */
 const LogoutPage: FC = () => {
   const navigate = useNavigate()
-  const { logout, isLoading, error } = useLogout()
+  const { logout, isLoading } = useLogout()
   const { setFlashMessages } = useFlashMessages()
 
   const [Modal] = useModal('root', {
@@ -48,7 +47,6 @@ const LogoutPage: FC = () => {
     <Modal>
       <ModalBox message="Asohubからログアウトしますか？">
         <Form onSubmit={handleSubmit}>
-          {error && <FormServerError error={error} />}
           <FormButtonFlex>
             <FormButton type="button" onClick={handleCancelClick} color="gray" isHalfSize>
               キャンセル

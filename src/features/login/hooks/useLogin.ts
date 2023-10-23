@@ -37,15 +37,18 @@ const useLogin = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.BadRequest: {
-            setError('入力された値の形式が正しくありません\nもう一度入力してください')
+            setError({
+              key: 'loginBadRequest',
+              message: '入力された値の形式が正しくありません\nもう一度入力してください',
+            })
             break
           }
           case HttpStatusCode.Unauthorized: {
-            setError('メールアドレスまたはパスワードが正しくありません')
+            setError({ key: 'loginUnauthorized', message: 'メールアドレスまたはパスワードが正しくありません' })
             break
           }
           default: {
-            setError('ログインエラー')
+            setError({ key: 'loginError', message: 'ログインエラー' })
             break
           }
         }

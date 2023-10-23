@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react'
 
 import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
 
+import Error from '@@/features/api/types/Error'
+
 /* ⭐️ APIステータスフック ⭐️ */
 const useAPIStatus = () => {
   // 🌐 APIローディング判定ステート
   const [isLoading, setIsLoading] = useState<boolean>(false)
   // 🌐 APIアクセスエラーステート
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<Error>(null)
 
   const { setFlashMessages } = useFlashMessages()
 
   useEffect(() => {
     if (error) {
-      setFlashMessages([{ key: 'apiError', type: 'error', message: error }])
+      setFlashMessages([{ key: error.key, type: 'error', message: error.message }])
     }
   }, [error])
 

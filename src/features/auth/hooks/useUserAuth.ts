@@ -68,7 +68,7 @@ const useUserAuth = () => {
         switch (error.response?.status) {
           default: {
             setUser(null)
-            setError('ユーザー認証情報取得エラー')
+            setError({ key: 'userAuthError', message: 'ユーザー認証情報取得エラー' })
             break
           }
         }

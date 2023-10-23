@@ -46,11 +46,11 @@ const useGithubUser = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.NotFound: {
-            setError('ユーザーが見つかりませんでした')
+            setError({ key: 'githubUserNotFound', message: 'ユーザーが見つかりませんでした' })
             break
           }
           default: {
-            setError('GitHubユーザー検索エラー')
+            setError({ key: 'githubUserError', message: 'GitHubユーザー検索エラー' })
             break
           }
         }

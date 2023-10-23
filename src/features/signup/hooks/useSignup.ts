@@ -44,11 +44,11 @@ const useSignup = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.Conflict: {
-            setError('このメールアドレスはすでに使用されています')
+            setError({ key: 'emailConflict', message: 'このメールアドレスはすでに使用されています' })
             break
           }
           default: {
-            setError('サインアップエラー')
+            setError({ key: 'signupError', message: 'サインアップエラー' })
             break
           }
         }
