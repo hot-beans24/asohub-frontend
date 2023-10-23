@@ -37,7 +37,15 @@ const LoginPage: FC = () => {
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isSuccess = await login(data.email, data.password)
     if (isSuccess) {
-      nagiagte(ROUTES.HOME)
+      nagiagte(ROUTES.HOME, { state: {
+        flashMessages: [
+          {
+            key: 'loginSuccess',
+            type: 'success',
+            message: 'ログインしました',
+          }
+        ]
+      }})
     }
   }
 

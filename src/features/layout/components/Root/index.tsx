@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import Header from '@@/features/layout/components/Header'
 import Navbar from '@@/features/layout/components/Navbar'
 import Main from '@@/features/layout/components/Main'
+import FlashMessages from '@@/features/common/components/FlashMessages'
 
 import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 
@@ -22,6 +23,7 @@ const Root: FC = () => {
       <Header isLoggedIn={isLoggedIn()} isAuthPage={isAuthPage} />
       <Navbar isLoggedIn={isLoggedIn()} isAuthPage={isAuthPage} />
       <Main isAuthPage={isAuthPage} />
+      <FlashMessages />
     </div>
   )
 }
