@@ -5,6 +5,7 @@ const logoutSuccesslashMessage: FlashMessages = [
     key: 'logoutSuccess',
     type: 'success',
     message: 'ログアウトしました',
+    isCrossPage: true,
   },
 ]
 

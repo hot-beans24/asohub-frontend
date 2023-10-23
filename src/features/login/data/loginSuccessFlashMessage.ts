@@ -5,6 +5,7 @@ const loginSuccesslashMessage: FlashMessages = [
     key: 'loginSuccess',
     type: 'success',
     message: 'ログインしました',
+    isCrossPage: true,
   },
 ]
 

@@ -7,7 +7,7 @@ const RoutingInit: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const { resetFlashMessages } = useFlashMessages()
+  const { deleteNotCrossPageMessages } = useFlashMessages()
 
   useEffect(() => {
     if (location.pathname.endsWith('/')) {
@@ -16,7 +16,7 @@ const RoutingInit: FC = () => {
   }, [])
 
   useEffect(() => {
-    resetFlashMessages()
+    deleteNotCrossPageMessages()
   }, [location.pathname])
 
   return <Outlet />
