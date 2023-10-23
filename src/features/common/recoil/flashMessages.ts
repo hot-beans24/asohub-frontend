@@ -2,27 +2,28 @@ import { DefaultValue, atom, selector } from 'recoil'
 
 import FlashMessages from '@@/features/common/types/FlashMessages'
 
-const flashMessages = atom<FlashMessages>({
-  key: 'flashMessages',
+const flashMessagesAtom = atom<FlashMessages>({
+  key: 'flashMessagesAtom',
   default: null,
 })
 
 const flashMessagesSelector = selector<FlashMessages>({
   key: 'flashMessagesSelector',
   get: ({ get }) => {
-    return get(flashMessages)
+    return get(flashMessagesAtom)
   },
   set: ({ get, set }, newFlashMessages) => {
+    const fMessages = get(flashMessagesAtom)
     if (newFlashMessages instanceof DefaultValue || newFlashMessages === null) {
       return
     }
-    const fMessages = get(flashMessages)
     const keys = fMessages?.map((fmessage) => fmessage.key) || []
     newFlashMessages.forEach((fMessage) => {
       if (!keys.includes(fMessage.key)) {
-        set(flashMessages, (prev) => [...(prev || []), fMessage])
+        set(flashMessagesAtom, (prev) => [...(prev || []), fMessage])
       }
     })
   },
 })
-export default flashMessagesSelector
+
+export { flashMessagesAtom, flashMessagesSelector }
