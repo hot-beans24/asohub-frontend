@@ -13,15 +13,19 @@ import AuthContainer from '@@/features/layout/components/AuthContainer'
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
 import FormButton from '@@/features/form/components/FormButton'
-import FormServerError from '@@/features/form/components/FormServerError'
 import TextField from '@@/features/form/components/TextField'
+
+import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
 
 import useLogin from '@@/features/login/hooks/useLogin'
 
+import loginSuccessflashMessage from '@@/features/login/data/loginSuccessFlashMessage'
+
 /* ⭐️ ログインページ : 完 ⭐️ */
 const LoginPage: FC = () => {
-  const nagiagte = useNavigate()
-  const { login, isLoading, error } = useLogin()
+  const naviagte = useNavigate()
+  const { login, isLoading } = useLogin()
+  const { setFlashMessages } = useFlashMessages()
 
   type FormValues = {
     email: string
@@ -37,17 +41,8 @@ const LoginPage: FC = () => {
   const handleOnSubmit: SubmitHandler<FormValues> = async (data) => {
     const isSuccess = await login(data.email, data.password)
     if (isSuccess) {
-      nagiagte(ROUTES.HOME, {
-        state: {
-          flashMessages: [
-            {
-              key: 'loginSuccess',
-              type: 'success',
-              message: 'ログインしました',
-            },
-          ],
-        },
-      })
+      naviagte(ROUTES.HOME)
+      setFlashMessages(loginSuccessflashMessage)
     }
   }
 
@@ -67,7 +62,6 @@ const LoginPage: FC = () => {
     <AuthContainer>
       <Heading>Login</Heading>
       <Form onSubmit={handleSubmit(handleOnSubmit)}>
-        {error && <FormServerError error={error} />}
         <TextField
           label="メールアドレス"
           type="email"

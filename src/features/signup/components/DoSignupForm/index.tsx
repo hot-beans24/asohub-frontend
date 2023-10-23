@@ -13,7 +13,6 @@ import ModalBox from '@@/features/common/components/ModalBox'
 
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
-import FormServerError from '@@/features/form/components/FormServerError'
 import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
 import FormButton from '@@/features/form/components/FormButton'
 import TextField from '@@/features/form/components/TextField'
@@ -35,7 +34,7 @@ const DoSignupForm: FC = () => {
   }
 
   const { handleSubmit } = useForm<FormValues>()
-  const { signup, isLoading, error } = useSignup()
+  const { signup, isLoading } = useSignup()
 
   const [Modal, open] = useModal('root', {
     preventScroll: false,
@@ -54,7 +53,6 @@ const DoSignupForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormText>以下の情報でアカウントを作成します</FormText>
-      {error && <FormServerError error={error} />}
       <TextField label="メールアドレス" type="email" value={signupFormValues.email} readOnly />
       <TextField label="ユーザー名" type="text" value={signupFormValues.username} readOnly />
       <TextField

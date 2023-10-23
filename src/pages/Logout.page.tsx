@@ -11,12 +11,17 @@ import FormServerError from '@@/features/form/components/FormServerError'
 import FormButtonFlex from '@@/features/form/components/FormButtonFlex'
 import FormButton from '@@/features/form/components/FormButton'
 
+import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
+
 import useLogout from '@@/features/logout/hooks/useLogout'
+
+import logoutSuccessFlashMessage from '@@/features/logout/data/logoutSuccessFlashMessage'
 
 /* ⭐️ ログアウトページ : 完 ⭐️ */
 const LogoutPage: FC = () => {
   const navigate = useNavigate()
   const { logout, isLoading, error } = useLogout()
+  const { setFlashMessages } = useFlashMessages()
 
   const [Modal] = useModal('root', {
     initialValue: true,
@@ -34,17 +39,8 @@ const LogoutPage: FC = () => {
     e.preventDefault()
     const isSuccess = await logout()
     if (isSuccess) {
-      navigate(ROUTES.HOME, {
-        state: {
-          flashMessages: [
-            {
-              key: 'logoutSuccess',
-              type: 'success',
-              message: 'ログアウトしました',
-            },
-          ],
-        },
-      })
+      navigate(ROUTES.HOME)
+      setFlashMessages(logoutSuccessFlashMessage)
     }
   }
 

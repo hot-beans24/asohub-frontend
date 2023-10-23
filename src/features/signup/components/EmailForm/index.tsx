@@ -11,7 +11,6 @@ import EmailFormValues from '@@/features/signup/types/EmailFormValues'
 import Link from '@@/features/common/components/Link'
 
 import Form from '@@/features/form/components/Form'
-import FormServerError from '@@/features/form/components/FormServerError'
 import FormButton from '@@/features/form/components/FormButton'
 import FormText from '@@/features/form/components/FormText'
 import TextField from '@@/features/form/components/TextField'
@@ -19,7 +18,7 @@ import TextField from '@@/features/form/components/TextField'
 const EmailForm: FC = () => {
   const { nextStep } = useFormStep()
   const { signupFormValues, setSignupFormValues } = useSignupFormValues()
-  const { fetchEmailAvailability, isLoading, error } = useEmailAvailability()
+  const { fetchEmailAvailability, isLoading } = useEmailAvailability()
 
   const {
     control,
@@ -47,7 +46,6 @@ const EmailForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormText>学校のメールアドレスを入力してください</FormText>
-      {error && <FormServerError error={error} />}
       <Controller
         name="email"
         control={control}

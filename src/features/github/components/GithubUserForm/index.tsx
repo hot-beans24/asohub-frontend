@@ -5,7 +5,6 @@ import githubUsernameRegex from 'github-username-regex'
 
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
-import FormServerError from '@@/features/form/components/FormServerError'
 import FormButton from '@@/features/form/components/FormButton'
 import TextField from '@@/features/form/components/TextField'
 
@@ -13,7 +12,7 @@ import useGithubUser from '@@/features/github/hooks/useGithubUser'
 import GithubUserFormValues from '@@/features/github/types/GithubUserFormValues'
 
 const GithunUserForm: FC = () => {
-  const { fetchGithubUser, githubUser, isLoading, error } = useGithubUser()
+  const { fetchGithubUser, githubUser, isLoading } = useGithubUser()
 
   const {
     control,
@@ -36,7 +35,6 @@ const GithunUserForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormText>GitHubアカウントと連携してください</FormText>
-      {error && <FormServerError error={error} />}
       <Controller
         name="githubUserID"
         control={control}
