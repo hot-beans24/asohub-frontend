@@ -17,7 +17,7 @@ const useFlashMessages = () => {
     return () => {
       resetFlashMessages()
     }
-  }, [])
+  }, [flashMessages])
 
   const deleteFlashMessage = (key: number) => {
     setFlashMessages((prev) => prev?.filter((_, index) => index !== key) ?? null)

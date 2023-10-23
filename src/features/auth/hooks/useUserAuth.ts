@@ -55,7 +55,6 @@ const useUserAuth = () => {
         })
       } else {
         setUser(null)
-        setError('ログインしていません')
       }
     } catch (error) {
       if (isAxiosError(error)) {
