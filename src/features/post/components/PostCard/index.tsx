@@ -29,12 +29,7 @@ const PostCard: FC<PostCardProps> = ({ username, repositoryName, description, ti
       <h3 css={styles.repositoryName}>{repositoryName}</h3>
       <p css={styles.description}>{description}</p>
       <span css={styles.time}>{time}</span>
-      <a
-        href={makeRepositoryPath(githubUserID, repositoryName)}
-        css={styles.linkBtn}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={makeRepositoryPath(githubUserID, repositoryName)} css={styles.linkBtn} target="_blank" rel="noreferrer">
         <FontAwesomeIcon icon={faGithub} style={{ fontSize: 18 }} />
         <span>リポジトリへ</span>
       </a>

@@ -34,15 +34,17 @@ const LogoutPage: FC = () => {
     e.preventDefault()
     const isSuccess = await logout()
     if (isSuccess) {
-      navigate(ROUTES.HOME, { state: {
-        flashMessages: [
-          {
-            key: 'logoutSuccess',
-            type: 'success',
-            message: 'ログアウトしました',
-          }
-        ]
-      }})
+      navigate(ROUTES.HOME, {
+        state: {
+          flashMessages: [
+            {
+              key: 'logoutSuccess',
+              type: 'success',
+              message: 'ログアウトしました',
+            },
+          ],
+        },
+      })
     }
   }
 

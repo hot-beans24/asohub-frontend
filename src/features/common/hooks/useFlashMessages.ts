@@ -5,7 +5,9 @@ import FlashMessage from '@@/features/common/types/FlashMessage'
 
 const useFlashMessages = () => {
   const location = useLocation()
-  const [flashMessages, setFlashMessages] = useState<FlashMessage[] | null>(location.state?.flashMessages as FlashMessage[])
+  const [flashMessages, setFlashMessages] = useState<FlashMessage[] | null>(
+    location.state?.flashMessages as FlashMessage[]
+  )
 
   useEffect(() => {
     setFlashMessages(location.state?.flashMessages as FlashMessage[])
@@ -20,7 +22,7 @@ const useFlashMessages = () => {
 
   return {
     flashMessages,
-    deleteFlashMessage
+    deleteFlashMessage,
   }
 }
 

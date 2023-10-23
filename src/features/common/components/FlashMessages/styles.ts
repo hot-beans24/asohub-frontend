@@ -25,7 +25,7 @@ const styles = {
     gap: 8px;
     animation-name: message;
     animation-duration: 10s;
-    animation-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
     animation-fill-mode: both;
     @keyframes message {
       0% {
@@ -49,7 +49,7 @@ const styles = {
     margin-right: 20px;
     white-space: wrap;
     flex: 1;
-  `
+  `,
 }
 
 export default styles
