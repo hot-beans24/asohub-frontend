@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import FlashMessage from '@@/features/common/types/FlashMessage'
 
-const useFlashMessages = () => {
+const useLocationFlashMessages = () => {
   const location = useLocation()
   const [flashMessages, setFlashMessages] = useState<FlashMessage[] | null>(
     location.state?.flashMessages as FlashMessage[]
@@ -30,4 +30,4 @@ const useFlashMessages = () => {
   }
 }
 
-export default useFlashMessages
+export default useLocationFlashMessages

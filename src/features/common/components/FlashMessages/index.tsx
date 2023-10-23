@@ -2,17 +2,16 @@ import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck, faCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons'
 
-import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
+import FlashMessage from '@@/features/common/types/FlashMessage'
 
 import styles from './styles'
 
-const FlashMessages: FC = () => {
-  const { flashMessages, deleteFlashMessage } = useFlashMessages()
+type FlashMessagesProps = {
+  flashMessages: FlashMessage[]
+  deleteFlashMessage: (index: number) => void
+}
 
-  if (!flashMessages) {
-    return null
-  }
-
+const FlashMessages: FC<FlashMessagesProps> = ({ flashMessages, deleteFlashMessage }) => {
   return (
     <div css={styles.flashMessagesContainer}>
       {flashMessages.map(({ key, type, message }, index) => (
