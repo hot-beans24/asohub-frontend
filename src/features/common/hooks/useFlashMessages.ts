@@ -23,8 +23,8 @@ const useFlashMessages = () => {
     console.log(flashMessages)
   }, [flashMessages])
 
-  const deleteFlashMessage = (key: number) => {
-    setFlashMessages((prev) => prev?.filter((_, index) => index !== key) ?? null)
+  const deleteFlashMessage = (key: string) => {
+    setFlashMessages((prev) => prev?.filter((fMessage) => fMessage.key !== key) ?? null)
   }
 
   return {
