@@ -16,11 +16,11 @@ const flashMessagesSelector = selector<FlashMessages>({
     if (newFlashMessages instanceof DefaultValue || newFlashMessages === null) {
       return
     }
-    console.log({newFlashMessages})
+    console.log({ newFlashMessages })
     set(flashMessagesAtom, (prev) => {
       const keys = newFlashMessages.map((fMessage) => fMessage.key)
-      const filterdFlashMessages = prev?.filter((fMessage) => !keys.includes(fMessage.key))
-      return [...(filterdFlashMessages || []), ...newFlashMessages]
+      const filteredFlashMessages = prev?.filter((fMessage) => !keys.includes(fMessage.key))
+      return [...(filteredFlashMessages || []), ...newFlashMessages]
     })
   },
 })

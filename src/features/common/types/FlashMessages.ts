@@ -1,4 +1,4 @@
-import FlashMessage from "@@/features/common/types/FlashMessage"
+import FlashMessage from '@@/features/common/types/FlashMessage'
 
 // 🌐 フラッシュメッセージ一覧s
 type FlashMessages = FlashMessage[] | null

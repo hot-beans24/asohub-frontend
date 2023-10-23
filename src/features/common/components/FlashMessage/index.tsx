@@ -4,7 +4,7 @@ import { faCircleCheck, faCircleExclamation, faXmark } from '@fortawesome/free-s
 
 import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
 
-import FlashMessageType from "@@/features/common/types/FlashMessage"
+import FlashMessageType from '@@/features/common/types/FlashMessage'
 
 import styles from './styles'
 
