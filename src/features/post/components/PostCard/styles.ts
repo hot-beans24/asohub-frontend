@@ -63,7 +63,7 @@ const styles = {
     gap: 6px;
     grid-area: linkBtn;
     overflow: hidden;
-    transition: width 0.4s, background-color 0s;
+    transition: width 0.2s, background-color 0s;
     span {
       white-space: nowrap;
       display: none;
@@ -73,7 +73,7 @@ const styles = {
       background-color: black;
       color: white;
       width: 140px;
-      transition: width 0.4s, background-color 0.4s;
+      transition: width 0.2s, background-color 0.4s;
       span {
         display: block;
       }

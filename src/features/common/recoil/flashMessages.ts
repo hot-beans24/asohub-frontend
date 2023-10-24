@@ -16,7 +16,6 @@ const flashMessagesSelector = selector<FlashMessages>({
     if (newFlashMessages instanceof DefaultValue || newFlashMessages === null) {
       return
     }
-    console.log({ newFlashMessages })
     set(flashMessagesAtom, (prev) => {
       const keys = newFlashMessages.map((fMessage) => fMessage.key)
       const filteredFlashMessages = prev?.filter((fMessage) => !keys.includes(fMessage.key))
