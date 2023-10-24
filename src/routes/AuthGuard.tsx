@@ -13,7 +13,7 @@ const AuthGuard: FC = () => {
       setIsAuthChecked(true)
     }
     init()
-  })
+  }, [])
 
   if (!isAuthChecked) return null
 

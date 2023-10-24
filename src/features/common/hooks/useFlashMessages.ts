@@ -13,15 +13,20 @@ const useFlashMessages = () => {
     setFilteredFlashMessages((prev) => prev?.filter((fMessage) => fMessage.key !== key) ?? null)
   }
 
-  const deleteNotCrossPageMessages = () => {
+  const deleteNotCrossPageFlashMessages = () => {
     setFilteredFlashMessages((prev) => prev?.filter((fMessage) => fMessage.isCrossPage) ?? null)
+  }
+
+  const deleteErrorFlashMessages = () => {
+    setFilteredFlashMessages((prev) => prev?.filter((fMessage) => fMessage.type !== 'error') ?? null)
   }
 
   return {
     flashMessages,
     setFlashMessages,
     deleteFlashMessage,
-    deleteNotCrossPageMessages,
+    deleteNotCrossPageFlashMessages,
+    deleteErrorFlashMessages,
     resetFlashMessages,
   }
 }
