@@ -27,7 +27,7 @@ const FlashMessage: FC<FlashMessageProps> = ({ flashMessage: { key, type, messag
     <div css={styles.flashMessageWrapper(type)}>
       <FontAwesomeIcon icon={type === 'success' ? faCircleCheck : faCircleExclamation} />
       <p css={styles.flashMessageText}>{message}</p>
-      <button type="button" aria-label="delet button" onClick={() => deleteFlashMessage(key)}>
+      <button type="button" aria-label="delet button" css={styles.deleteButton} onClick={() => deleteFlashMessage(key)}>
         <FontAwesomeIcon
           icon={faXmark}
           css={{ color: type === 'success' ? 'var(--success-color)' : 'var(--error-color)' }}

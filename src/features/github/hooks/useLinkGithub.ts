@@ -1,19 +1,26 @@
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
+import useUserState from '@@/features/auth/hooks/useUserState'
+
 import LinkGithubResBody from '@@/features/api/types/LinkGithubResBody'
 
 /* ⭐️ GitHubアカウント紐付けフック ⭐️ */
 const useLinkGithub = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
 
+  const { user } = useUserState()
+
   // 🌐 GitHubアカウントを紐付け
   const linkGithub = async (githubUserID: string): Promise<boolean> => {
     apiInit()
 
+    if (!user) return false
+
     try {
       await asohubApiClient.post<LinkGithubResBody>('/link-github', {
-        id: githubUserID,
+        user_id: user.id,
+        github_username: githubUserID,
       })
 
       return true

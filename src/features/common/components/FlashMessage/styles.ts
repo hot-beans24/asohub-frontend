@@ -39,6 +39,14 @@ const styles = {
     white-space: wrap;
     flex: 1;
   `,
+  deleteButton: css`
+    width: 22px;
+    height: 22px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
 }
 
 export default styles

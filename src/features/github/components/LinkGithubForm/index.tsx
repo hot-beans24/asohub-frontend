@@ -13,16 +13,22 @@ import useLinkGithub from '@@/features/github/hooks/useLinkGithub'
 import GithunUserForm from '@@/features/github/components/GithubUserForm'
 import GithubUser from '@@/features/github/components/GithubUser'
 
+import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
+
+import ROUTES from '@@/routes/routes'
+
 const LinkGithubForm: FC = () => {
   const navigate = useNavigate()
   const { githubUser, resetGithubUser } = useGithubUser()
   const { linkGithub, isLoading } = useLinkGithub()
+  const { setFlashMessages } = useFlashMessages()
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await linkGithub(githubUser!!.id)
     if (isSuccess) {
-      navigate('/home')
+      navigate(ROUTES.HOME)
+      setFlashMessages([{ key: 'linkGithubSuccess', type: 'success', message: 'Githubアカウントを連携しました' }])
     }
   }
 
