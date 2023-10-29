@@ -1,4 +1,4 @@
-type RouteName = 'HOME' | 'SETTING' | 'LOGIN' | 'LOGOUT' | 'SIGNUP' | 'USERS' | 'USER' | 'NEW_REPOSITORY' | 'SEARCH'
+type RouteName = 'HOME' | 'SETTING' | 'LOGIN' | 'LOGOUT' | 'SIGNUP' | 'USERS' | 'USER' | 'LINK_REPOSITORIES' | 'SEARCH'
 
 type Routes = {
   readonly [key in RouteName]: string
@@ -12,7 +12,7 @@ const ROUTES: Routes = {
   SIGNUP: '/signup',
   USERS: '/users',
   USER: '/users/:userID',
-  NEW_REPOSITORY: '/new-repository',
+  LINK_REPOSITORIES: '/link-repositories',
   SEARCH: '/search',
 }
 

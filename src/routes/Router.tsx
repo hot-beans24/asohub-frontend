@@ -15,7 +15,7 @@ import Users from '@@/pages/Users.page'
 import User from '@@/pages/User.page'
 import Setting from '@@/pages/Setting.page'
 import Search from '@@/pages/Search.page'
-import NewRepository from '@@/pages/NewRepository.page'
+import LinkRepositories from '@@/pages/LinkRepositories.page'
 import NotFound from '@@/pages/NotFound.page'
 
 const Router: FC = () => {
@@ -33,7 +33,7 @@ const Router: FC = () => {
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route element={<AuthGuard />}>
               <Route path={ROUTES.SETTING} element={<Setting />} />
-              <Route path={ROUTES.NEW_REPOSITORY} element={<NewRepository />} />
+              <Route path={ROUTES.LINK_REPOSITORIES} element={<LinkRepositories />} />
               <Route path={ROUTES.LOGOUT} element={<Logout />} />
             </Route>
             <Route path="*" element={<NotFound />} />
