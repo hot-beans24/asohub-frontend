@@ -7,6 +7,7 @@
     "dev": "vite --host --port 3000",
     "build:prod": "tsc && vite build",
     "build:dev": "tsc && vite build --mode development",
+    "build:local": "tsc && vite build --mode local",
     "build:analyze": "tsc && vite build --mode analyze",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

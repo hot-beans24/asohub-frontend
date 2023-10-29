@@ -18,6 +18,6 @@ export default defineConfig(({ mode }) => ({
       }),
   ],
   build: {
-    outDir: '../asohub-backend/AsoHub/dockerfiles/nginx/dist',
+    outDir: mode === 'local' ? '../asohub-backend/AsoHub/dockerfiles/nginx/dist' : 'dist',
   },
 }))
