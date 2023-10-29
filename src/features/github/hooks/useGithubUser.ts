@@ -1,6 +1,6 @@
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
-import { githubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
+import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import recoilGithubUser from '@@/features/github/recoil/githubUser'
@@ -22,7 +22,7 @@ const useGithubUser = () => {
     apiInit()
 
     try {
-      const res = await githubApiClient.get<FetchUserAuthResBody>(`/users/${userID}`)
+      const res = await asohubApiClient.get<FetchUserAuthResBody>(`/github-user/${userID}`)
 
       const githubUserData = res.data
 
