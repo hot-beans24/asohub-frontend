@@ -9,11 +9,15 @@ export default defineConfig(({ mode }) => ({
       jsxImportSource: '@emotion/react',
     }),
     tsconfigPaths(),
-    mode === 'analyze' && visualizer({
-      open: true,
-      filename: 'dist/stats.html',
-      gzipSize: true,
-      brotliSize: true,
-    }),
+    mode === 'analyze' &&
+      visualizer({
+        open: true,
+        filename: 'dist/stats.html',
+        gzipSize: true,
+        brotliSize: true,
+      }),
   ],
+  build: {
+    outDir: '../asohub-backend/AsoHub/dockerfiles/nginx/dist',
+  },
 }))
