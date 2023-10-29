@@ -8,6 +8,7 @@ import {
   faRightFromBracket,
   faRightToBracket,
   faUser,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
@@ -50,6 +51,9 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
         </li>
         <li>
           <NavbarLink path={ROUTES.HOME} label="ホーム" icon={faHouse} />
+        </li>
+        <li>
+          <NavbarLink path={ROUTES.USERS} label="ユーザー" icon={faUsers} />
         </li>
         {isLoggedIn && user && (
           <>

@@ -6,7 +6,6 @@ const styles = {
     padding-top: ${isAuthPage ? '140px' : '0'};
     padding-bottom: ${isAuthPage ? '200px' : '0'};
     grid-area: main;
-    overflow-y: auto;
   `,
 }
 

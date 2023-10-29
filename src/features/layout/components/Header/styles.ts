@@ -7,14 +7,16 @@ const styles = {
     justify-content: space-between;
     align-items: center;
     grid-area: header;
+    gap: 60px;
     position: ${isAuthPage ? 'fixed' : 'stataic'};
   `,
   newRepositoryBtn: css`
-    padding: 14px 20px;
-    border-radius: 10px;
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 8px;
     background-color: var(--main-color);
     color: white;
-    font-weight: 500;
+    white-space: nowrap;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +25,21 @@ const styles = {
     &:hover {
       opacity: 0.6;
     }
+  `,
+  linksWrapper: css`
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  `,
+  link: css`
+    color: var(--dark-gray);
+    transition: opacity 0.4s;
+    &:hover {
+      opacity: 0.6;
+    }
+  `,
+  divider: css`
+    color: var(--dark-gray);
   `,
 }
 

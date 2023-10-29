@@ -14,8 +14,10 @@ const styles = {
     height: 100%;
     padding: 20px;
     border-radius: 10px;
+    border: 0.6px solid #b0c7e1;
+    background-color: white;
     color: #657990;
-    box-shadow: 0 0 30px rgba(180, 191, 221, 0.25);
+    /* box-shadow: 0 0 30px rgba(180, 191, 221, 0.25); */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
