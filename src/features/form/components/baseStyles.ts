@@ -13,7 +13,7 @@ const baseStyles = {
     font-weight: 500;
     letter-spacing: 0.1em;
     &:focus-visible {
-      outline: ${isError ? `2px solid var(--error-color)` : '2px solid var(--main-color)'};
+      outline: ${isError ? `1.6px solid var(--error-color)` : '1.6px solid var(--main-color)'};
       ${isReadOnly && 'outline: none;'}
     }
     ${isReadOnly && 'text-align: center;'}

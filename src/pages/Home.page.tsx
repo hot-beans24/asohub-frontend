@@ -3,10 +3,12 @@ import { FC } from 'react'
 import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
 import PostCard from '@@/features/post/components/PostCard'
 
+import styles from './Home.styles'
+
 /* ⭐️ ホームページ : 製作中 ⭐️ */
 const HomePage: FC = () => {
   const postInfo = {
-    id: 'ID',
+    id: '1',
     username: 'username',
     repositoryName: 'asohub-frontend',
     description: 'AsoHubのフロントエンドリポジトリ',
@@ -19,13 +21,13 @@ const HomePage: FC = () => {
     posts[i] = postInfo
   }
   return (
-    <>
-      <h2>ホーム画面</h2>
+    <div css={styles.container}>
       <PostCardsContainer>
         {posts.map((info, i) => (
           <PostCard
             // eslint-disable-next-line react/no-array-index-key
             key={info.id + i}
+            userID={info.id}
             username={info.username}
             repositoryName={info.repositoryName}
             description={info.description}
@@ -35,7 +37,7 @@ const HomePage: FC = () => {
           />
         ))}
       </PostCardsContainer>
-    </>
+    </div>
   )
 }
 

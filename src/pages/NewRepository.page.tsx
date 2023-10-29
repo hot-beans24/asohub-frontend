@@ -6,9 +6,8 @@ import PageStatus from '@@/features/common/components/PageStatus'
 const NewRepositoryPage: FC = () => {
   return (
     <>
-      <h2>新規リポジトリ登録ページ</h2>
       {/* 製作中であることを表示 */}
-      <PageStatus status="creating" />
+      <PageStatus status="creating" title="新規リポジトリ登録ページ" />
     </>
   )
 }

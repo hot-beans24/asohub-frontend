@@ -26,7 +26,7 @@ const grobalStyles = css`
     -moz-appearance: none;
     appearance: none;
     &:focus-visible {
-      outline: 2px solid var(--main-color);
+      outline: 1.6px solid var(--main-color);
     }
   }
 

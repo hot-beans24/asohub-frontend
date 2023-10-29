@@ -2,14 +2,14 @@ import { FC } from 'react'
 
 import PageStatus from '@@/features/common/components/PageStatus'
 
-/* ⭐️ 設定ページ : 製作中 ⭐️ */
-const SettingPage: FC = () => {
+/* ⭐️ 検索ページ : 製作中 ⭐️ */
+const SearchPage: FC = () => {
   return (
     <>
       {/* 製作中であることを表示 */}
-      <PageStatus status="creating" title="設定ページ" />
+      <PageStatus status="creating" title="検索ページ" />
     </>
   )
 }
 
-export default SettingPage
+export default SearchPage
