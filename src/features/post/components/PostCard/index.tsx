@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import makeRepositoryPath from '@@/features/github/utils/makeRepositoryPath'
+
+import GithubLinkButton from '@@/features/github/components/GithubLinkButton'
 
 import UserIcon from '@@/features/user/components/UserIcon'
 import UserName from '@@/features/user/components/UserName'
@@ -11,28 +11,41 @@ import UserName from '@@/features/user/components/UserName'
 import styles from './styles'
 
 type PostCardProps = {
+  userID: string
   username: string
   repositoryName: string
   description: string
   time: string
   githubUserID: string
   githubUserIcon: string
+  isHiddenUser?: boolean
 }
 
-const PostCard: FC<PostCardProps> = ({ username, repositoryName, description, time, githubUserID, githubUserIcon }) => {
+const PostCard: FC<PostCardProps> = ({
+  userID,
+  username,
+  repositoryName,
+  description,
+  time,
+  githubUserID,
+  githubUserIcon,
+  isHiddenUser,
+}) => {
+  const githubPath = makeRepositoryPath(githubUserID, repositoryName)
   return (
-    <div css={styles.postCardWrapper}>
-      <Link to={`/${username}`} css={styles.userWrapper}>
-        <UserIcon src={githubUserIcon} />
-        <UserName username={username} />
-      </Link>
-      <h3 css={styles.repositoryName}>{repositoryName}</h3>
+    <div css={styles.postCardWrapper(isHiddenUser)}>
+      {!isHiddenUser && (
+        <Link to={`/users/${userID}`} css={styles.userWrapper}>
+          <UserIcon src={githubUserIcon} />
+          <UserName username={username} />
+        </Link>
+      )}
+      <a href={githubPath} css={styles.repositoryName} target="_blank" rel="noreferrer">
+        {repositoryName}
+      </a>
       <p css={styles.description}>{description}</p>
       <span css={styles.time}>{time}</span>
-      <a href={makeRepositoryPath(githubUserID, repositoryName)} css={styles.linkBtn} target="_blank" rel="noreferrer">
-        <FontAwesomeIcon icon={faGithub} style={{ fontSize: 18 }} />
-        <span>リポジトリへ</span>
-      </a>
+      <GithubLinkButton path={githubPath} label="リポジトリへ" type="repository" />
     </div>
   )
 }
