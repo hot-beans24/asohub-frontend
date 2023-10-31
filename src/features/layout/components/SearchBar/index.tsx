@@ -12,7 +12,7 @@ const SearchBar: FC = () => {
   const location = useLocation()
   const [serchParams] = useSearchParams()
   const ref = useRef<HTMLInputElement>(null)
-  const [keyword, setKeyword] = useState<string>('')
+  const [keyword, setKeyword] = useState<string>(serchParams.get('keyword') || '')
 
   useEffect(() => {
     if (ref.current && location.pathname !== ROUTES.SEARCH) {
@@ -25,6 +25,7 @@ const SearchBar: FC = () => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value)
   }
+
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate(`${ROUTES.SEARCH}?keyword=${keyword}`)

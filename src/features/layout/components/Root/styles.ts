@@ -10,7 +10,7 @@ const styles = {
       'header header'
       'navber main';
     row-gap: 20px;
-    column-gap: 30px;
+    column-gap: 20px;
   `,
 }
 

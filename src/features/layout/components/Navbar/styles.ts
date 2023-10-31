@@ -14,7 +14,7 @@ const styles = {
     height: 100%;
     padding: 20px;
     border-radius: 10px;
-    border: 0.6px solid #b0c7e1;
+    border: 0.6px solid var(--medium-gray);
     background-color: white;
     color: #657990;
     /* box-shadow: 0 0 30px rgba(180, 191, 221, 0.25); */
@@ -38,6 +38,7 @@ const styles = {
     transition: background-color 0.4s;
     &:hover {
       background-color: #edf0f3;
+      background-color: var(--light-gray);
     }
   `,
   marginBottom: css`

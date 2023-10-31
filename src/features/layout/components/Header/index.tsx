@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ isLoggedIn, isAuthPage }) => {
       <BreadCrumbs />
       {!isAuthPage && <SearchBar />}
       {isLoggedIn && !isAuthPage && (
-        <Link to="/new-repository" css={styles.newRepositoryBtn}>
+        <Link to={ROUTES.LINK_REPOSITORIES} css={styles.newRepositoryBtn}>
           <FontAwesomeIcon icon={faFolderPlus} style={{ fontSize: 16 }} />
           リポジトリの連携
         </Link>

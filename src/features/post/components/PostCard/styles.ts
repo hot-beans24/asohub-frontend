@@ -5,7 +5,8 @@ const styles = {
     width: 100%;
     padding: 20px;
     border: 0.6px solid #b0c7e1;
-    border-radius: 8px;
+    border: 0.6px solid var(--medium-gray);
+    border-radius: 10px;
     display: grid;
     grid-template: ${!isHiddenUser && 'auto'} auto 1fr auto / 1fr auto;
     grid-template-areas:
@@ -13,16 +14,15 @@ const styles = {
       'repositoryName repositoryName'
       'description description'
       'time linkBtn';
-    gap: 20px;
+    gap: 10px;
     transition: box-shadow 0.2s;
     &:hover {
-      box-shadow: 0 0 30px rgba(180, 191, 221, 0.4);
+      box-shadow: 0 0 20px rgba(180, 191, 221, 0.4);
     }
   `,
   repositoryName: css`
     width: fit-content;
     color: #525252;
-    font-size: 1.6rem;
     font-weight: bold;
     letter-spacing: 0.1em;
     grid-area: repositoryName;
@@ -37,10 +37,9 @@ const styles = {
   `,
   time: css`
     color: var(--dark-gray);
+    font-size: 1.2rem;
     grid-area: time;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    align-self: flex-end;
   `,
   userWrapper: css`
     width: fit-content;

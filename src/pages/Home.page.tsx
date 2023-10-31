@@ -14,10 +14,10 @@ const HomePage: FC = () => {
     description: 'AsoHubのフロントエンドリポジトリ',
     time: '2023/09/26 10:05',
     githubUserId: 'hot-beans24',
-    githubUserIcon: 'https://avatars.githubusercontent.com/u/106505475?v=4',
+    githubUserIcon: 'https://github.com/hot-beans24.png',
   }
   const posts = []
-  for (let i = 0; i < 40; i += 1) {
+  for (let i = 0; i < 90; i += 1) {
     posts[i] = postInfo
   }
   return (

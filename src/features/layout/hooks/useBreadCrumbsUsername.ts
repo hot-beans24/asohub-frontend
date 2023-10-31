@@ -4,6 +4,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import recoilGithubUserreadCrumbsUsername from '@@/features/layout/recoil/breadCrumbsUsername'
 
+/* ⭐️ パンくずリストユーザー名フック ⭐️ */
 const useBreadCrumbsUsername = () => {
   const location = useLocation()
   const [breadCrumbsUsername, setBreadCrumbsUsername] = useRecoilState(recoilGithubUserreadCrumbsUsername)

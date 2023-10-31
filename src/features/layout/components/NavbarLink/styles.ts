@@ -15,6 +15,7 @@ const styles = {
     transition: background-color 0.4s;
     &:hover {
       background-color: #edf0f3;
+      background-color: var(--light-gray);
     }
   `,
   navLinkLabel: (isWide: boolean) => css`

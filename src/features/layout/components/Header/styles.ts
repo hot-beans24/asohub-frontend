@@ -33,6 +33,7 @@ const styles = {
   `,
   link: css`
     color: var(--dark-gray);
+    white-space: nowrap;
     transition: opacity 0.4s;
     &:hover {
       opacity: 0.6;
