@@ -11,7 +11,6 @@ import SettingBox from '@@/features/user/components/SettingBox'
 import SettingBoxTitle from '@@/features/user/components/SettingBoxTItle'
 import SettingFIeld from '@@/features/user/components/SettingField'
 
-import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 import useUserState from '@@/features/auth/hooks/useUserState'
 
 import linkGithubSuccessFlashMessage from '@@/features/github/data/linkGithubSuccessFlashMessage'
@@ -26,7 +25,6 @@ import styles from './Setting.styles'
 /* ⭐️ 設定ページ : 製作中 ⭐️ */
 const SettingPage: FC = () => {
   const navigate = useNavigate()
-  const { fetchUserAuth } = useUserAuth()
   const { user } = useUserState()
   const { fetchGithubUser, githubUser } = useGithubUser({ useGithubAPI: true })
   const { setFlashMessages } = useFlashMessages()
@@ -44,7 +42,6 @@ const SettingPage: FC = () => {
   useEffect(() => {
     const doSuccess = async () => {
       if (isSuccess) {
-        await fetchUserAuth()
         setFlashMessages(linkGithubSuccessFlashMessage)
       }
     }

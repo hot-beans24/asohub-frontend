@@ -1,6 +1,7 @@
 import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
+import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 import useUserState from '@@/features/auth/hooks/useUserState'
 
 import LinkGithubResBody from '@@/features/api/types/LinkGithubResBody'
@@ -9,6 +10,7 @@ import LinkGithubResBody from '@@/features/api/types/LinkGithubResBody'
 const useLinkGithub = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
 
+  const { fetchUserAuth } = useUserAuth()
   const { user } = useUserState()
 
   // 🌐 GitHubアカウントを紐付け
@@ -23,6 +25,7 @@ const useLinkGithub = () => {
         github_username: githubUserID,
       })
 
+      await fetchUserAuth({ do: true })
       return true
     } catch (error) {
       if (isAxiosError(error)) {

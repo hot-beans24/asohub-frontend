@@ -40,7 +40,7 @@ const useLinkGithubRepositories = () => {
           }))
       )
 
-      await fetchUserAuth()
+      await fetchUserAuth({ do: true })
       return true
     } catch (error) {
       if (isAxiosError(error)) {
