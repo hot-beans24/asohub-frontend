@@ -7,7 +7,7 @@ const styles = {
     width: 300px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 30px rgba(180, 191, 221, 0.25);
+    border: 0.6px solid var(--medium-gray);
     display: grid;
     grid-template: 1fr 1fr / auto 1fr;
     grid-template-areas:

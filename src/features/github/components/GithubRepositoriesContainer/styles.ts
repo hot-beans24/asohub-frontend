@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 
+import animations from '@@/styles/animations'
+
 const styles = {
   container: css`
     width: fit-content;
@@ -13,6 +15,8 @@ const styles = {
     align-items: center;
     justify-self: center;
     overflow-y: auto;
+    animation-name: ${animations.fadeIn};
+    animation-duration: 0.4s;
   `,
 }
 

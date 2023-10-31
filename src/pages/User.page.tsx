@@ -1,67 +1,68 @@
 import { FC } from 'react'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
-import GithubLinkButton from '@@/features/github/components/GithubLinkButton'
+import PageStatus from '@@/features/common/components/PageStatus'
 
-import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
-import PostCard from '@@/features/post/components/PostCard'
+// import GithubLinkButton from '@@/features/github/components/GithubLinkButton'
 
-import Tag from '@@/features/user/components/Tag'
+// import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
+// import PostCard from '@@/features/post/components/PostCard'
 
-import useUserData from '@@/features/user/hooks/useUserData'
+// import Tag from '@@/features/user/components/Tag'
 
-import UserIcon from '@@/features/user/components/UserIcon'
+// import useUserData from '@@/features/user/hooks/useUserData'
 
-import department from '@@/features/user/data/department'
-import grade from '@@/features/user/data/grade'
+// import UserIcon from '@@/features/user/components/UserIcon'
 
-import styles from './User.styles'
+// import department from '@@/features/user/data/department'
+// import grade from '@@/features/user/data/grade'
+
+// import styles from './User.styles'
 
 /* ⭐️ ユーザーページ : 製作中 ⭐️ */
 const UserPage: FC = () => {
-  const params = useParams()
-  const { userData } = useUserData(params.userID || '')
+  // const params = useParams()
+  // const { userData } = useUserData(params.userID || '')
 
-  if (!userData) return null
+  // if (!userData) return null
 
   return (
-    <div css={styles.container}>
-      <div css={styles.profile}>
-        <UserIcon src={userData.githubUserIcon} />
-        <span>{userData.name}</span>
-        <GithubLinkButton
-          path={`https://github.com/${userData.githubUserName}`}
-          label="プロフィールへ"
-          type="profile"
-        />
-        <Tag text={department[userData.departmentID]} />
-        <Tag text={grade[userData.grade]} />
-      </div>
-      <PostCardsContainer>
-        {userData.posts &&
-          userData.posts.map((post) => (
-            <PostCard
-              key={post.repositoryName}
-              userID={userData.id}
-              username={userData.name}
-              repositoryName={post.repositoryName}
-              description={post.description}
-              time={post.time}
-              githubUserID={post.githubUserName}
-              githubUserIcon={post.githubUserIcon}
-              isHiddenUser
-            />
-          ))}
-      </PostCardsContainer>
-    </div>
+    <>
+      {/* 製作中であることを表示 */}
+      <PageStatus status="creating" title="ユーザーページ" />
+    </>
   )
 
   // return (
-  //   <>
-  //     <h2>ユーザーページ</h2>
-  //     {/* 製作中であることを表示 */}
-  //     <PageStatus status="creating" />
-  //   </>
+  //   <div css={styles.container}>
+  //     <div css={styles.profile}>
+  //       <UserIcon src={userData.githubUserIcon} />
+  //       <span>{userData.name}</span>
+  //       <GithubLinkButton
+  //         path={`https://github.com/${userData.githubUserName}`}
+  //         label="プロフィールへ"
+  //         type="profile"
+  //       />
+  //       <Tag text={department[userData.departmentID]} />
+  //       <Tag text={grade[userData.grade]} />
+  //     </div>
+  //     <PostCardsContainer>
+  //       {userData.posts &&
+  //         userData.posts.map((post) => (
+  //           <PostCard
+  //             key={post.repositoryName}
+  //             userID={userData.id}
+  //             username={userData.name}
+  //             repositoryName={post.repositoryName}
+  //             description={post.description}
+  //             time={post.time}
+  //             githubUserID={post.githubUserName}
+  //             githubUserIcon={post.githubUserIcon}
+  //             isHiddenUser
+  //           />
+  //         ))}
+  //     </PostCardsContainer>
+  //   </div>
   // )
 }
 

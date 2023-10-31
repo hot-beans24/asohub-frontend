@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 
+import animations from '@@/styles/animations'
+
 const styles = {
   postCardsContainer: css`
     min-width: 360px;
@@ -11,6 +13,8 @@ const styles = {
     gap: 20px;
     overflow-y: auto;
     overflow-x: visible;
+    animation-name: ${animations.fadeIn};
+    animation-duration: 0.4s;
   `,
 }
 

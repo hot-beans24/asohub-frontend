@@ -58,10 +58,10 @@ const styles = {
     }
   `,
   userName: (isWide: boolean) => css`
-    height: 20px;
     color: var(--dark-gray);
     letter-spacing: 1px;
-    white-space: nowrap;
+    white-space: wrap;
+    text-align: center;
     display: ${isWide ? 'inline-block' : 'none'};
   `,
 }

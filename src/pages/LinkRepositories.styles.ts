@@ -26,6 +26,9 @@ const styles = {
     padding: 0 20px;
     color: var(--dark-gray);
   `,
+  attentionText: css`
+    color: var(--error-color);
+  `,
   sendButton: css`
     height: 42px;
     padding: 0 20px;

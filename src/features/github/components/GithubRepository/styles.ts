@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 const styles = {
   repositoryWrapper: css`
     width: 100%;
-    min-width: 500px;
     max-width: 800px;
     padding: 20px;
     border: 0.6px solid var(--medium-gray);

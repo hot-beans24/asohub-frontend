@@ -51,6 +51,7 @@ const useUserAuth = () => {
           grade: userAuthData.grade,
           githubUserID: userAuthData.github_username,
           githubUserIcon: userAuthData.github_user_icon,
+          isRepoRegistered: userAuthData.is_repo_registered,
           role: userAuthData.role,
         })
       } else {

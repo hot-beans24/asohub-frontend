@@ -5,6 +5,7 @@ const linkGithubRepositoriesSuccessFlashMessage: FlashMessages = [
     key: 'linkGithubRepositoriesSuccess',
     type: 'success',
     message: 'Githubリポジトリを連携しました',
+    isCrossPage: true,
   },
 ]
 

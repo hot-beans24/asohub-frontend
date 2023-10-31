@@ -4,7 +4,6 @@ const styles = {
   postCardWrapper: (isHiddenUser?: boolean) => css`
     width: 100%;
     padding: 20px;
-    border: 0.6px solid #b0c7e1;
     border: 0.6px solid var(--medium-gray);
     border-radius: 10px;
     display: grid;

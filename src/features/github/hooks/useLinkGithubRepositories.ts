@@ -1,6 +1,7 @@
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
+import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 import useUserState from '@@/features/auth/hooks/useUserState'
 
 import GithubRepository from '@@/features/github/types/GithubRepository'
@@ -9,15 +10,22 @@ import LinkGithubRepositoriesResBody from '@@/features/api/types/LinkGithubRepos
 
 /* ⭐️ GitHubリポジトリ紐付けフック ⭐️ */
 const useLinkGithubRepositories = () => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const { isLoading, setIsLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
 
+  const { fetchUserAuth } = useUserAuth()
   const { user } = useUserState()
 
   // 🌐 GitHubリポジトリを紐付け
   const linkGithubRepositories = async (githubRepositories: GithubRepository[]): Promise<boolean> => {
-    apiInit()
-
     if (!user) return false
+
+    if (githubRepositories.length === 0) {
+      setIsLoading(false)
+      setError({ key: 'linkGithubRepositoriesFieldError', message: 'リポジトリが選択されていません' })
+      return false
+    }
+
+    apiInit()
 
     try {
       await asohubApiClient.post<LinkGithubRepositoriesResBody>(
@@ -25,13 +33,14 @@ const useLinkGithubRepositories = () => {
         githubRepositories
           .sort((a, b) => a.id - b.id)
           .map((githubRepository) => ({
-            repository_id: githubRepository.id,
-            repository_name: githubRepository.name,
+            id: githubRepository.id,
+            name: githubRepository.name,
             description: githubRepository.description,
-            create_at: githubRepository.createdAt,
+            created_at: githubRepository.createdAt,
           }))
       )
 
+      await fetchUserAuth()
       return true
     } catch (error) {
       if (isAxiosError(error)) {

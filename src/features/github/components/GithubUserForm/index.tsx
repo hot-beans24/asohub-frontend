@@ -3,6 +3,8 @@ import { useForm, SubmitHandler, RegisterOptions, Controller } from 'react-hook-
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import githubUsernameRegex from 'github-username-regex'
 
+import AttentionText from '@@/features/common/components/AttentionText'
+
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
 import FormButton from '@@/features/form/components/FormButton'
@@ -35,6 +37,7 @@ const GithunUserForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormText>GitHubアカウントと連携してください</FormText>
+      <AttentionText text="製作中のため現在はGitHubアカウントの変更はできません" />
       <Controller
         name="githubUserID"
         control={control}

@@ -1,6 +1,8 @@
-import { FC, FormEvent, Dispatch, SetStateAction } from 'react'
+import { FC, useEffect, FormEvent, Dispatch, SetStateAction } from 'react'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
+import AttentionText from '@@/features/common/components/AttentionText'
 
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
@@ -20,6 +22,10 @@ const LinkGithubForm: FC<LinkGithubFormProps> = ({ setIsSuccess }) => {
   const { githubUser, resetGithubUser } = useGithubUser()
   const { linkGithub, isLoading } = useLinkGithub()
 
+  useEffect(() => {
+    resetGithubUser()
+  }, [])
+
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await linkGithub(githubUser!!.id)
@@ -36,6 +42,7 @@ const LinkGithubForm: FC<LinkGithubFormProps> = ({ setIsSuccess }) => {
   return (
     <Form onSubmit={handleOnSubmit}>
       <FormText>以下のユーザーで登録します</FormText>
+      <AttentionText text="製作中のため現在はGitHubアカウントの変更はできません" />
       <GithubUser githubUserIcon={githubUser.icon} githubUserID={githubUser.id} githubUserName={githubUser.name} />
       <FormButtonFlex>
         <FormButton type="button" icon={faArrowLeft} color="gray" isHalfSize onClick={resetGithubUser}>

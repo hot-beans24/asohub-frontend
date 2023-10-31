@@ -1,16 +1,18 @@
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
-import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
+import { asohubApiClient, githubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
+import useUserState from '@@/features/auth/hooks/useUserState'
 import recoilGithubUser from '@@/features/github/recoil/githubUser'
 
-import FetchUserAuthResBody from '@@/features/api/types/FetchGithubUserResBody'
+import FetchGithubUserResBody from '@@/features/api/types/FetchGithubUserResBody'
 import GithubUser from '@@/features/github/types/GithubUser'
 
 /* ⭐️ GitHubユーザーフック ⭐️ */
-const useGithubUser = () => {
+const useGithubUser = (option?: { useGithubAPI: boolean }) => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const { user } = useUserState()
 
   // 🌐 GitHubユーザー情報ステート
   const [githubUser, setGithubUser] = useRecoilState<GithubUser>(recoilGithubUser)
@@ -22,7 +24,12 @@ const useGithubUser = () => {
     apiInit()
 
     try {
-      const res = await asohubApiClient.get<FetchUserAuthResBody>(`/github-user/${userID}`)
+      let res;
+      if (option?.useGithubAPI) {
+        res = await githubApiClient.get<FetchGithubUserResBody>(`/users/${user?.githubUserID}`)
+      } else {
+        res = await asohubApiClient.get<FetchGithubUserResBody>(`/github-user/${userID}`)
+      }
 
       const githubUserData = res.data
 
@@ -46,7 +53,7 @@ const useGithubUser = () => {
          */
         switch (error.response?.status) {
           case HttpStatusCode.NotFound: {
-            setError({ key: 'githubUserNotFound', message: 'ユーザーが見つかりませんでした' })
+            setError({ key: 'githubUserNotFound', message: 'アカウントが見つかりませんでした' })
             break
           }
           default: {

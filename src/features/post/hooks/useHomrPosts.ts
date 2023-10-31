@@ -3,38 +3,39 @@ import { useState, useEffect } from 'react'
 import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
 
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
-import FetchGithubRepositoriesResBody from '@@/features/api/types/FetchGithubRepositoriesResBody'
+import FetchHomePostsResBody from '@@/features/api/types/FetchHomePostsResBody'
 
-import useUserState from '@@/features/auth/hooks/useUserState'
+import Post from '@@/features/post/types/Post'
 
-import GithubRepository from '@@/features/github/types/GithubRepository'
-
-/* ⭐️ GitHubリポジトリ一覧取得フック ⭐️ */
-const useGithubRepositories = () => {
+/* ⭐️ Home投稿一覧取得フック ⭐️ */
+const useHomePosts = () => {
   const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
   // 🌐
-  const [githubRepositories, setGithubRepositories] = useState<GithubRepository[]>([])
-  const { user } = useUserState()
+  const [posts, setPosts] = useState<Post[]>([])
 
   useEffect(() => {
-    // 🌐 ユーザーのGithubPublicリポジトリを取得
-    const fetchGithubRepositories = async (): Promise<void> => {
-      if (!user) return
-
+    // 🌐 投稿一覧を取得
+    const fetchPosts = async (): Promise<void> => {
       apiInit()
 
       try {
-        const res = await asohubApiClient.get<FetchGithubRepositoriesResBody>(`/user/${user.id}/repositories`)
+        const res = await asohubApiClient.get<FetchHomePostsResBody>(`/repositories`)
 
-        const githubRepositoriesData: GithubRepository[] = res.data.map(({ id, name, description, created_at }) => ({
+        const postsData: Post[] = res.data.map(({ id, name, user_id, asohub_username, github_username, github_user_icon, repository_url, description, repository_created_at, created_at  }) => ({
           id,
           name,
+          userID: user_id,
+          asohubUsername: asohub_username,
+          githubUserID: github_username,
+          githubUserIcon: github_user_icon,
+          repositoryURL: repository_url,
           description,
+          repositoryCreatedAt: repository_created_at,
           createdAt: created_at,
         }))
 
         // ✅ 正常にAPIアクセスできた場合GitHubリポジトリ情報をステートに保存
-        setGithubRepositories(githubRepositoriesData)
+        setPosts(postsData)
       } catch (error) {
         if (isAxiosError(error)) {
           /**
@@ -47,7 +48,7 @@ const useGithubRepositories = () => {
            */
           switch (error.response?.status) {
             default: {
-              setError({ key: 'githubRepositoriesError', message: 'GitHubリポジトリ取得エラー' })
+              setError({ key: 'fetchHomePotsError', message: 'ホーム投稿一覧取得エラー' })
               break
             }
           }
@@ -57,14 +58,14 @@ const useGithubRepositories = () => {
       }
     }
 
-    fetchGithubRepositories()
+    fetchPosts()
   }, [])
 
   return {
-    githubRepositories,
+    posts,
     isLoading,
     error,
   }
 }
 
-export default useGithubRepositories
+export default useHomePosts
