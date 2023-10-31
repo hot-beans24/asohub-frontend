@@ -16,7 +16,7 @@ type GithubRepositoryProps = {
 
 const GithubRepository: FC<GithubRepositoryProps> = ({ id, name, description, createdAt, setSelectedRepositories }) => {
   const ref = useRef<HTMLInputElement>(null)
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true)
 
   useEffect(() => {
     if (isChecked) {
