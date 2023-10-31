@@ -36,7 +36,7 @@ const Step03Form: FC = () => {
 
   const usernameOptions: RegisterOptions<ProfileFormValues, 'username'> = {
     required: 'ユーザー名を入力してください',
-    maxLength: { value: 20, message: 'ユーザー名は20文字以内で入力してください' }
+    maxLength: { value: 20, message: 'ユーザー名は20文字以内で入力してください' },
   }
 
   const departmentIDOptions: RegisterOptions<ProfileFormValues, 'departmentID'> = {

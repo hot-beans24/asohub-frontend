@@ -9,7 +9,7 @@ const styles = {
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
-  `
+  `,
 }
 
 export default styles

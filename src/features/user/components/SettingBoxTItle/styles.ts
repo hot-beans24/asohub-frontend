@@ -6,9 +6,8 @@ const styles = {
     display: grid;
     grid-template: auto auto / auto 1fr;
     grid-template-areas:
-      "title statusMessage"
-      "divider divider"
-    ;
+      'title statusMessage'
+      'divider divider';
     row-gap: 8px;
     column-gap: 10px;
   `,
@@ -43,7 +42,7 @@ const styles = {
     background-color: var(--medium-gray);
     grid-area: divider;
     display: block;
-  `
+  `,
 }
 
 export default styles

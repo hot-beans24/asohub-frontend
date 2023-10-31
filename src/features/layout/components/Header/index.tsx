@@ -28,7 +28,9 @@ const Header: FC<HeaderProps> = ({ isLoggedIn, isAuthPage }) => {
     if (user?.githubUserID && !user.isRepoRegistered) {
       navigate(ROUTES.LINK_REPOSITORIES)
     } else if (user?.isRepoRegistered) {
-      setFlashMessages([{ key: 'linkRepositoriesRegistered', type: 'error', message: 'Githubリポジトリは連携済みです' }])
+      setFlashMessages([
+        { key: 'linkRepositoriesRegistered', type: 'error', message: 'Githubリポジトリは連携済みです' },
+      ])
     } else {
       setFlashMessages([{ key: 'linkRepositoriesBtnError', type: 'error', message: 'GitHubアカウントが未連携です' }])
     }

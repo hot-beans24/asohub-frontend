@@ -65,8 +65,18 @@ const SettingPage: FC = () => {
       </SettingBox>
       <SettingBox>
         <SettingBoxTitle statusMessage={!user.githubUserID ? '※ 未連携' : undefined}>GitHubアカウント</SettingBoxTitle>
-        {!user.githubUserID  && <div css={styles.center}><LinkGithubForm setIsSuccess={setIsSuccess} /></div>}
-        {user.githubUserID && githubUser && <GithubUser githubUserID={user.githubUserID} githubUserName={githubUser.name} githubUserIcon={user.githubUserIcon}  />}
+        {!user.githubUserID && (
+          <div css={styles.center}>
+            <LinkGithubForm setIsSuccess={setIsSuccess} />
+          </div>
+        )}
+        {user.githubUserID && githubUser && (
+          <GithubUser
+            githubUserID={user.githubUserID}
+            githubUserName={githubUser.name}
+            githubUserIcon={user.githubUserIcon}
+          />
+        )}
       </SettingBox>
     </div>
   )

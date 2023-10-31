@@ -21,18 +21,31 @@ const useHomePosts = () => {
       try {
         const res = await asohubApiClient.get<FetchHomePostsResBody>(`/repositories`)
 
-        const postsData: Post[] = res.data.map(({ id, name, user_id, asohub_username, github_username, github_user_icon, repository_url, description, repository_created_at, created_at  }) => ({
-          id,
-          name,
-          userID: user_id,
-          asohubUsername: asohub_username,
-          githubUserID: github_username,
-          githubUserIcon: github_user_icon,
-          repositoryURL: repository_url,
-          description,
-          repositoryCreatedAt: repository_created_at,
-          createdAt: created_at,
-        }))
+        const postsData: Post[] = res.data.map(
+          ({
+            id,
+            name,
+            user_id,
+            asohub_username,
+            github_username,
+            github_user_icon,
+            repository_url,
+            description,
+            repository_created_at,
+            created_at,
+          }) => ({
+            id,
+            name,
+            userID: user_id,
+            asohubUsername: asohub_username,
+            githubUserID: github_username,
+            githubUserIcon: github_user_icon,
+            repositoryURL: repository_url,
+            description,
+            repositoryCreatedAt: repository_created_at,
+            createdAt: created_at,
+          })
+        )
 
         // ✅ 正常にAPIアクセスできた場合GitHubリポジトリ情報をステートに保存
         setPosts(postsData)

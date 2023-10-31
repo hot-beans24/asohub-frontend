@@ -25,7 +25,7 @@ const styles = {
   `,
   field: css`
     color: var(--dark-gray);
-  `
+  `,
 }
 
 export default styles
