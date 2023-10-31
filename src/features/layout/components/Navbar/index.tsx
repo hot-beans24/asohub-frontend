@@ -44,7 +44,7 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
           </button>
         </li>
         <li css={styles.marginBottom}>
-          <Link to={`/${user?.id}` || ROUTES.HOME} css={styles.userWrapper(isWide, isLoggedIn)}>
+          <Link to={`/users/${user?.id}` || ROUTES.HOME} css={styles.userWrapper(isWide, isLoggedIn)}>
             <UserIcon src={isLoggedIn && user ? user.githubUserIcon : '/guest.png'} />
             <span css={styles.userName(isWide)}>{isLoggedIn ? user!!.name : 'Guest'}</span>
           </Link>
@@ -58,7 +58,7 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
         {isLoggedIn && user && (
           <>
             <li>
-              <NavbarLink path={user.id} label="マイページ" icon={faUser} />
+              <NavbarLink path={`/users/${user.id}`} label="マイページ" icon={faUser} />
             </li>
             <li>
               <NavbarLink path={ROUTES.SETTING} label="設定" icon={faGear} />

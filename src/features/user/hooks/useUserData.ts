@@ -7,6 +7,7 @@ import UserData from '@@/features/user/types/UserData'
 
 import useBreadCrumbsUsername from '@@/features/layout/hooks/useBreadCrumbsUsername'
 
+/* ⭐️ ユーザーデータ取得フック ⭐️ */
 const useUserData = (userID: string) => {
   const { isLoading, setError, apiInit, apiEnd } = useAPIStatus()
   const { setBreadCrumbsUsername } = useBreadCrumbsUsername()

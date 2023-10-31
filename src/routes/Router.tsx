@@ -32,8 +32,8 @@ const Router: FC = () => {
             <Route path={ROUTES.USER} element={<User />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route element={<AuthGuard />}>
-              <Route path={ROUTES.SETTING} element={<Setting />} />
               <Route path={ROUTES.LINK_REPOSITORIES} element={<LinkRepositories />} />
+              <Route path={ROUTES.SETTING} element={<Setting />} />
               <Route path={ROUTES.LOGOUT} element={<Logout />} />
             </Route>
             <Route path="*" element={<NotFound />} />

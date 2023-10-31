@@ -1,3 +1,4 @@
+// 🌐 ユーザーデータ情報
 type UserData = {
   id: string
   name: string

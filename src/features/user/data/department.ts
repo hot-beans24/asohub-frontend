@@ -1,3 +1,4 @@
+// 🌐 学科情報
 const department: {
   [key: number]: string
 } = {

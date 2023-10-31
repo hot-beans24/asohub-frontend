@@ -8,15 +8,11 @@ const styles = {
     grid-template: auto auto 1fr / 1fr;
     grid-template-areas:
       'profile'
-      /* 'divider' */
       'posts';
     gap: 16px;
   `,
-  divider: css`
-    height: 1px;
-    background-color: var(--medium-gray);
-  `,
   profile: css`
+    padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

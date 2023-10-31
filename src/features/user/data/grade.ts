@@ -1,3 +1,4 @@
+// 🌐 学年情報
 const grade: {
   [key: number]: string
 } = {

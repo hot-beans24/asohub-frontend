@@ -37,12 +37,10 @@ const UserPage: FC = () => {
         <Tag text={department[userData.departmentID]} />
         <Tag text={grade[userData.grade]} />
       </div>
-      {/* <div css={styles.divider} /> */}
       <PostCardsContainer>
         {userData.posts &&
           userData.posts.map((post) => (
             <PostCard
-              // eslint-disable-next-line react/no-array-index-key
               key={post.repositoryName}
               userID={userData.id}
               username={userData.name}
