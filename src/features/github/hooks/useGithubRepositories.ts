@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 
-// import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
-import { isAxiosError } from '@@/features/api/utils/apiClient'
+import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
+
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
-// import FetchGithubRepositoriesResBody from '@@/features/api/types/FetchGithubRepositoriesResBody'
+import FetchGithubRepositoriesResBody from '@@/features/api/types/FetchGithubRepositoriesResBody'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
 
@@ -24,22 +24,10 @@ const useGithubRepositories = () => {
       apiInit()
 
       try {
-        // const res = await asohubApiClient.get<FetchGithubRepositoriesResBody>(
-        //   `/user/${user.id}/repositories`
-        // )
-        const data = []
-        for (let i = 0; i < 90; i += 1) {
-          data.push({
-            id: 659495078 + i,
-            name: 'AsoHub',
-            html_url: 'https://github.com/soudai531/AsoHub',
-            description: '麻生情報ビジネス専門学校内でソースコードを共有するアプリケーション',
-            created_at: '2023-06-28T01:02:58Z',
-          })
-        }
-        const res = {
-          data,
-        }
+        const res = await asohubApiClient.get<FetchGithubRepositoriesResBody>(
+          `/user/${user.id}/repositories`
+        )
+
         const githubRepositoriesData: GithubRepository[] = res.data.map(({ id, name, description, created_at }) => ({
           id,
           name,
