@@ -26,7 +26,6 @@ const stepAnimate = keyframes`
 
 const styles = {
   stepsContainer: css`
-    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;

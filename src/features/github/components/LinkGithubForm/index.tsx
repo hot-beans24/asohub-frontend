@@ -1,7 +1,8 @@
-import { FC, FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { FC, useEffect, FormEvent, Dispatch, SetStateAction } from 'react'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
+import AttentionText from '@@/features/common/components/AttentionText'
 
 import Form from '@@/features/form/components/Form'
 import FormText from '@@/features/form/components/FormText'
@@ -13,22 +14,24 @@ import useLinkGithub from '@@/features/github/hooks/useLinkGithub'
 import GithunUserForm from '@@/features/github/components/GithubUserForm'
 import GithubUser from '@@/features/github/components/GithubUser'
 
-import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
+type LinkGithubFormProps = {
+  setIsSuccess: Dispatch<SetStateAction<boolean>>
+}
 
-import ROUTES from '@@/routes/routes'
-
-const LinkGithubForm: FC = () => {
-  const navigate = useNavigate()
+const LinkGithubForm: FC<LinkGithubFormProps> = ({ setIsSuccess }) => {
   const { githubUser, resetGithubUser } = useGithubUser()
   const { linkGithub, isLoading } = useLinkGithub()
-  const { setFlashMessages } = useFlashMessages()
+
+  useEffect(() => {
+    resetGithubUser()
+  }, [])
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isSuccess = await linkGithub(githubUser!!.id)
     if (isSuccess) {
-      navigate(ROUTES.HOME)
-      setFlashMessages([{ key: 'linkGithubSuccess', type: 'success', message: 'Githubアカウントを連携しました' }])
+      resetGithubUser()
+      setIsSuccess(true)
     }
   }
 
@@ -39,6 +42,7 @@ const LinkGithubForm: FC = () => {
   return (
     <Form onSubmit={handleOnSubmit}>
       <FormText>以下のユーザーで登録します</FormText>
+      <AttentionText text="製作中のため現在はGitHubアカウントの変更はできません" />
       <GithubUser githubUserIcon={githubUser.icon} githubUserID={githubUser.id} githubUserName={githubUser.name} />
       <FormButtonFlex>
         <FormButton type="button" icon={faArrowLeft} color="gray" isHalfSize onClick={resetGithubUser}>

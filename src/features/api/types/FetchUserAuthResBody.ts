@@ -7,10 +7,11 @@ type FetchUserAuthResBody = {
     user_name: string
     department_id: number
     grade: number
-    github_username: string
+    github_username: string | null
     github_user_icon: string
     authenticated: boolean
-    role: string
+    is_repo_registered: boolean
+    role: string[]
   } | null
 }
 

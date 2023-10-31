@@ -38,7 +38,7 @@ const EmailForm: FC = () => {
   const emailOptions: RegisterOptions<EmailFormValues, 'email'> = {
     required: 'メールアドレスを入力してください',
     pattern: {
-      value: /^[0-9]{7}@s.asojuku.ac.jp$/,
+      value: /^[a-zA-Z0-9_.+-]+@s.asojuku.ac.jp$/,
       message: '@s.asojuku.ac.jpの形で入力してください',
     },
   }

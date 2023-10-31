@@ -7,6 +7,7 @@ const styles = {
     width: 40px;
     height: 40px;
     border-radius: 6px;
+    border: 0.6px solid var(--light-gray);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -2,6 +2,7 @@ import { DefaultValue, atom, selector } from 'recoil'
 
 import FlashMessages from '@@/features/common/types/FlashMessages'
 
+// 🌐 Recoilで管理するフラッシュメッセージ
 const flashMessagesAtom = atom<FlashMessages>({
   key: 'flashMessagesAtom',
   default: null,

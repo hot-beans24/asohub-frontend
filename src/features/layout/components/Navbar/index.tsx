@@ -8,6 +8,7 @@ import {
   faRightFromBracket,
   faRightToBracket,
   faUser,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
@@ -43,7 +44,7 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
           </button>
         </li>
         <li css={styles.marginBottom}>
-          <Link to={`/${user?.id}` || ROUTES.HOME} css={styles.userWrapper(isWide, isLoggedIn)}>
+          <Link to={`/users/${user?.id}` || ROUTES.HOME} css={styles.userWrapper(isWide, isLoggedIn)}>
             <UserIcon src={isLoggedIn && user ? user.githubUserIcon : '/guest.png'} />
             <span css={styles.userName(isWide)}>{isLoggedIn ? user!!.name : 'Guest'}</span>
           </Link>
@@ -51,10 +52,13 @@ const Navbar: FC<NavbarProps> = ({ isLoggedIn, isAuthPage }) => {
         <li>
           <NavbarLink path={ROUTES.HOME} label="ホーム" icon={faHouse} />
         </li>
+        <li>
+          <NavbarLink path={ROUTES.USERS} label="ユーザー" icon={faUsers} />
+        </li>
         {isLoggedIn && user && (
           <>
             <li>
-              <NavbarLink path={user.id} label="マイページ" icon={faUser} />
+              <NavbarLink path={`/users/${user.id}`} label="マイページ" icon={faUser} />
             </li>
             <li>
               <NavbarLink path={ROUTES.SETTING} label="設定" icon={faGear} />

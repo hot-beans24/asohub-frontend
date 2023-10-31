@@ -14,8 +14,10 @@ const styles = {
     height: 100%;
     padding: 20px;
     border-radius: 10px;
+    border: 0.6px solid var(--medium-gray);
+    background-color: white;
     color: #657990;
-    box-shadow: 0 0 30px rgba(180, 191, 221, 0.25);
+    /* box-shadow: 0 0 30px rgba(180, 191, 221, 0.25); */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -36,6 +38,7 @@ const styles = {
     transition: background-color 0.4s;
     &:hover {
       background-color: #edf0f3;
+      background-color: var(--light-gray);
     }
   `,
   marginBottom: css`
@@ -55,10 +58,10 @@ const styles = {
     }
   `,
   userName: (isWide: boolean) => css`
-    height: 20px;
     color: var(--dark-gray);
     letter-spacing: 1px;
-    white-space: nowrap;
+    white-space: wrap;
+    text-align: center;
     display: ${isWide ? 'inline-block' : 'none'};
   `,
 }

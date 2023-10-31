@@ -5,9 +5,10 @@ type User = {
   name: string
   departmentID: number
   grade: number
-  role: string
-  githubUserID: string
+  githubUserID: string | null
   githubUserIcon: string
+  isRepoRegistered: boolean
+  role: string[]
 } | null
 
 export default User

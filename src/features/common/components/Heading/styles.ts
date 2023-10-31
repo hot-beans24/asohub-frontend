@@ -9,20 +9,10 @@ const fontSizes = {
   h6: '1.2rem',
 }
 
-const marginBottoms = {
-  h1: '40px',
-  h2: '32px',
-  h3: '24px',
-  h4: '20px',
-  h5: '16px',
-  h6: '12px',
-}
-
 export type Tag = keyof typeof fontSizes
 
 const styles = {
   heading: (tag: Tag) => css`
-    margin-bottom: ${marginBottoms[tag!]};
     font-size: ${fontSizes[tag!]};
     font-weight: bold;
     text-align: center;

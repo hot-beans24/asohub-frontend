@@ -1,41 +1,38 @@
 import { FC } from 'react'
 
+import ContentsLoading from '@@/features/common/components/ContentsLoading'
+
 import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
 import PostCard from '@@/features/post/components/PostCard'
 
+import useHomePosts from '@@/features/post/hooks/useHomrPosts'
+
+import styles from './Home.styles'
+
 /* ⭐️ ホームページ : 製作中 ⭐️ */
 const HomePage: FC = () => {
-  const postInfo = {
-    id: 'ID',
-    username: 'username',
-    repositoryName: 'asohub-frontend',
-    description: 'AsoHubのフロントエンドリポジトリ',
-    time: '2023/09/26 10:05',
-    githubUserId: 'hot-beans24',
-    githubUserIcon: 'https://avatars.githubusercontent.com/u/106505475?v=4',
-  }
-  const posts = []
-  for (let i = 0; i < 40; i += 1) {
-    posts[i] = postInfo
-  }
+  const { posts, isLoading } = useHomePosts()
+
   return (
-    <>
-      <h2>ホーム画面</h2>
-      <PostCardsContainer>
-        {posts.map((info, i) => (
-          <PostCard
-            // eslint-disable-next-line react/no-array-index-key
-            key={info.id + i}
-            username={info.username}
-            repositoryName={info.repositoryName}
-            description={info.description}
-            time={info.time}
-            githubUserID={info.githubUserId}
-            githubUserIcon={info.githubUserIcon}
-          />
-        ))}
-      </PostCardsContainer>
-    </>
+    <div css={styles.container}>
+      {isLoading && <ContentsLoading />}
+      {!isLoading && (
+        <PostCardsContainer>
+          {posts.map((post) => (
+            <PostCard
+              key={post.id}
+              userID={post.userID}
+              username={post.asohubUsername}
+              repositoryName={post.name}
+              description={post.description}
+              time={post.repositoryCreatedAt}
+              githubUserID={post.githubUserID}
+              githubUserIcon={post.githubUserIcon}
+            />
+          ))}
+        </PostCardsContainer>
+      )}
+    </div>
   )
 }
 

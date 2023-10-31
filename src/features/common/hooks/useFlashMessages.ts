@@ -4,6 +4,7 @@ import { flashMessagesAtom, flashMessagesSelector } from '@@/features/common/rec
 
 import FlashMessages from '@@/features/common/types/FlashMessages'
 
+/* ⭐️ フラッシュメッセージフック ⭐️ */
 const useFlashMessages = () => {
   const [flashMessages, setFlashMessages] = useRecoilState<FlashMessages>(flashMessagesSelector)
   const setFilteredFlashMessages = useSetRecoilState(flashMessagesAtom)

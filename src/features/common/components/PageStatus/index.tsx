@@ -9,9 +9,10 @@ import styles from './styles'
 
 type StatusPageProps = {
   status: 'notfound' | 'creating' | 'maintenance'
+  title?: string
 }
 
-const PageStatus: FC<StatusPageProps> = ({ status }) => {
+const PageStatus: FC<StatusPageProps> = ({ status, title }) => {
   type StatusData = {
     json: any
     message: string
@@ -37,6 +38,7 @@ const PageStatus: FC<StatusPageProps> = ({ status }) => {
       <div css={styles.lottieWrapper}>
         <Lottie animationData={data[status].json} style={{ width: '100%' }} />
       </div>
+      {title && <h2 css={styles.title}>🔥 {title} 🔥</h2>}
       <span css={styles.message}>{data[status].message}</span>
     </div>
   )

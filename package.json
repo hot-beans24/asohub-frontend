@@ -7,6 +7,7 @@
     "dev": "vite --host --port 3000",
     "build:prod": "tsc && vite build",
     "build:dev": "tsc && vite build --mode development",
+    "build:front": "tsc && vite build --mode front",
     "build:analyze": "tsc && vite build --mode analyze",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -32,6 +33,7 @@
     "react-router-dom": "^6.13.0",
     "recoil": "^0.7.7",
     "sanitize.css": "^13.0.0",
+    "use-react-router-breadcrumbs": "^4.0.1",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {

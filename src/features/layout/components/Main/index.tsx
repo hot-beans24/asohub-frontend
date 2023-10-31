@@ -9,9 +9,9 @@ type MainProps = {
 
 const Main: FC<MainProps> = ({ isAuthPage }) => {
   return (
-    <div css={styles.main(isAuthPage)}>
+    <main css={styles.main(isAuthPage)}>
       <Outlet />
-    </div>
+    </main>
   )
 }
 

@@ -1,4 +1,4 @@
-import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
+import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
 
 import useUserState from '@@/features/auth/hooks/useUserState'
@@ -34,6 +34,10 @@ const useLinkGithub = () => {
          * ---------------------------------
          */
         switch (error.response?.status) {
+          case HttpStatusCode.Conflict: {
+            setError({ key: 'linkGithubConflict', message: 'このGitHubアカウントは使用できません' })
+            break
+          }
           default: {
             setError({ key: 'linkGithubError', message: 'GitHub紐付け処理エラー' })
             break

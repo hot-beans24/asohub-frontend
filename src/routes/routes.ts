@@ -1,4 +1,4 @@
-type RouteName = 'HOME' | 'SETTING' | 'LOGIN' | 'LOGOUT' | 'SIGNUP' | 'USER' | 'NEW_REPOSITORY'
+type RouteName = 'HOME' | 'SETTING' | 'LOGIN' | 'LOGOUT' | 'SIGNUP' | 'USERS' | 'USER' | 'LINK_REPOSITORIES' | 'SEARCH'
 
 type Routes = {
   readonly [key in RouteName]: string
@@ -10,8 +10,10 @@ const ROUTES: Routes = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   SIGNUP: '/signup',
-  USER: '/:userID',
-  NEW_REPOSITORY: '/new-repository',
+  USERS: '/users',
+  USER: '/users/:userID',
+  LINK_REPOSITORIES: '/link-repositories',
+  SEARCH: '/search',
 }
 
 export default ROUTES

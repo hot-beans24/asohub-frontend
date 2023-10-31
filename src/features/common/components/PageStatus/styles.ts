@@ -10,8 +10,12 @@ const styles = {
     align-items: center;
     gap: 30px;
   `,
-  message: css`
+  title: css`
     font-size: 1.6rem;
+    font-weight: 600;
+  `,
+  message: css`
+    font-size: 1.4rem;
   `,
   lottieWrapper: css`
     max-width: 500px;
