@@ -5,7 +5,7 @@ import ContentsLoading from '@@/features/common/components/ContentsLoading'
 import PostCardsContainer from '@@/features/post/components/PostCardsContainer'
 import PostCard from '@@/features/post/components/PostCard'
 
-import useHomePosts from '@@/features/post/hooks/useHomrPosts'
+import useHomePosts from '@@/features/post/hooks/useHomePosts'
 
 import styles from './Home.styles'
 
