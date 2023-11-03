@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react'
-import { useLocation, useNavigate, Outlet } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
+import PageStatus from '@@/features/common/components/PageStatus'
 import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
 
 const RoutingInit: FC = () => {
@@ -19,7 +20,8 @@ const RoutingInit: FC = () => {
     deleteNotCrossPageFlashMessages()
   }, [location.pathname])
 
-  return <Outlet />
+  return <PageStatus status="maintenance"  />
+  // return <Outlet />
 }
 
 export default RoutingInit

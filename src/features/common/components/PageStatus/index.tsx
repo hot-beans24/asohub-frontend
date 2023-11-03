@@ -29,7 +29,7 @@ const PageStatus: FC<StatusPageProps> = ({ status, title }) => {
     },
     maintenance: {
       json: lottieMaintenance,
-      message: 'このページはメンテナンス中です',
+      message: 'メンテナンス中です',
     },
   }
 
