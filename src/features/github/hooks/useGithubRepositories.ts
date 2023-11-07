@@ -24,7 +24,7 @@ const useGithubRepositories = () => {
       apiInit()
 
       try {
-        const res = await asohubApiClient.get<FetchGithubRepositoriesResBody>(`/user/${user.id}/repositories`)
+        const res = await asohubApiClient.get<FetchGithubRepositoriesResBody>(`/user/${user.id}/github-repositories`)
 
         const githubRepositoriesData: GithubRepository[] = res.data.map(({ id, name, description, created_at }) => ({
           id,

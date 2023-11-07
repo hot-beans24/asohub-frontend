@@ -29,7 +29,7 @@ const useLinkGithubRepositories = () => {
 
     try {
       await asohubApiClient.post<LinkGithubRepositoriesResBody>(
-        `/github-repositories/user/${user.id}`,
+        `/user/${user.id}/repositories`,
         githubRepositories
           .sort((a, b) => a.id - b.id)
           .map((githubRepository) => ({
