@@ -36,7 +36,7 @@ const LinkRepositoriesPage: FC = () => {
     if (!user?.githubUserID || user.isRepoRegistered) {
       navigate(ROUTES.SETTING, { replace: true })
     }
-  },[])
+  }, [])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()

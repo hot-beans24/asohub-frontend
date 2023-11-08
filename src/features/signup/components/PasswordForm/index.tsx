@@ -31,6 +31,10 @@ const PasswordForm: FC = () => {
 
   const passwordOptions: RegisterOptions<PasswordFormValues, 'password'> = {
     required: 'パスワードを入力してください',
+    pattern: {
+      value: /^[a-zA-Z0-9.?$%@]{8,100}$/,
+      message: 'パスワードは半角英数字,記号(.?$%@)を使用して8文字以上100文字以下で入力してください',
+    },
   }
 
   const confirmPasswordOptions: RegisterOptions<PasswordFormValues, 'confirmPassword'> = {
@@ -47,14 +51,12 @@ const PasswordForm: FC = () => {
       <TextField
         label="パスワード"
         type="password"
-        isPassword
         {...register('password', passwordOptions)}
         error={errors.password?.message}
       />
       <TextField
         label="パスワード(確認用)"
         type="password"
-        isPassword
         {...register('confirmPassword', confirmPasswordOptions)}
         error={errors.confirmPassword?.message}
       />

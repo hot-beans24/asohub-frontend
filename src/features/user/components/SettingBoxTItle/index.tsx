@@ -12,9 +12,7 @@ type SettingBoxTitleProps = {
 const SettingBoxTitle: FC<PropsWithChildren<SettingBoxTitleProps>> = ({ children, statusMessage, icon }) => {
   return (
     <div css={styles.container}>
-      <h3 css={styles.title}>
-        {children}
-      </h3>
+      <h3 css={styles.title}>{children}</h3>
       {statusMessage && (
         <span css={styles.statusMessage}>
           {icon && <FontAwesomeIcon icon={icon} style={{ fontSize: 14 }} />}

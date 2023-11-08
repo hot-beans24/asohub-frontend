@@ -16,7 +16,7 @@ const useUserAuth = () => {
   }
 
   // 🌐 ユーザー認証情報を取得
-  const fetchUserAuth = async (): Promise<void> => {
+  const fetchUserAuth = async (option?: { do: boolean }): Promise<void> => {
     apiInit()
 
     /**
@@ -27,7 +27,7 @@ const useUserAuth = () => {
      * ❌ 未取得の場合は続けて処理を実行
      * -----------------------------------
      */
-    if (isLoggedIn()) return
+    if (isLoggedIn() && !option?.do) return
 
     try {
       const res = await asohubApiClient.get<FetchUserAuthResBody>('/auth-status')

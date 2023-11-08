@@ -72,7 +72,6 @@ const LoginPage: FC = () => {
           label="パスワード"
           type="password"
           maxLength={20}
-          isPassword
           {...register('password', passwordOptions)}
           error={errors.password?.message}
         />

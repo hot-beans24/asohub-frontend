@@ -24,7 +24,7 @@ const useGithubUser = (option?: { useGithubAPI: boolean }) => {
     apiInit()
 
     try {
-      let res;
+      let res
       if (option?.useGithubAPI) {
         res = await githubApiClient.get<FetchGithubUserResBody>(`/users/${user?.githubUserID}`)
       } else {

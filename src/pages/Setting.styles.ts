@@ -18,7 +18,7 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
-  `
+  `,
 }
 
 export default styles
