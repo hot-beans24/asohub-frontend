@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+Router.dev.tsx
+Development.page.tsx
 
 # Editor directories and files
 .vscode/*

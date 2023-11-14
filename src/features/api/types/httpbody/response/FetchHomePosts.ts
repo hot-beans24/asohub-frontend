@@ -1,5 +1,4 @@
-// 🌐 ホーム画面投稿一覧取得APIレスポンスボディ
-type FetchHomePostsResBody = {
+type FetchHomePostsResponseBody = {
   id: string
   name: string
   user_id: string
@@ -12,4 +11,4 @@ type FetchHomePostsResBody = {
   created_at: string
 }[]
 
-export default FetchHomePostsResBody
+export default FetchHomePostsResponseBody
