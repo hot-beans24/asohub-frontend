@@ -23,6 +23,8 @@ import styles from './Signup.styles'
 
 /* ⭐️ サインアップページ ⭐️ */
 const SignupPage: FC = () => {
+  console.log('📘 サインアップ(/signup) page render')
+
   const navigate = useNavigate()
   const { formStep, resetFormStep } = useFormStep()
   const [isSuccess, setIsSuccess] = useState(false)

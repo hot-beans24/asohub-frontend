@@ -25,11 +25,13 @@ import styles from './LinkRepositories.styles'
 
 /* ⭐️ リポジトリ連携ページ : 製作中 ⭐️ */
 const LinkRepositoriesPage: FC = () => {
+  console.log('📘 リポジトリ連携(/link-repositories) page render')
+
   const navigate = useNavigate()
   const { user } = useUserState()
   const { setFlashMessages } = useFlashMessages()
   const { githubRepositories, isLoading: isFetchGithubRepositoriesLoading } = useGithubRepositories()
-  const { linkGithubRepositories, isLoading: isLinkGithubRepositoriesLoading } = useLinkGithubRepositories()
+  const { linkGithubRepositories, isMutating: isLinkGithubRepositoriesLoading } = useLinkGithubRepositories()
   const [selectedRepositories, setSelectedRepositories] = useState<GithubRepositoryType[]>([])
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const LinkRepositoriesPage: FC = () => {
         </FormButton>
       </div>
       {isFetchGithubRepositoriesLoading && <ContentsLoading />}
-      {!isFetchGithubRepositoriesLoading && (
+      {!isFetchGithubRepositoriesLoading && githubRepositories && (
         <GithubRepositoriesContainer>
           {githubRepositories.map((repository) => (
             <GithubRepository

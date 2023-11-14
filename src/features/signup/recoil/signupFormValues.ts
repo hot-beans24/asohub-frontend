@@ -6,11 +6,11 @@ import SignupFormValues from '@@/features/signup/types/SignupFormValues'
 const signupFormValues = atom<SignupFormValues>({
   key: 'signupFormValues',
   default: {
-    email: '',
-    username: '',
-    password: '',
-    departmentID: 1,
-    grade: 1,
+    email: null,
+    username: null,
+    password: null,
+    departmentID: null,
+    grade: null,
   },
 })
 

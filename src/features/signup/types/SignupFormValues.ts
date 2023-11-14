@@ -1,10 +1,10 @@
 // 🌐 サインアップフォーム値
 type SignupFormValues = {
-  email: string
-  username: string
-  password: string
-  departmentID: number
-  grade: number
+  email: string | null
+  username: string | null
+  password: string | null
+  departmentID: number | null
+  grade: number | null
 }
 
 export default SignupFormValues

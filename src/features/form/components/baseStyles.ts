@@ -12,6 +12,9 @@ const baseStyles = {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.1em;
+    &:disabled {
+      cursor: not-allowed;
+    }
     &:focus-visible {
       outline: ${isError ? `1.6px solid var(--error-color)` : '1.6px solid var(--main-color)'};
       ${isReadOnly && 'outline: none;'}

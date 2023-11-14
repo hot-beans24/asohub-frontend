@@ -18,7 +18,7 @@ import TextField from '@@/features/form/components/TextField'
 const EmailForm: FC = () => {
   const { nextStep } = useFormStep()
   const { signupFormValues, setSignupFormValues } = useSignupFormValues()
-  const { fetchEmailAvailability, isLoading } = useEmailAvailability()
+  const { fetchEmailAvailability, isMutating } = useEmailAvailability()
 
   const {
     control,
@@ -49,7 +49,7 @@ const EmailForm: FC = () => {
       <Controller
         name="email"
         control={control}
-        defaultValue={signupFormValues.email}
+        defaultValue={signupFormValues.email || ''}
         render={({ field }) => (
           <TextField
             label="メールアドレス"
@@ -60,7 +60,7 @@ const EmailForm: FC = () => {
           />
         )}
       />
-      <FormButton type="submit" icon={faArrowRight} isLoading={isLoading} isIconRight>
+      <FormButton type="submit" icon={faArrowRight} isLoading={isMutating} isIconRight>
         Next
       </FormButton>
       <FormText>

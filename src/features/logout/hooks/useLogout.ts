@@ -1,51 +1,32 @@
-import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
-import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import useSWRMutation from 'swr/mutation'
 
-import useUserState from '@@/features/auth/hooks/useUserState'
+import useFetcher from '@@/features/api/hooks/useFetcher'
 
-import LogoutResBody from '@@/features/api/types/LogoutResBody'
+import ResponseBody from '@@/features/api/types/httpbody/response/Logout'
+
+import useUserAuth from '@@/features/auth/hooks/useUserAuth'
 
 /* ⭐️ ログアウトフック ⭐️ */
 const useLogout = () => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
-  const { setUser } = useUserState()
+  const fetcher = useFetcher<null, ResponseBody>('logout', {
+    method: 'POST',
+  })
 
-  // 🌐 ログアウト
+  const { error, isMutating, trigger } = useSWRMutation('/api/logout', fetcher)
+
+  const { fetchUserAuth } = useUserAuth()
+
   const logout = async (): Promise<boolean> => {
-    apiInit()
-
-    try {
-      await asohubApiClient.post<LogoutResBody>('/logout')
-
-      // ✅ 正常にAPIアクセスできた場合ユーザー認証情報ステートをクリア
-      setUser(null)
-
-      return true
-    } catch (error) {
-      if (isAxiosError(error)) {
-        /**
-         * ---------------------------------
-         * 💡 HTTPステータスコードでエラー処理を分岐
-         * ---------------------------------
-         * 1. その他
-         * ---------------------------------
-         */
-        switch (error.response?.status) {
-          default: {
-            setError({ key: 'logoutError', message: 'ログアウトエラー' })
-            break
-          }
-        }
-      }
-      return false
-    } finally {
-      apiEnd()
+    const result = await trigger(null)
+    if (result) {
+      await fetchUserAuth()
     }
+    return !!result
   }
 
   return {
     logout,
-    isLoading,
+    isMutating,
     error,
   }
 }

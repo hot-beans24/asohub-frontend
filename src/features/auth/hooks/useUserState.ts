@@ -6,7 +6,7 @@ import User from '@@/features/auth/types/User'
 /* ⭐️ ユーザー認証情報ステートフック ⭐️ */
 const useUserState = () => {
   // 🌐 ユーザー認証情報ステート
-  const [user, setUser] = useRecoilState<User>(recoilUser)
+  const [user, setUser] = useRecoilState<User | null>(recoilUser)
 
   return {
     user,

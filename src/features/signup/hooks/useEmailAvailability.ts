@@ -1,66 +1,34 @@
-import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
+import useSWRMutation from 'swr/mutation'
+
 import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import useFetcher from '@@/features/api/hooks/useFetcher'
 
-import FetchEmailAvailabilityResBody from '@@/features/api/types/FetchEmailAvailabilityResBody'
+import RequestBody from '@@/features/api/types/httpbody/request/FetchEmailAvailability'
+import ResponseBody from '@@/features/api/types/httpbody/response/FetchEmailAvailability'
 
-/* ⭐️ メールアドレス有効性フック ⭐️ */
 const useEmailAvailability = () => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const fetcher = useFetcher<RequestBody, ResponseBody>('fetchEmailAvailability', {
+    method: 'POST',
+    errors: {
+      badrequest: { key: 'fetchEmailAvailability-BadRequest', message: 'メールアドレスが不正です' },
+    },
+  })
 
-  // 🌐 メールアドレスの有効性をチェック
+  const { error, isMutating, trigger } = useSWRMutation('/api/email-check', fetcher)
+
+  const { setError } = useAPIStatus()
+
   const fetchEmailAvailability = async (email: string): Promise<boolean> => {
-    apiInit()
-
-    try {
-      const res = await asohubApiClient.post<FetchEmailAvailabilityResBody>('/email-check', {
-        email,
-      })
-
-      const isAvailable = res.data.is_available
-
-      /**
-       * ---------------------------------
-       * 💡 メールアドレスの有効性を判定
-       * ---------------------------------
-       * ✅ 有効な場合はそのまま処理を続行
-       * ❌ 無効な場合はエラーを設定して処理を続行
-       * ---------------------------------
-       */
-      if (!isAvailable) {
-        setError({ key: 'emailIsNotAvailable', message: 'このメールアドレスは使用できません' })
-      }
-
-      return isAvailable
-    } catch (error) {
-      if (isAxiosError(error)) {
-        /**
-         * ---------------------------------
-         * 💡 HTTPステータスコードでエラー処理を分岐
-         * ---------------------------------
-         * 1. 400
-         * 2. その他
-         * ---------------------------------
-         */
-        switch (error.response?.status) {
-          case HttpStatusCode.BadRequest: {
-            setError({ key: 'emailAvailabilityBadRequest', message: 'メールアドレスが不正です' })
-            break
-          }
-          default: {
-            setError({ key: 'emailAvailabilityError', message: 'メールアドレス有効性チェックエラー' })
-            break
-          }
-        }
-      }
-      return false
-    } finally {
-      apiEnd()
+    const result = await trigger({ email })
+    if (!result?.is_available) {
+      setError({ key: 'email-NotAvailable', message: 'このメールアドレスは使用できません' })
     }
+    return !!result?.is_available
   }
 
   return {
     fetchEmailAvailability,
-    isLoading,
+    isMutating,
     error,
   }
 }
