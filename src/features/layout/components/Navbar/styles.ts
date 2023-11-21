@@ -2,12 +2,20 @@ import { css } from '@emotion/react'
 
 const styles = {
   navbar: (isWide: boolean) => css`
-    width: ${isWide ? '220px' : '100px'};
+    width: ${isWide ? '240px' : '120px'};
+    height: calc(100vh - 90px);
+    padding: 0 20px 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     grid-area: navber;
     transition: width 0.4s;
+    position: fixed;
+    top: 90px;
+    left: 0;
+    @media (max-width: 620px) {
+      display: none;
+    }
   `,
   navbarUl: css`
     width: 100%;
@@ -62,7 +70,7 @@ const styles = {
     letter-spacing: 1px;
     white-space: wrap;
     text-align: center;
-    display: ${isWide ? 'inline-block' : 'none'};
+    visibility: ${isWide ? 'visible' : 'hidden'};
   `,
 }
 

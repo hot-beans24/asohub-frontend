@@ -4,6 +4,9 @@ const styles = {
   searchBarWrapper: css`
     flex: 1;
     position: relative;
+    @media (max-width: 620px) {
+      display: none;
+    }
   `,
   searchBar: css`
     width: 100%;

@@ -11,6 +11,9 @@ const styles = {
     justify-content: flex-start;
     align-items: center;
     gap: 14px;
+    @media (max-width: 620px) {
+      display: none;
+    }
   `,
   link: css`
     color: var(--dark-gray);

@@ -25,6 +25,9 @@ const styles = {
   `,
   field: css`
     color: var(--dark-gray);
+    @media (max-width: 620px) {
+      font-size: 1.2rem;
+    }
   `,
 }
 
