@@ -19,7 +19,10 @@ const SelectField: FC<SelectFieldProps> = forwardRef<HTMLSelectElement, SelectFi
     return (
       <FormFieldWrapper label={label} error={error}>
         <FontAwesomeIcon css={styles.arrowIcon(isReadOnly)} icon={faCaretDown} size="lg" />
-        <select css={styles.selectField(!!error, isReadOnly)} defaultValue="" ref={ref} {...selectProps}>
+        <select css={styles.selectField(!!error, isReadOnly)} ref={ref} {...selectProps}>
+          <option css={styles.option} value={0} disabled>
+            選択してください
+          </option>
           {options.map((option) => (
             <option css={styles.option} key={option.value} value={option.value}>
               {option.label}

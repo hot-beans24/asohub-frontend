@@ -1,88 +1,49 @@
-import { asohubApiClient, isAxiosError } from '@@/features/api/utils/apiClient'
+import useSWRMutation from 'swr/mutation'
 
-import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
-import FetchUserAuthResBody from '@@/features/api/types/FetchUserAuthResBody'
+import useFetcher from '@@/features/api/hooks/useFetcher'
 
-import useUserState from '@@/features/auth/hooks/useUserState'
+import ResponseBody from '@@/features/api/types/httpbody/response/FetchUserAuth'
+
+import useUserState from './useUserState'
 
 /* ⭐️ ユーザー認証情報フック ⭐️ */
 const useUserAuth = () => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const fetcher = useFetcher<null, ResponseBody>('fetchUserAuth', {
+    method: 'GET',
+  })
+
+  const { error, isMutating, trigger } = useSWRMutation('/api/auth-status', fetcher)
+
   const { user, setUser } = useUserState()
 
-  // 🌐 ログイン済みかを判定
   const isLoggedIn = (): boolean => {
     return !!user
   }
 
-  // 🌐 ユーザー認証情報を取得
-  const fetchUserAuth = async (option?: { do: boolean }): Promise<void> => {
-    apiInit()
-
-    /**
-     * -----------------------------------
-     * 💡 ユーザー認証情報を取得済みかどうかを判定
-     * -----------------------------------
-     * ✅ 取得済みの場合は処理を終了
-     * ❌ 未取得の場合は続けて処理を実行
-     * -----------------------------------
-     */
-    if (isLoggedIn() && !option?.do) return
-
-    try {
-      const res = await asohubApiClient.get<FetchUserAuthResBody>('/auth-status')
-
-      const userAuthData = res.data.user
-
-      /**
-       * ------------------------------------
-       * 💡 ログイン済みかどうかを判定
-       * ------------------------------------
-       * ✅ ログイン済みの場合はユーザー認証情報を保存
-       * ❌ 未ログインの場合はユーザー認証情報を削除
-       * ------------------------------------
-       */
-      if (res.data.authenticated && userAuthData) {
-        setUser({
-          id: userAuthData.user_id,
-          email: userAuthData.email,
-          name: userAuthData.user_name,
-          departmentID: userAuthData.department_id,
-          grade: userAuthData.grade,
-          githubUserID: userAuthData.github_username,
-          githubUserIcon: userAuthData.github_user_icon,
-          isRepoRegistered: userAuthData.is_repo_registered,
-          role: userAuthData.role,
-        })
-      } else {
-        setUser(null)
-      }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        /**
-         * ---------------------------------
-         * 💡 HTTPステータスコードでエラー処理を分岐
-         * ---------------------------------
-         * 1. その他
-         * ---------------------------------
-         */
-        switch (error.response?.status) {
-          default: {
-            setUser(null)
-            setError({ key: 'userAuthError', message: 'ユーザー認証情報取得エラー' })
-            break
-          }
-        }
-      }
-    } finally {
-      apiEnd()
+  const fetchUserAuth = async (): Promise<void> => {
+    const result = await trigger(null)
+    if (result && result.authenticated && result.user) {
+      const { user } = result
+      setUser({
+        id: user.user_id,
+        email: user.email,
+        name: user.user_name,
+        departmentID: user.department_id,
+        grade: user.grade,
+        githubUserID: user.github_username,
+        githubUserIcon: user.github_user_icon,
+        isRepoRegistered: user.is_repo_registered,
+        role: user.role,
+      })
+    } else {
+      setUser(null)
     }
   }
 
   return {
     isLoggedIn,
     fetchUserAuth,
-    isLoading,
+    isMutating,
     error,
   }
 }

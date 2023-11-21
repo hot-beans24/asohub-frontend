@@ -1,78 +1,52 @@
+import { useState, useEffect } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
+import useSWRMutation from 'swr/mutation'
 
-import { asohubApiClient, githubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
-import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import useFetcher from '@@/features/api/hooks/useFetcher'
 
-import useUserState from '@@/features/auth/hooks/useUserState'
+import ResponseBody from '@@/features/api/types/httpbody/response/FetchGithubUser'
+
 import recoilGithubUser from '@@/features/github/recoil/githubUser'
-
-import FetchGithubUserResBody from '@@/features/api/types/FetchGithubUserResBody'
 import GithubUser from '@@/features/github/types/GithubUser'
 
 /* ⭐️ GitHubユーザーフック ⭐️ */
-const useGithubUser = (option?: { useGithubAPI: boolean }) => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
-  const { user } = useUserState()
+const useGithubUser = () => {
+  const fetcher = useFetcher<null, ResponseBody>('fetchGithubUser', {
+    errors: {
+      notfound: { key: 'fetchGithubUser-NotFound', message: 'アカウントが見つかりませんでした' },
+    },
+  })
 
-  // 🌐 GitHubユーザー情報ステート
+  const [githubUserID, setGithubUserID] = useState<string | null>(null)
+
+  const { error, isMutating, trigger } = useSWRMutation(() => `/api/github-user/${githubUserID}`, fetcher)
+
   const [githubUser, setGithubUser] = useRecoilState<GithubUser>(recoilGithubUser)
-  // 🌐 GitHubユーザー情報ステートをリセットする関数
   const resetGithubUser = useResetRecoilState(recoilGithubUser)
 
-  // 🌐 GitHubユーザー情報を取得
-  const fetchGithubUser = async (userID: string): Promise<boolean> => {
-    apiInit()
-
-    try {
-      let res
-      if (option?.useGithubAPI) {
-        res = await githubApiClient.get<FetchGithubUserResBody>(`/users/${user?.githubUserID}`)
-      } else {
-        res = await asohubApiClient.get<FetchGithubUserResBody>(`/github-user/${userID}`)
-      }
-
-      const githubUserData = res.data
-
-      // ✅ 正常にAPIアクセスできた場合GitHubユーザー情報をステートに保存
+  const fetchGithubUser = async (): Promise<void> => {
+    const result = await trigger(null)
+    if (result) {
       setGithubUser({
-        id: githubUserData.login,
-        name: githubUserData.name,
-        icon: githubUserData.avatar_url,
+        id: result.login,
+        name: result.name,
+        icon: result.avatar_url,
       })
-
-      return true
-    } catch (error) {
-      if (isAxiosError(error)) {
-        /**
-         * ---------------------------------
-         * 💡 HTTPステータスコードでエラー処理を分岐
-         * ---------------------------------
-         * 1. 404
-         * 2. その他
-         * ---------------------------------
-         */
-        switch (error.response?.status) {
-          case HttpStatusCode.NotFound: {
-            setError({ key: 'githubUserNotFound', message: 'アカウントが見つかりませんでした' })
-            break
-          }
-          default: {
-            setError({ key: 'githubUserError', message: 'GitHubユーザー検索エラー' })
-            break
-          }
-        }
-      }
-      return false
-    } finally {
-      apiEnd()
     }
   }
 
+  useEffect(() => {
+    if (githubUserID) {
+      fetchGithubUser()
+    }
+  }, [githubUserID])
+
   return {
+    setGithubUserID,
     fetchGithubUser,
     resetGithubUser,
     githubUser,
-    isLoading,
+    isMutating,
     error,
   }
 }

@@ -18,8 +18,10 @@ import logoutSuccessFlashMessage from '@@/features/logout/data/logoutSuccessFlas
 
 /* ⭐️ ログアウトページ : 完 ⭐️ */
 const LogoutPage: FC = () => {
+  console.log('📘 ログアウト(/logout) age render')
+
   const navigate = useNavigate()
-  const { logout, isLoading } = useLogout()
+  const { logout, isMutating } = useLogout()
   const { setFlashMessages } = useFlashMessages()
 
   const [Modal] = useModal('root', {
@@ -51,7 +53,7 @@ const LogoutPage: FC = () => {
             <FormButton type="button" onClick={handleCancelClick} color="gray" isHalfSize>
               キャンセル
             </FormButton>
-            <FormButton type="submit" isLoading={isLoading} isHalfSize>
+            <FormButton type="submit" isLoading={isMutating} isHalfSize>
               ログアウト
             </FormButton>
           </FormButtonFlex>

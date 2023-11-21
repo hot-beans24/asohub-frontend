@@ -14,7 +14,7 @@ import useGithubUser from '@@/features/github/hooks/useGithubUser'
 import GithubUserFormValues from '@@/features/github/types/GithubUserFormValues'
 
 const GithunUserForm: FC = () => {
-  const { fetchGithubUser, githubUser, isLoading } = useGithubUser()
+  const { setGithubUserID, githubUser, isMutating } = useGithubUser()
 
   const {
     control,
@@ -24,7 +24,7 @@ const GithunUserForm: FC = () => {
   } = useForm<GithubUserFormValues>()
 
   const handleOnSubmit: SubmitHandler<GithubUserFormValues> = async (data) => {
-    await fetchGithubUser(data.githubUserID)
+    setGithubUserID(data.githubUserID)
   }
 
   const githubUserIDOptions: RegisterOptions<GithubUserFormValues, 'githubUserID'> = {
@@ -52,7 +52,7 @@ const GithunUserForm: FC = () => {
           />
         )}
       />
-      <FormButton type="submit" icon={faGithub} color="black" isLoading={isLoading}>
+      <FormButton type="submit" icon={faGithub} color="black" isLoading={isMutating}>
         Check
       </FormButton>
     </Form>

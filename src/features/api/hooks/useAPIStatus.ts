@@ -9,13 +9,15 @@ const useAPIStatus = () => {
   // 🌐 APIローディング判定ステート
   const [isLoading, setIsLoading] = useState<boolean>(false)
   // 🌐 APIアクセスエラーステート
-  const [error, setError] = useState<Error>(null)
+  const [error, setError] = useState<Error | null>(null)
 
   const { setFlashMessages, deleteErrorFlashMessages } = useFlashMessages()
 
   useEffect(() => {
     if (error) {
       setFlashMessages([{ key: error.key, type: 'error', message: error.message }])
+    } else {
+      setFlashMessages(null)
     }
   }, [error])
 

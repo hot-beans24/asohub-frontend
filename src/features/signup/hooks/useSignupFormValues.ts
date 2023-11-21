@@ -1,6 +1,7 @@
 import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useEffect } from 'react'
 
-import recoilSignupFormValues from '../recoil/signupFormValues'
+import recoilSignupFormValues from '@@/features/signup/recoil/signupFormValues'
 
 /* ⭐️ サインアップフォームステートフック ⭐️ */
 const useSignupFormValues = () => {
@@ -8,6 +9,11 @@ const useSignupFormValues = () => {
   const [signupFormValues, setSignupFormValues] = useRecoilState(recoilSignupFormValues)
   // 🌐 サインアップフォームステートをリセット
   const resetSignupFormValues = useResetRecoilState(recoilSignupFormValues)
+
+  useEffect(() => {
+    console.log('🎁 signupFormValues')
+    console.log(signupFormValues)
+  }, [signupFormValues])
 
   return {
     signupFormValues,

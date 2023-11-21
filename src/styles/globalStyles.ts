@@ -39,7 +39,6 @@ const grobalStyles = css`
     height: 100%;
     min-width: 300px;
     min-height: 100vh;
-    padding: 30px;
   }
 
   button {

@@ -4,6 +4,8 @@ import { faArrowLeft, faArrowRight, faGhost } from '@fortawesome/free-solid-svg-
 import { useModal } from 'react-hooks-use-modal'
 import Lottie from 'lottie-react'
 
+import useUserState from '@@/features/auth/hooks/useUserState'
+
 import useFormStep from '@@/features/form/hooks/useFormStep'
 
 import useSignupFormValues from '@@/features/signup/hooks/useSignupFormValues'
@@ -25,6 +27,7 @@ import lottieGood from '@@/assets/lottie-good.json'
 const DoSignupForm: FC = () => {
   const { nextStep, backStep } = useFormStep()
   const { signupFormValues } = useSignupFormValues()
+  const { user } = useUserState()
 
   type FormValues = {
     email: string
@@ -34,7 +37,7 @@ const DoSignupForm: FC = () => {
   }
 
   const { handleSubmit } = useForm<FormValues>()
-  const { signup, isLoading } = useSignup()
+  const { signup, isMutating } = useSignup()
 
   const [Modal, open] = useModal('root', {
     preventScroll: false,
@@ -53,20 +56,29 @@ const DoSignupForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(handleOnSubmit)}>
       <FormText>以下の情報でアカウントを作成します</FormText>
-      <TextField label="メールアドレス" type="email" value={signupFormValues.email} readOnly />
-      <TextField label="ユーザー名" type="text" value={signupFormValues.username} readOnly />
+      <TextField label="メールアドレス" type="email" value={signupFormValues.email!} readOnly />
+      <TextField label="ユーザーネーム" type="text" value={signupFormValues.username!} readOnly />
       <TextField
         label="学科"
         type="text"
-        value={departmentSelectOpts[signupFormValues.departmentID - 1].label}
+        value={
+          departmentSelectOpts[
+            signupFormValues.departmentID ? signupFormValues.departmentID - 1 : user!.departmentID - 1
+          ].label
+        }
         readOnly
       />
-      <TextField label="学年" type="text" value={gradeSelectOpts[signupFormValues.grade - 1].label} readOnly />
+      <TextField
+        label="学年"
+        type="text"
+        value={gradeSelectOpts[signupFormValues.grade ? signupFormValues.grade - 1 : user!.grade - 1].label}
+        readOnly
+      />
       <FormButtonFlex>
         <FormButton type="button" icon={faArrowLeft} onClick={backStep} color="gray" isHalfSize>
           Back
         </FormButton>
-        <FormButton type="submit" icon={faGhost} isLoading={isLoading} isIconRight isHalfSize>
+        <FormButton type="submit" icon={faGhost} isLoading={isMutating} isIconRight isHalfSize>
           Create
         </FormButton>
       </FormButtonFlex>

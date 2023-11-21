@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { useForm, SubmitHandler, RegisterOptions, Controller } from 'react-hook-form'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,14 +20,29 @@ import gradeSelectOpts from '@@/features/signup/data/gradeSelectOpts'
 const Step03Form: FC = () => {
   const { nextStep, backStep } = useFormStep()
   const { signupFormValues, setSignupFormValues } = useSignupFormValues()
+  const [slicedGradeSelectOpts, setSlicedGradeSelectOpts] = useState(
+    signupFormValues.departmentID
+      ? gradeSelectOpts.slice(0, departmentSelectOpts[signupFormValues.departmentID - 1].maxGrade)
+      : gradeSelectOpts
+  )
 
   const {
     control,
     register,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<ProfileFormValues>()
+
+  const departmentID = watch('departmentID')
+
+  useEffect(() => {
+    if (!departmentID) return
+
+    setSlicedGradeSelectOpts(gradeSelectOpts.slice(0, departmentSelectOpts[departmentID - 1].maxGrade))
+    setValue('grade', 0)
+  }, [departmentID])
 
   const handleOnSubmit: SubmitHandler<ProfileFormValues> = (data) => {
     setSignupFormValues((prev) => ({ ...prev, ...data }))
@@ -41,10 +56,12 @@ const Step03Form: FC = () => {
 
   const departmentIDOptions: RegisterOptions<ProfileFormValues, 'departmentID'> = {
     required: '学科を選択してください',
+    min: { value: 1, message: '学科を選択してください' },
   }
 
   const gradeOptions: RegisterOptions<ProfileFormValues, 'grade'> = {
     required: '学年を選択してください',
+    min: { value: 1, message: '学年を選択してください' },
   }
 
   return (
@@ -53,10 +70,10 @@ const Step03Form: FC = () => {
       <Controller
         name="username"
         control={control}
-        defaultValue={signupFormValues.username}
+        defaultValue={signupFormValues.username || ''}
         render={({ field }) => (
           <TextField
-            label="ユーザー名"
+            label="ユーザーネーム"
             type="text"
             {...field}
             {...register('username', usernameOptions)}
@@ -64,22 +81,35 @@ const Step03Form: FC = () => {
           />
         )}
       />
-      <SelectField
-        label="学科"
-        options={departmentSelectOpts}
-        defaultValue={signupFormValues.departmentID}
-        {...register('departmentID', departmentIDOptions)}
-        error={errors.departmentID?.message}
-      />
-      <SelectField
-        label="学年"
-        options={gradeSelectOpts.slice(
-          0,
-          departmentSelectOpts[watch('departmentID', signupFormValues.departmentID) - 1].maxGrade
+      <Controller
+        name="departmentID"
+        control={control}
+        defaultValue={signupFormValues.departmentID || 0}
+        render={({ field }) => (
+          <SelectField
+            label="学科"
+            options={departmentSelectOpts}
+            {...field}
+            {...register('departmentID', departmentIDOptions)}
+            error={errors.departmentID?.message}
+          />
         )}
-        defaultValue={signupFormValues.grade}
-        {...register('grade', gradeOptions)}
-        error={errors.grade?.message}
+      />
+      <Controller
+        name="grade"
+        control={control}
+        defaultValue={signupFormValues.grade || 0}
+        disabled={!departmentID && !signupFormValues.departmentID}
+        render={({ field }) => (
+          <SelectField
+            label="学年"
+            options={slicedGradeSelectOpts}
+            {...field}
+            {...register('grade', gradeOptions)}
+            error={errors.grade?.message}
+            // disabled={!signupFormValues.departmentID}
+          />
+        )}
       />
       <FormButtonFlex>
         <FormButton type="button" icon={faArrowLeft} onClick={backStep} color="gray" isHalfSize>

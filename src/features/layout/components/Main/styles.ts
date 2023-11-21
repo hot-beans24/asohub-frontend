@@ -1,11 +1,18 @@
 import { css } from '@emotion/react'
 
 const styles = {
-  main: (isAuthPage: boolean) => css`
-    height: ${isAuthPage ? 'auth' : 'calc(100vh - 60px - 60px - 20px)'};
-    padding-top: ${isAuthPage ? '140px' : '0'};
-    padding-bottom: ${isAuthPage ? '200px' : '0'};
+  main: (isWide: boolean, isAuthPage: boolean) => css`
+    width: 100%;
+    padding-top: 90px;
+    padding-left: ${isAuthPage ? '0' : isWide ? '240px' : '120px'};
+    padding-bottom: 10px;
     grid-area: main;
+    transition: padding-left 0.4s;
+    @media (max-width: 620px) {
+      padding-top: 60px;
+      padding-left: 0;
+      padding-bottom: 100px;
+    }
   `,
 }
 

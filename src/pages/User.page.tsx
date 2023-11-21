@@ -1,5 +1,5 @@
 import { FC } from 'react'
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import PageStatus from '@@/features/common/components/PageStatus'
 
@@ -21,7 +21,10 @@ import PageStatus from '@@/features/common/components/PageStatus'
 
 /* ⭐️ ユーザーページ : 製作中 ⭐️ */
 const UserPage: FC = () => {
-  // const params = useParams()
+  const params = useParams()
+
+  console.log(`📘 ユーザー(/user/${params.userID}) page render`)
+
   // const { userData } = useUserData(params.userID || '')
 
   // if (!userData) return null

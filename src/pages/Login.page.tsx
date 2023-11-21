@@ -23,8 +23,10 @@ import loginSuccessflashMessage from '@@/features/login/data/loginSuccessFlashMe
 
 /* ⭐️ ログインページ : 完 ⭐️ */
 const LoginPage: FC = () => {
+  console.log('📘 ログイン(/login) page render')
+
   const naviagte = useNavigate()
-  const { login, isLoading } = useLogin()
+  const { login, isMutating } = useLogin()
   const { setFlashMessages } = useFlashMessages()
 
   type FormValues = {
@@ -75,7 +77,7 @@ const LoginPage: FC = () => {
           {...register('password', passwordOptions)}
           error={errors.password?.message}
         />
-        <FormButton type="submit" icon={faEnvelope} isLoading={isLoading}>
+        <FormButton type="submit" icon={faEnvelope} isLoading={isMutating}>
           Login with Email
         </FormButton>
         <FormText>

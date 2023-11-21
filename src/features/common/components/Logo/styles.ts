@@ -15,6 +15,13 @@ const styles = {
     &:hover {
       opacity: 0.6;
     }
+    @media (max-width: 620px) {
+      font-size: 1.4rem;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
   `,
 }
 

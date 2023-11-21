@@ -4,7 +4,7 @@ import animations from '@@/styles/animations'
 
 const styles = {
   githubUser: css`
-    width: 300px;
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     border: 0.6px solid var(--medium-gray);
@@ -23,6 +23,10 @@ const styles = {
     justify-content: center;
     align-items: center;
     align-self: center;
+    @media (max-width: 620px) {
+      width: 60px;
+      height: 60px;
+    }
   `,
   githubUserIcon: css`
     width: 100%;
@@ -41,6 +45,9 @@ const styles = {
     align-items: center;
     animation-name: ${animations.fadeIn};
     animation-duration: 0.4s;
+    @media (max-width: 620px) {
+      font-size: 1.2rem;
+    }
   `,
   githubUsername: css`
     font-size: 1.6rem;
@@ -51,6 +58,9 @@ const styles = {
     align-items: center;
     animation-name: ${animations.fadeIn};
     animation-duration: 0.4s;
+    @media (max-width: 620px) {
+      font-size: 1.4rem;
+    }
   `,
 }
 

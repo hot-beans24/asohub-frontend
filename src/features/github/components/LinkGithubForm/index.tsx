@@ -20,7 +20,7 @@ type LinkGithubFormProps = {
 
 const LinkGithubForm: FC<LinkGithubFormProps> = ({ setIsSuccess }) => {
   const { githubUser, resetGithubUser } = useGithubUser()
-  const { linkGithub, isLoading } = useLinkGithub()
+  const { linkGithub, isMutating } = useLinkGithub()
 
   useEffect(() => {
     resetGithubUser()
@@ -48,7 +48,7 @@ const LinkGithubForm: FC<LinkGithubFormProps> = ({ setIsSuccess }) => {
         <FormButton type="button" icon={faArrowLeft} color="gray" isHalfSize onClick={resetGithubUser}>
           Back
         </FormButton>
-        <FormButton type="submit" icon={faGithub} isHalfSize isLoading={isLoading} color="black" isIconRight>
+        <FormButton type="submit" icon={faGithub} isHalfSize isLoading={isMutating} color="black" isIconRight>
           OK
         </FormButton>
       </FormButtonFlex>

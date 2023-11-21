@@ -17,6 +17,9 @@ export default defineConfig(({ mode }) => ({
         brotliSize: true,
       }),
   ],
+  esbuild: {
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
+  },
   build: {
     outDir: mode === 'front' ? '../asohub-backend/AsoHub/dockerfiles/nginx/dist' : 'dist',
   },

@@ -8,7 +8,7 @@ type User = {
   githubUserID: string | null
   githubUserIcon: string
   isRepoRegistered: boolean
-  role: string[]
-} | null
+  role: string
+}
 
 export default User

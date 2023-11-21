@@ -1,67 +1,46 @@
-import { asohubApiClient, isAxiosError, HttpStatusCode } from '@@/features/api/utils/apiClient'
-import useAPIStatus from '@@/features/api/hooks/useAPIStatus'
+import useSWRMutation from 'swr/mutation'
 
 import useLogin from '@@/features/login/hooks/useLogin'
 
 import useSignupFormValues from '@@/features/signup/hooks/useSignupFormValues'
-import SignupResBody from '@@/features/api/types/SignupResBody'
+
+import useFetcher from '@@/features/api/hooks/useFetcher'
+
+import RequestBody from '@@/features/api/types/httpbody/request/Signup'
+import ResponseBody from '@@/features/api/types/httpbody/response/Signup'
 
 /* ⭐️ サインアップフック ⭐️ */
 const useSignup = () => {
-  const { isLoading, error, setError, apiInit, apiEnd } = useAPIStatus()
+  const fetcher = useFetcher<RequestBody, ResponseBody>('signup', {
+    method: 'POST',
+    errors: {
+      conflict: { key: 'email-Conflict', message: 'このメールアドレスはすでに使用されています' },
+    },
+  })
+
+  const { error, isMutating, trigger } = useSWRMutation('/api/signup', fetcher)
+
   const { signupFormValues, resetSignupFormValues } = useSignupFormValues()
   const { login } = useLogin()
 
-  // 🌐 サインアップ
   const signup = async (): Promise<boolean> => {
-    apiInit()
-
-    try {
-      await asohubApiClient.post<SignupResBody>('/signup', {
-        email: signupFormValues.email,
-        password: signupFormValues.password,
-        name: signupFormValues.username,
-        department_id: signupFormValues.departmentID,
-        grade: signupFormValues.grade,
-      })
-
-      // ✅ 正常にAPIアクセスできた場合ログイン
-      await login(signupFormValues.email, signupFormValues.password)
-
-      // ✅ サインアップフォームの値をリセット
+    const result = await trigger({
+      email: signupFormValues.email!,
+      password: signupFormValues.password!,
+      name: signupFormValues.username!,
+      department_id: signupFormValues.departmentID!,
+      grade: signupFormValues.grade!,
+    })
+    if (result) {
+      await login(signupFormValues.email!, signupFormValues.password!)
       resetSignupFormValues()
-
-      return true
-    } catch (error) {
-      if (isAxiosError(error)) {
-        /**
-         * ---------------------------------
-         * 💡 HTTPステータスコードでエラー処理を分岐
-         * ---------------------------------
-         * 1. 409
-         * 2. その他
-         * ---------------------------------
-         */
-        switch (error.response?.status) {
-          case HttpStatusCode.Conflict: {
-            setError({ key: 'emailConflict', message: 'このメールアドレスはすでに使用されています' })
-            break
-          }
-          default: {
-            setError({ key: 'signupError', message: 'サインアップエラー' })
-            break
-          }
-        }
-      }
-      return false
-    } finally {
-      apiEnd()
     }
+    return !!result
   }
 
   return {
     signup,
-    isLoading,
+    isMutating,
     error,
   }
 }

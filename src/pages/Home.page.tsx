@@ -11,14 +11,16 @@ import styles from './Home.styles'
 
 /* ⭐️ ホームページ : 製作中 ⭐️ */
 const HomePage: FC = () => {
-  const { posts, isLoading } = useHomePosts()
+  console.log('📘 ホーム(/home) page render')
+
+  const { homePosts, isLoading } = useHomePosts()
 
   return (
     <div css={styles.container}>
       {isLoading && <ContentsLoading />}
       {!isLoading && (
         <PostCardsContainer>
-          {posts.map((post) => (
+          {homePosts.map((post) => (
             <PostCard
               key={post.id}
               userID={post.userID}

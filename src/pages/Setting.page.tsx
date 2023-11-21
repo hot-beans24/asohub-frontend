@@ -1,11 +1,10 @@
 import { FC, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import useFlashMessages from '@@/features/common/hooks/useFlashMessages'
 
 import LinkGithubForm from '@@/features/github/components/LinkGithubForm'
 import GithubUser from '@@/features/github/components/GithubUser'
-import useGithubUser from '@@/features/github/hooks/useGithubUser'
+import useGithubUsername from '@@/features/github/hooks/useGithubUsername'
 
 import SettingBox from '@@/features/user/components/SettingBox'
 import SettingBoxTitle from '@@/features/user/components/SettingBoxTItle'
@@ -18,26 +17,16 @@ import linkGithubSuccessFlashMessage from '@@/features/github/data/linkGithubSuc
 import department from '@@/features/user/data/department'
 import grade from '@@/features/user/data/grade'
 
-import ROUTES from '@@/routes/routes'
-
 import styles from './Setting.styles'
 
 /* ⭐️ 設定ページ : 製作中 ⭐️ */
 const SettingPage: FC = () => {
-  const navigate = useNavigate()
+  console.log('📘 設定(/setting) page render')
+
   const { user } = useUserState()
-  const { fetchGithubUser, githubUser } = useGithubUser({ useGithubAPI: true })
+  const { githubUsername } = useGithubUsername(user?.githubUserID)
   const { setFlashMessages } = useFlashMessages()
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
-
-  useEffect(() => {
-    const doFetch = async () => {
-      if (user?.githubUserID) {
-        await fetchGithubUser(user.githubUserID)
-      }
-    }
-    doFetch()
-  }, [user])
 
   useEffect(() => {
     const doSuccess = async () => {
@@ -49,7 +38,6 @@ const SettingPage: FC = () => {
   }, [isSuccess])
 
   if (!user) {
-    navigate(ROUTES.LOGIN)
     return null
   }
 
@@ -70,10 +58,10 @@ const SettingPage: FC = () => {
             <LinkGithubForm setIsSuccess={setIsSuccess} />
           </div>
         )}
-        {user.githubUserID && githubUser && (
+        {user.githubUserID && (
           <GithubUser
             githubUserID={user.githubUserID}
-            githubUserName={githubUser.name}
+            githubUserName={githubUsername || ''}
             githubUserIcon={user.githubUserIcon}
           />
         )}

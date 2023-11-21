@@ -41,7 +41,7 @@ const SearchBar: FC = () => {
         onChange={handleInput}
         ref={ref}
       />
-      <button type="submit" css={styles.searchButton}>
+      <button type="submit" css={styles.searchButton} aria-label="search">
         <FontAwesomeIcon icon={faMagnifyingGlass} style={{ fontSize: 16, color: 'var(--dark-gray)' }} />
       </button>
     </form>

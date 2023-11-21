@@ -1,5 +1,4 @@
-// 🌐 ユーザー認証情報取得APIレスポンスボディ
-type FetchUserAuthResBody = {
+type FetchUserAuthResponseBody = {
   authenticated: boolean
   user: {
     user_id: string
@@ -11,8 +10,8 @@ type FetchUserAuthResBody = {
     github_user_icon: string
     authenticated: boolean
     is_repo_registered: boolean
-    role: string[]
+    role: string
   } | null
 }
 
-export default FetchUserAuthResBody
+export default FetchUserAuthResponseBody
